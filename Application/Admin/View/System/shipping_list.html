@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>{$plugin.name}配送列表</h4>   
+                            <a href="{:U('system/shipping')}">
+                                <button class="btn btn-default"><i class="fa fa-level-up"></i>返回</button>
+                            </a>    
+                        </div>
+                        <a href="{:U('Admin/system/shipping_list_edit',array('id'=>$vo[shipping_area_id],'type'=>$plugin['type'],'code'=>$plugin['code']))}" class="btn btn-primary pull-right" style="margin-top:15px;">添加配送区域</a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <table class="table table-hover table-header">
+                            <thead>
+                                <tr>
+                                    <td>配送区名称</td>
+                                    <td>配送区域</td>
+                                    <td class="w10">操作</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <foreach name="shipping_list" item="vo"> 
+                                    <tr>
+                                        <td>{$vo.shipping_area_name}</td>
+                                        <td>{$vo.region_list}<if condition="$vo['is_default'] eq 1">全国其他地区</if></td>  
+                                        <td>
+                                            <a href="{:U('Admin/system/shipping_list_edit',array('id'=>$vo[shipping_area_id],'type'=>$plugin['type'],'code'=>$plugin['code'],'edit'=>1,'default'=>$vo['is_default']))}" data-toggle="tooltip" title="" class="btn btn-primary" data-original-title="编辑"><i class="fa fa-pencil"></i></a>
+                                            <if condition="$vo['is_default'] neq 1">
+                                              <a href="javascript:void(0);" data-href="{:U('Admin/system/del_area',array('id'=>$vo[shipping_area_id],'type'=>$plugin['type'],'code'=>$plugin['code']))}" onclick="del('{$vo[shipping_area_id]}',this)" id="button-delete6" data-toggle="tooltip" title="" class="btn btn-danger" data-original-title="删除"><i class="fa fa-trash-o"></i></a>
+                                            </if>
+                                        </td>
+                                    </tr>
+                                </foreach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+    <script type="text/javascript">
+    // 删除操作
+    function del(id,t)
+    {
+        if(!confirm('确定要删除吗?'))
+            return false;
+
+        location.href = $(t).data('href');
+    }
+    </script>
+</body>
+</html>

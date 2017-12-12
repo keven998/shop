@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>编辑品牌</h4>     
+                            <a href="javascript:history.go(-1)">
+                                <button class="btn btn-default"><i class="fa fa-level-up"></i>返回</button>
+                            </a> 
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <form action="{:U('goods/addBrand')}" class="form-horizontal" method="post" onsubmit="return checkName();" id="addEditBrandForm">
+                            <input type="hidden" name="brand_id" value="{$brand.brand_id}" />
+                            <table class="table table-hover contact-template-form">
+                                <tbody>
+                                    <tr>
+                                        <td width="20%" align="right">品牌名称：</td>
+                                        <td>
+                                            <input type="text" name="brand_name" value="{$brand.brand_name}" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">品牌网址：</td>
+                                        <td>
+                                            <input type="text" name="site_url" value="{$brand.brand_name}" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">品牌LOGO：</td>
+                                        <td>
+                                            <div class="col-sm-3">                                                                              
+                                                <input type="text" value="{$brand.brand_logo}" name="brand_logo" id="brand_logo" class="form-control" style="width:350px;margin-left:-15px;"/>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input onclick="GetUploadify(1,'brand_logo','brand');" type="button" class="btn btn-default" value="上传logo"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">品牌排序：</td>
+                                        <td>
+                                            <input type="text" name="sort" value="{$brand.sort}" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">品牌描述：</td>
+                                        <td>
+                                            <textarea class="form-control w-300" name="brand_desc">{$brand.brand_desc}</textarea>
+                                        </td>
+                                    </tr>                                    
+                                    <tr>
+                                        <td width="20%" align="right">是否显示：</td>
+                                        <td>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="is_show" id="inlineRadio1" value="0" <if condition="$brand['is_show'] eq 0">checked</if>> 隐藏
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="is_show" id="inlineRadio2" value="1"  <if condition="$brand['is_show'] eq 1">checked</if>> 显示
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%"></td>
+                                        <td>
+                                            <button class="btn btn-primary">提 交</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>    
+                        </form>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+    <script type="text/javascript">
+    // 判断输入框是否为空
+    function checkName(){
+        var name = $("#addEditBrandForm").find("input[name='brand_name']").val();
+        if($.trim(name) == '')
+        {
+            layer.msg('品牌名称不能为空！')
+            return false;
+        }
+        return true;
+    }
+    </script>
+</body>
+</html>

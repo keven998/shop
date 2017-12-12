@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>添加关键词</h4>     
+                            <a href="javascript:history.go(-1)">
+                                <button class="btn btn-default"><i class="fa fa-level-up"></i>返回</button>
+                            </a> 
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <form action="{:U('wechat/addText')}" class="form-horizontal" method="post">
+                            <table class="table table-hover contact-template-form">
+                                <tbody>
+                                    <tr>
+                                        <td width="20%" align="right">类型：</td>
+                                        <td>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="type" id="inlineRadio1" value="1" checked> 文本
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="type" id="inlineRadio2" value="2"> 图文
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr class="ibox" style="display:none">
+                                        <td width="20%" align="right">关键词：</td>
+                                        <td>
+                                            <input type="text" name="key" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr class="ibox" style="display:none">
+                                        <td width="20%" align="right">消息标题：</td>
+                                        <td>
+                                            <input type="text" name="title" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr class="ibox" style="display:none">
+                                        <td width="20%" align="right">消息封面：</td>
+                                        <td>
+                                            <div class="col-sm-3">
+                                                <input type="text" class="form-control" style="width:350px;margin-left:-15px;" name="cover" id="cover" value="" >
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="button" class="btn btn-default" onClick="GetUploadify(1,'cover','wechat','')"  value="上传图片"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="ibox" style="display:none">
+                                        <td width="20%" align="right">跳转至URL：</td>
+                                        <td>
+                                            <input type="text" name="url" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">内容：</td>
+                                        <td>
+                                            <textarea name="content" id="" class="form-control w-300"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%"></td>
+                                        <td>
+                                            <button class="btn btn-primary">提 交</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>    
+                        </form>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        $('input[name="type"]').each(function(i){
+            $(this).click(function(){
+                if($(this).val() == 2){
+                    $('.ibox').show();
+                }else{
+                    $('.ibox').hide();
+                }
+            })
+        })
+    })
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>添加商品属性</h4>     
+                            <a href="javascript:history.go(-1)">
+                                <button class="btn btn-default"><i class="fa fa-level-up"></i>返回</button>
+                            </a> 
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <form action="{:U('goods/addGoodsAttribute')}" class="form-horizontal" method="post" onsubmit="return checkName();" id="addEditGoodsAttributeForm">
+                            <table class="table table-hover contact-template-form">
+                                <tbody>
+                                    <tr>
+                                        <td width="20%" align="right">属性名称：</td>
+                                        <td>
+                                            <input type="text" name="attr_name" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">所属商品类型：</td>
+                                        <td>
+                                            <select name="type_id" id="" class="form-control w-300">
+                                                <option value="0">请选择</option>
+                                                <foreach name="goodsTypeList" item="vo">
+                                                    <option value="{$vo.id}">{$vo.name}</option>
+                                                </foreach>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">能否进行检索：</td>
+                                        <td>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="attr_index" id="inlineRadio1" value="0" checked> 不需要检索
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="attr_index" id="inlineRadio2" value="1"> 关键词检索
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">该属性值的录入方式：</td>
+                                        <td>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="attr_input_type" id="inlineRadio1" value="0" checked> 手工录入
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="attr_input_type" id="inlineRadio2" value="1" > 从下面的列表中选择（一行代表一个可选值）
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="attr_input_type" id="inlineRadio2" value="2"> 多行文本框
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">可选值列表：</td>
+                                        <td>
+                                            <textarea name="attr_values" class="form-control w-300 pull-left"></textarea>
+                                            <div class="tip-text">录入方式为手工或者多行文本时，此输入框不需填写。</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%"></td>
+                                        <td>
+                                            <button class="btn btn-primary">提 交</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>    
+                        </form>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+    <script type="text/javascript">
+    // 判断输入框是否为空
+    function checkName(){
+        var name = $("#addEditGoodsAttributeForm").find("input[name='attr_name']").val();
+        if($.trim(name) == '')
+        {
+            layer.msg('属性名称不能为空！')
+            return false;
+        }
+        return true;
+    }
+    </script>
+</body>
+</html>

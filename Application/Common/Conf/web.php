@@ -1,0 +1,2 @@
+<?php
+return array ( 'web' => array ( 'web_icp' => '粤00-86140485号', 'web_name' => '深圳搜豹公司', 'web_logo' => '/Uploads/images/2017/03-13/58c673103d525.jpg', 'web_title' => '开源商城 | B2C商城 | B2B2C商城 | 三级分销 | 免费商城 | 多用户商城 | tpshop｜thinkphp shop｜TPshop 免费开源系统 | 微商城', 'web_desc' => 'TPshop 开源商城 tpshop thinkphp shop B2C商城 B2B2C商城 三级分销 免费商城  微商城 多用户商城 免费开源系统', 'web_keyword' => '开源商城 B2C商城  B2B2C商城  三级分销  多用户商城  免费商城  微商城', 'web_contact' => '', 'web_mobile' => '15871376283', 'web_address' => '南山区西丽镇留仙大道1001号', 'web_qq' => '673964249', ), ); ?>

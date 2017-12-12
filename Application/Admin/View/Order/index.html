@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+    <link href="__ADMIN_PLUGINS__/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+    <script src="__ADMIN_PLUGINS__/daterangepicker/moment.min.js" type="text/javascript"></script>
+    <script src="__ADMIN_PLUGINS__/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>商品列表</h4>      
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="search-box row">
+                        <div class="col-md-10">
+                            <form action="" method="get">
+                                <div class="form-group">
+                                    <span class="pull-left form-span">收货人:</span>
+                                    <input type="text" name="consignee" value="{$Think.get.consignee}" class="form-control" placeholder="请输入关键词">
+                                </div>
+                                <div class="form-group">
+                                    <span class="pull-left form-span">订单编号:</span>
+                                    <input type="text" name="order_sn" value="{$Think.get.order_sn}" class="form-control" placeholder="请输入关键词">
+                                </div>
+                                <div class="form-group">
+                                    <span class="pull-left form-span">下单日期:</span>
+                                    <input type="text" name="timegap" value="{$timegap}" placeholder="下单日期"  id="add_time" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <select name="pay_status" class="form-control" >
+                                        <option value="">支付状态</option>
+                                        <option value="0">未支付</option>
+                                        <option value="1">已支付</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select name="pay_code" class="form-control">
+                                        <option value="">支付方式</option>
+                                        <option value="alipay">支付宝支付</option>
+                                        <option value="weixin">微信支付</option>
+                                        <option value="cod">货到付款</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select name="shipping_status" class="form-control">
+                                        <option value="">发货状态</option>
+                                        <option value="0">未发货</option>
+                                        <option value="1">已发货</option>
+                                        <option value="2">部分发货</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <select name="order_status" class="form-control">
+                                        <option value="">订单状态</option>
+                                        <volist name="order_status" id="v" key="k">
+                                            <option value="{$k-1}">{$v}</option>
+                                        </volist>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group btn-search">
+                                    <button class="btn btn-default" ><span class="glyphicon glyphicon-search"></span> 筛选</button>
+                                </div>  
+                            </form>
+                        </div>
+                        <div class="col-md-2">
+                            <form action="{:U('order/export_order')}" method="post">
+                                <input type="hidden" name="consignee"  value="{$Think.get.consignee}"/>
+                                <input type="hidden" name="order_sn" value="{$Think.get.order_sn}" />
+                                <input type="hidden" name="order_status" value="{$Think.get.order_status}" />
+                                <input type="hidden" name="timegap" value="{$timegap}" />
+                                <button class="btn btn-primary pull-right ">导出Excel</button>
+                            </form>
+                            
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <table class="table table-hover table-header">
+                            <thead>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>订单编号</td>
+                                    <td>收货人</td>
+                                    <td>总金额</td>
+                                    <td>应付金额</td>
+                                    <td>订单状态</td>
+                                    <td>支付状态</td>
+                                    <td>发货状态</td>
+                                    <td>支付方式</td>
+                                    <td>配送方式</td>
+                                    <td>下单时间</td>
+                                    <td class="w10">操作</td>
+                                </tr>
+                            </thead>
+                            <if condition="$list['data']">
+                                <tbody>
+                                    <foreach name="list.data" item="vo"> 
+                                        <tr>
+                                            <td>{$vo.order_id}</td>
+                                            <td>{$vo.order_sn}</td>
+                                            <td>{$vo.consignee}:{$vo.mobile}</td>
+                                            <td>{$vo.goods_amount}</td>
+                                            <td>{$vo.order_amount}</td>
+                                            <td>{$order_status[$vo[order_status]]}</td>
+                                            <td>{$pay_status[$vo[pay_status]]}</td>
+                                            <td>{$shipping_status[$vo[shipping_status]]}</td>
+                                            <td>{$vo.pay_name}</td>
+                                            <td>{$vo.shipping_name}</td>
+                                            <td>{$vo.add_time|date='Y-m-d H:i',###}</td>      
+                                            <td>
+                                                <a href="{:U('order/detail',array('order_id'=>$vo['order_id']))}" data-toggle="tooltip" title="" data-original-title="查看详情">详情</a>
+                                                <span class="text-explode">|</span>
+                                                <if condition="($vo['order_status'] eq 3) or ($vo['order_status'] eq 5)">
+                                                    <a href="{:U('order/delete_order',array('order_id'=>$vo['order_id']))}"  data-toggle="tooltip" title=""  data-original-title="删除">删除</a>
+                                                <else/>
+                                                    <a href="javascript:void(0)" onclick="alert('该订单不得删除')" data-toggle="tooltip" title=""  data-original-title="删除">删除</a>
+                                                </if>
+                                            </td>
+                                        </tr>
+                                    </foreach>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="12" align="right">{$list.page}</td>
+                                    </tr>
+                                </tfoot>
+                            <else />
+                                <tr>
+                                    <td colspan="12">暂无数据</td>
+                                </tr>
+                            </if>
+                        </table>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $('#add_time').daterangepicker({
+            format:"YYYY/MM/DD",
+            singleDatePicker: false,
+            showDropdowns: true,
+            minDate:'<?php echo date("Y")-10;?>/01/01',
+            maxDate:'2030/01/01',
+            startDate:'<?php echo date("Y");?>/01/01',
+            locale : {
+                applyLabel : '确定',
+                cancelLabel : '取消',
+                fromLabel : '起始时间',
+                toLabel : '结束时间',
+                customRangeLabel : '自定义',
+                daysOfWeek : [ '日', '一', '二', '三', '四', '五', '六' ],
+                monthNames : [ '一月', '二月', '三月', '四月', '五月', '六月','七月', '八月', '九月', '十月', '十一月', '十二月' ],
+                firstDay : 1
+            }
+        });
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+    <script type="text/javascript">
+        /*
+         * 在线编辑器相 关配置 js 
+         *  参考 地址 http://fex.baidu.com/ueditor/
+         */
+        window.UEDITOR_Admin_URL = "__ADMIN_PLUGINS__/Ueditor/";
+        var URL_upload = "{$URL_upload}";
+        var URL_fileUp = "{$URL_fileUp}";
+        var URL_scrawlUp = "{$URL_scrawlUp}";
+        var URL_getRemoteImage = "{$URL_getRemoteImage}";
+        var URL_imageManager = "{$URL_imageManager}";
+        var URL_imageUp = "{$URL_imageUp}";
+        var URL_getMovie = "{$URL_getMovie}";
+        var URL_home = "{$URL_home}";
+    </script>
+    <script type="text/javascript" charset="utf-8" src="__ADMIN_PLUGINS__/Ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="__ADMIN_PLUGINS__/Ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="__ADMIN_PLUGINS__/Ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript">  
+      
+        var editor;
+        $(function () {
+            //具体参数配置在  editor_config.js  中
+            var options = {
+                zIndex: 999,
+                initialFrameWidth: "95%", //初化宽度
+                initialFrameHeight: 400, //初化高度
+                focus: false, //初始化时，是否让编辑器获得焦点true或false
+                maximumWords: 99999, removeFormatAttributes: 'class,style,lang,width,height,align,hspace,valign'
+                , //允许的最大字符数 'fullscreen',
+                pasteplain: true, autoHeightEnabled: true,
+                autotypeset: {
+                    mergeEmptyline: true,        //合并空行
+                    removeClass: true,           //去掉冗余的class
+                    removeEmptyline: false,      //去掉空行
+                    textAlign: "left",           //段落的排版方式，可以是 left,right,center,justify 去掉这个属性表示不执行排版
+                    imageBlockLine: 'center',    //图片的浮动方式，独占一行剧中,左右浮动，默认: center,left,right,none 去掉这个属性表示不执行排版
+                    pasteFilter: false,          //根据规则过滤没事粘贴进来的内容
+                    clearFontSize: false,        //去掉所有的内嵌字号，使用编辑器默认的字号
+                    clearFontFamily: false,      //去掉所有的内嵌字体，使用编辑器默认的字体
+                    removeEmptyNode: false,      // 去掉空节点
+                                                 //可以去掉的标签
+                    removeTagNames: {"font": 1},
+                    indent: false,               // 行首缩进
+                    indentValue: '0em'           //行首缩进的大小
+                },
+                toolbars: [
+                       ['fullscreen', 'source', '|', 'undo', 'redo',
+                           '|', 'bold', 'italic', 'underline', 'fontborder',
+                           'strikethrough', 'superscript', 'subscript',
+                           'removeformat', 'formatmatch', 'autotypeset',
+                           'blockquote', 'pasteplain', '|', 'forecolor',
+                           'backcolor', 'insertorderedlist',
+                           'insertunorderedlist', 'selectall', 'cleardoc', '|',
+                           'rowspacingtop', 'rowspacingbottom', 'lineheight', '|',
+                           'customstyle', 'paragraph', 'fontfamily', 'fontsize',
+                           '|', 'directionalityltr', 'directionalityrtl',
+                           'indent', '|', 'justifyleft', 'justifycenter',
+                           'justifyright', 'justifyjustify', '|', 'touppercase',
+                           'tolowercase', '|', 'link', 'unlink', 'anchor', '|',
+                           'imagenone', 'imageleft', 'imageright', 'imagecenter',
+                           '|', 'insertimage', 'emotion', 'insertvideo',
+                           'attachment', 'map', 'gmap', 'insertframe',
+                           'insertcode', 'webapp', 'pagebreak', 'template',
+                           'background', '|', 'horizontal', 'date', 'time',
+                           'spechars', 'wordimage', '|',
+                           'inserttable', 'deletetable',
+                           'insertparagraphbeforetable', 'insertrow', 'deleterow',
+                           'insertcol', 'deletecol', 'mergecells', 'mergeright',
+                           'mergedown', 'splittocells', 'splittorows',
+                           'splittocols', '|', 'print', 'preview', 'searchreplace']
+                   ]
+            };
+            editor = new UE.ui.Editor(options);
+            editor.render("goods_content");  //  指定 textarea 的  id 为 goods_content
+
+        }); 
+    </script>
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>网站设置</h4>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab_tongyong" data-toggle="tab">网站信息</a></li>                 
+                        </ul>
+                        <form action="{:U('system/index')}" class="form-horizontal" method="post">
+                            <div class="tab-content">                     
+                                <div class="tab-pane active" id="tab_tongyong">
+                                    <table class="table contact-template-form">
+                                        <tbody>
+                                            <tr>
+                                                <td width="20%" align="right">网站备案号：</td>
+                                                <td>
+                                                    <input type="text" name="web_icp" value="{$web.web_icp}" class="form-control" placeholder="">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="20%" align="right">网站名称：</td>
+                                                <td>
+                                                    <input type="text" name="web_name" value="{$web.web_name}" class="form-control" placeholder="">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="20%" align="right">上传商品图片：</td>
+                                                <td>
+                                                    <div class="col-sm-3">                                                                              
+                                                        <input type="text" value="" name="web_logo" id="web_logo" value="{$web.web_logo}" class="form-control" style="width:350px;margin-left:-15px;"/>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <input onclick="GetUploadify(1,'web_logo','images');" type="button" class="btn btn-default" value="上传logo"/>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="20%" align="right">网站标题：</td>
+                                                <td>
+                                                    <input type="text" name="web_title" value="{$web.web_title}" class="form-control" placeholder="">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="20%" align="right">网站描述：</td>
+                                                <td>
+                                                    <input type="text" name="web_desc" value="{$web.web_desc}" class="form-control" placeholder="">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="20%" align="right">网站关键字：</td>
+                                                <td>
+                                                    <input type="text" name="web_keyword" value="{$web.web_keyword}" class="form-control" placeholder="">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="20%" align="right">联系人：</td>
+                                                <td>
+                                                    <input type="text" name="web_contact" value="{$web.web_contact}" class="form-control" placeholder="">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="20%" align="right">联系电话：</td>
+                                                <td>
+                                                    <input type="text" name="web_mobile" value="{$web.web_mobile}" class="form-control" placeholder="">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="20%" align="right">具体地址：</td>
+                                                <td>
+                                                    <input type="text" name="web_address" value="{$web.web_address}" class="form-control" placeholder="">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="20%" align="right">客服QQ：</td>
+                                                <td>
+                                                    <input type="text" name="web_qq" class="form-control" value="{$web.web_qq}" placeholder="">
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>   
+                                </div>
+                            </div> 
+                            <button class="btn btn-primary" style="margin-left:20%">提 交</button>         
+                        </form>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+    <script>
+        /*
+         * 以下是图片上传方法
+         */
+        // 上传商品图片成功回调函数
+        function call_back(fileurl_tmp){
+            $("#original_img").val(fileurl_tmp);
+            $("#original_img2").attr('href', fileurl_tmp);
+        }
+    
+    </script>
+</body>
+</html>

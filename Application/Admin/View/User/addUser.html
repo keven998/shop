@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>添加会员</h4>     
+                            <a href="{:U('user/index')}">
+                                <button class="btn btn-default"><i class="fa fa-level-up"></i>返回</button>
+                            </a> 
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <form action="{:U('user/addUser')}" class="form-horizontal" method="post" onsubmit="return checkUserUpdate(this);">
+                            <table class="table table-hover contact-template-form">
+                                <tbody>
+                                    <tr>
+                                        <td width="20%" align="right">手机号码：</td>
+                                        <td>
+                                            <input type="text" class="form-control w-300 pull-left" name="mobile" /><div class="tip-text">前台登录账号</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">会员昵称：</td>
+                                        <td>
+                                            <input type="text" name="nickname" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">登入密码：</td>
+                                        <td>
+                                            <input type="password" name="password" class="form-control w-300 pull-left" />
+                                            <div class="tip-text">6-16位字母数字符号组合</div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">身份证号码：</td>
+                                        <td>
+                                            <input type="text" name="idcard" class="form-control w-300" />
+                                        </td>
+                                    </tr>                                    
+                                    <tr>
+                                        <td width="20%" align="right">性别：</td>
+                                        <td>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="sex" id="inlineRadio1" value="0" checked> 保密
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="sex" id="inlineRadio2" value="1"> 男
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="sex" id="inlineRadio2" value="2"> 女
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%"></td>
+                                        <td>
+                                            <button class="btn btn-primary" type="submit">提 交</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>    
+                        </form>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+    <script>
+        function checkUserUpdate(){
+            var idcard = $('input[name="idcard"]').val();
+            var mobile = $('input[name="mobile"]').val();
+            var password = $('input[name="password"]').val();
+            if(mobile ==''){
+                 layer.alert('手机不能为空', {icon: 2});
+                return false;
+            }
+            if(!checkMobile(mobile) && mobile != ''){
+                layer.alert('手机号码填写有误', {icon: 2});
+                return false;
+            }
+            if(password == ''){
+                layer.alert('密码不能为空', {icon: 2});
+                return false;
+            }
+            if(password.length<6 || password.length>16){
+                layer.alert('密码长度不正确', {icon: 2});
+                return false;
+            }
+            if(idcard == ''){
+                layer.alert('身份证号码不能为空', {icon: 2});
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>编辑广告位</h4>     
+                            <a href="javascript:history.go(-1)">
+                                <button class="btn btn-default"><i class="fa fa-level-up"></i>返回</button>
+                            </a> 
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <form action="{:U('ad/editPosition')}" class="form-horizontal" method="post" onsubmit="return checkName();" id="addEditAdForm">
+                            <input type="hidden" name="position_id" value="{$data.position_id}" />
+                            <table class="table table-hover contact-template-form">
+                                <tbody>
+                                    <tr>
+                                        <td width="20%" align="right">广告位名称：</td>
+                                        <td>
+                                            <input type="text" name="position_name" value="{$data.position_name}" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">广告位宽度：</td>
+                                        <td>
+                                            <input type="text" name="ad_width" value="{$data.ad_width}" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">广告位高度：</td>
+                                        <td>
+                                            <input type="text" name="ad_height" value="{$data.ad_height}" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">广告位描述：</td>
+                                        <td>
+                                            <textarea class="form-control w-300" name="position_desc">{$data.position_desc}</textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">是否启用：</td>
+                                        <td>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="is_open" id="inlineRadio1" value="1" <if condition="$data['is_open'] eq 1">checked</if>> 开启
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="is_open" id="inlineRadio2" value="0"  <if condition="$data['is_open'] eq 0">checked</if>> 关闭
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%"></td>
+                                        <td>
+                                            <button class="btn btn-primary">提 交</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>    
+                        </form>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+    <script type="text/javascript">
+    // 判断输入框是否为空
+    function checkName(){
+        var name = $("#addEditAdForm").find("input[name='position_name']").val();
+        if($.trim(name) == '')
+        {
+            layer.msg('广告位名称不能为空！')
+            return false;
+        }
+        return true;
+    }
+    </script>
+</body>
+</html>

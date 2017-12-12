@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+    <link href="__ADMIN_PLUGINS__/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+    <script src="__ADMIN_PLUGINS__/daterangepicker/moment.min.js" type="text/javascript"></script>
+    <script src="__ADMIN_PLUGINS__/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+    <style type="text/css">
+    .timed{display: none;}
+    </style>
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>添加优惠券</h4>     
+                            <a href="javascript:history.go(-1)">
+                                <button class="btn btn-default"><i class="fa fa-level-up"></i>返回</button>
+                            </a> 
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <form action="{:U('promotion/addCoupon')}" class="form-horizontal" method="post" id="addEditPromotionForm">
+                            <table class="table table-hover contact-template-form">
+                                <tbody>
+                                    <tr>
+                                        <td width="20%" align="right">优惠券名称：</td>
+                                        <td>
+                                            <input type="text" name="name" id="name" value="" class="form-control w-300" placeholder="请填写优惠券名称">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">优惠券面额：</td>
+                                        <td>
+                                            <input type="text" name="money" id="money" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" value="" class="form-control w-300" placeholder="优惠券可抵扣金额">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">消费金额：</td>
+                                        <td>
+                                            <input type="text" name="condition" id="condition" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" value="" class="form-control w-300" placeholder="订单需满足的最低消费金额(必需为整数)才能使用">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">发放类型:</td>
+                                        <td id="order-status">
+                                            <label><input name="type" type="radio" value="0" <if condition="$coupon['type'] eq 0">checked</if> >面额模板</label>
+                                            <label><input name="type" type="radio" value="1" <if condition="$coupon['type'] eq 1">checked</if> >按用户发放</label>                                     
+                                            <label><input name="type" type="radio" value="2" <if condition="$coupon['type'] eq 2">checked</if> >注册发放</label>
+                                            <label><input name="type" type="radio" value="3" <if condition="$coupon['type'] eq 3">checked</if> >邀请发放</label>
+                                            <label><input name="type" type="radio" value="4" <if condition="$coupon['type'] eq 4">checked</if> >线下发放</label>
+                                        </td>
+                                    </tr> 
+                                    <tr>
+                                        <td width="20%" align="right">发放数量：</td>
+                                        <td>
+                                            <input type="text" id="createnum" name="createnum" value="" onpaste="this.value=this.value.replace(/[^\d.]/g,'')" onkeyup="this.value=this.value.replace(/[^\d.]/g,'')" class="form-control w-300" placeholder="发放数量限制(默认为0则无限制)">
+                                        </td>
+                                    </tr>
+                                    <tr class="timed">
+                                        <td width="20%" align="right">发放起始日期：</td>
+                                        <td>
+                                            <input type="text" name="send_start_time" id="send_start_time" value="<?php echo date('Y-m-d',strtotime("+1 day"));?>" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr class="timed">
+                                        <td width="20%" align="right">发放结束日期：</td>
+                                        <td>
+                                            <input type="text" name="send_end_time" id="send_end_time" value="<?php echo date('Y-m-d',strtotime("+1 month"));?>"  class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">使用起始日期：</td>
+                                        <td>
+                                            <input type="text" name="use_start_time" id="use_start_time" value="<?php echo date('Y-m-d',strtotime("+1 day"));?>" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">使用结束日期：</td>
+                                        <td>
+                                            <input type="text" name="use_end_time" id="use_end_time" value="<?php echo date('Y-m-d',strtotime("+2 month"));?>"  class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%"></td>
+                                        <td>
+                                            <button class="btn btn-primary" type="button" onclick="adsubmit()">提 交</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>    
+                        </form>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+    <script type="text/javascript">
+    function adsubmit(){
+        if($('#name').val() ==''){
+            layer.msg('优惠券名称不能为空');return;
+        }
+        if($('#money').val() ==''){
+            layer.msg('优惠券金额不能为空');return;
+        }
+        $('#addEditPromotionForm').submit();
+    }
+    $('input[type="radio"]').click(function(){
+        if($(this).val() == 0){
+            $('.timed').hide();
+        }else{
+            $('.timed').show();
+        }
+    })
+
+
+    $(function(){
+        data_pick('send_start_time');
+        data_pick('send_end_time');
+        data_pick('use_start_time');
+        data_pick('use_end_time');
+        $('input[type="radio"]:checked').trigger('click');
+    })
+        
+    function data_pick(id){
+        var myDate = new Date();
+        $('#'+id).daterangepicker({
+            singleDatePicker: true,
+            showDropdowns: true,
+            minDate:myDate.getFullYear()+'-'+myDate.getMonth()+'-'+myDate.getDate(),
+            maxDate:'2030-01-01',
+            format: 'YYYY-MM-DD',
+            locale : {
+                applyLabel : '确定',
+                cancelLabel : '取消',
+                fromLabel : '起始时间',
+                toLabel : '结束时间',
+                customRangeLabel : '自定义',
+                daysOfWeek : [ '日', '一', '二', '三', '四', '五', '六' ],
+                monthNames : [ '一月', '二月', '三月', '四月', '五月', '六月','七月', '八月', '九月', '十月', '十一月', '十二月' ],
+                firstDay : 1
+            }
+        });
+    }
+</script>
+</body>
+</html>

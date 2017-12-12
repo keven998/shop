@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>文章列表</h4>      
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="search-box row">
+                        <div class="col-md-8">
+                            <form action="" method="get">
+                                <div class="form-group">
+                                    <span class="pull-left form-span">关键词:</span>
+                                    <input type="text" name="keywords" value="{$Think.get.keywords}" class="form-control" placeholder="请输入关键词">
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" name="cat_id">
+                                        <option value="">所有文章类别</option>
+                                        <foreach name="category" item="vo">
+                                            <option value="{$vo.cat_id}" <if condition="$Think.get.cat_id eq $vo['cat_id']">selected</if>>{$vo.html}{$vo.cat_name}</option>
+                                        </foreach>
+                                    </select>
+                                </div>
+                                <div class="form-group btn-search">
+                                    <button class="btn btn-default" ><span class="glyphicon glyphicon-search"></span> 筛选</button>
+                                </div>  
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{:U('article/addArt')}" class="btn btn-primary pull-right ">添加文章</a>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <table class="table table-hover table-header">
+                            <thead>
+                                <tr>
+                                    <td>文章标题</td>
+                                    <td>文章类别</td>
+                                    <td>显示</td>
+                                    <td>发布时间</td>
+                                    <td class="w10">操作</td>
+                                </tr>
+                            </thead>
+                            <if condition="$list['data']">
+                                <tbody>
+                                    <foreach name="list.data" item="vo"> 
+                                        <tr>
+                                            <td>{$vo.title}</td>
+                                            <td>{$vo.cat_name}</td>
+                                            <td><img width="20" height="20" src="__ADMIN_IMAGES__/<if condition='$vo[is_open] eq 1'>yes.png<else />cancel.png</if>" onclick="changeTableVal('article','article_id','{$vo.article_id}','is_open',this)"/></td>
+                                            <td>{$vo.add_time|date="Y-m-d H:i:s",###}</td>                                     
+                                            <td>
+                                                <a href="{:U('article/editArt',array('article_id'=>$vo['article_id']))}">编辑</a>
+                                                <span class="text-explode">|</span>
+                                                <a href="{:U('article/delArt',array('article_id'=>$vo['article_id']))}">删除</a>
+                                            </td>
+                                        </tr>
+                                    </foreach>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="6" align="right">{$list.page}</td>
+                                    </tr>
+                                </tfoot>
+                            <else />
+                                <tr>
+                                    <td colspan="6">暂无数据</td>
+                                </tr>
+                            </if>
+                        </table>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+</body>
+</html>

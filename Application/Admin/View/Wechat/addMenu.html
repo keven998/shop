@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>添加微信菜单</h4>     
+                            <a href="javascript:history.go(-1)">
+                                <button class="btn btn-default"><i class="fa fa-level-up"></i>返回</button>
+                            </a> 
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <form action="{:U('wechat/addMenu')}" class="form-horizontal" method="post">
+                            <table class="table table-hover contact-template-form">
+                                <tbody>
+                                    <tr>
+                                        <td width="20%" align="right">上级菜单：</td>
+                                        <td>
+                                            <select class="form-control w-300" name="pid">
+                                                <option value="0">一级菜单</option>
+                                                <foreach name="menu" item="vo">
+                                                    <option value="{$vo.id}">{$vo.name}</option>
+                                                </foreach>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">菜单类型：</td>
+                                        <td>
+                                            <select class="form-control w-300" name="type" id="type">
+                                                <option value="scancode_push">扫码推事件</option>
+                                                <option value="click">点击推事件</option>
+                                                <option value="view">跳转URL</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">菜单名称：</td>
+                                        <td>
+                                            <input type="text" name="name" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr id="viewbox" style="display:none">
+                                        <td width="20%" align="right">跳转链接：</td>
+                                        <td>
+                                            <input type="text" name="url" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr id="clickbox" style="display:none">
+                                        <td width="20%" align="right">关键词：</td>
+                                        <td>
+                                            <input type="text" name="key" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%"></td>
+                                        <td>
+                                            <button class="btn btn-primary">提 交</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>    
+                        </form>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        $('#type').change(function(){
+            if($(this).val() == 'view'){
+                $('#viewbox').show();
+            }else{
+                $('#viewbox').hide();
+            }
+            if($(this).val() == 'click'){
+                $('#clickbox').show();
+            }else{
+                $('#clickbox').hide();
+            }
+        })
+    })
+    </script>
+</body>
+</html>

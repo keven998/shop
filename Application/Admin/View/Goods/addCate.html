@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>添加分类</h4>     
+                            <a href="javascript:history.go(-1)">
+                                <button class="btn btn-default"><i class="fa fa-level-up"></i>返回</button>
+                            </a> 
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <form action="{:U('goods/addCate')}" class="form-horizontal" method="post">
+                            <table class="table table-hover contact-template-form">
+                                <tbody>
+                                    <tr>
+                                        <td width="20%" align="right">分类名称：</td>
+                                        <td>
+                                            <input type="text" name="cat_name" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">上级分类：</td>
+                                        <td>
+                                            <select name="parent_id" id="" class="form-control w-300">
+                                                <option value="0">顶级分类</option>
+                                                <foreach name="category" item="vo">
+                                                    <option value="{$vo.cat_id}">{$vo.html}{$vo.cat_name}</option>
+                                                </foreach>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">关键词：</td>
+                                        <td>
+                                            <input type="text" name="keywords" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">描述：</td>
+                                        <td>
+                                            <textarea class="form-control w-300" name="description"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">排序：</td>
+                                        <td>
+                                            <input type="text" name="sort" value="50" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">是否显示：</td>
+                                        <td>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="is_show" id="inlineRadio1" value="0"> 隐藏
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="is_show" id="inlineRadio2" value="1" checked> 显示
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%"></td>
+                                        <td>
+                                            <button class="btn btn-primary">提 交</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>    
+                        </form>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+</body>
+</html>

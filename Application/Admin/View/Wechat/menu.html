@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>微信菜单</h4>      
+                        </div>
+                        <a href="{:U('wechat/addMenu')}" class="btn btn-primary pull-right margin-top">添加菜单</a>
+                        <a href="{:U('wechat/upMenu')}" class="btn btn-primary pull-right margin-top" style="margin-right:20px;">更新微信菜单</a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <table class="table table-hover table-header">
+                            <thead>
+                                <tr>
+                                    <td>菜单名称</td>
+                                    <td>菜单类型</td>
+                                    <td>菜单关键词</td>
+                                    <td>跳转链接</td>
+                                    <td class="w10">操作</td>
+                                </tr>
+                            </thead>
+                            <if condition="$menu">
+                                <tbody>
+                                    <foreach name="menu" item="vo"> 
+                                        <tr>
+                                            <td>{$vo.html}{$vo.name}</td>
+                                            <td>
+                                                <if condition="$vo['type'] eq 'scancode_push'">扫码推事件</if>
+                                                <if condition="$vo['type'] eq 'click'">点击推事件</if>
+                                                <if condition="$vo['type'] eq 'view'">跳转URL</if>
+                                            </td>
+                                            <td><if condition="$vo['key']">{$vo.key}<else />-</if></td>
+                                            <td><if condition="$vo['url']">{$vo.url}<else />-</if></td>                        
+                                            <td>
+                                                <a href="{:U('wechat/editMenu',array('id'=>$vo['id']))}">编辑</a>
+                                                <span class="text-explode">|</span>
+                                                <a href="{:U('wechat/delMenu',array('id'=>$vo['id']))}">删除</a>
+                                            </td>
+                                        </tr>
+                                    </foreach>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="6" align="right">{$list.page}</td>
+                                    </tr>
+                                </tfoot>
+                            <else />
+                                <tr>
+                                    <td colspan="6">暂无数据</td>
+                                </tr>
+                            </if>
+                        </table>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <include file="Public/meta" />
+</head>
+<body>
+    <div class="ms-bottomNav">
+        <div class="ms-indexFloor">
+            <!-- 幻灯块 滑动图片链接 开始 -->
+            <div class="ms-swiperBox ms-slideLinkPic swiper-container-horizontal" style="margin-bottom: .266667rem">
+                <div class="ms-wrapper">
+
+                    <!-- 遍历 item 开始 -->
+                    <a href="/wap/topic-lists-5.html" class="ms-link-item ms-slide ms-slide-active">
+
+                        <!-- 图片开始 -->
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/dede_uploads/allimg/170925/1-1F9251039130-L.jpg" alt="优选推荐">
+                            </div>
+                        </div>
+                        <!-- 图片结束 -->
+
+                        <!-- 简洁开始 -->
+                        <div class="info">
+                            <p>优选推荐</p>
+                        </div>
+                        <!-- 简洁结束 -->
+                    </a>
+                    <a href="/wap/topic-lists-6.html" class="ms-link-item ms-slide swiper-slide-next">
+
+                        <!-- 图片开始 -->
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/dede_uploads/allimg/170915/1-1F9151211490-L.jpg" alt="买手推荐">
+                            </div>
+                        </div>
+                        <!-- 图片结束 -->
+
+                        <!-- 简洁开始 -->
+                        <div class="info">
+                            <p>买手推荐</p>
+                        </div>
+                        <!-- 简洁结束 -->
+                    </a>
+                    <!-- 遍历 item 结束 -->
+                    <script>
+                        setTimeout(function() {
+                            (function(e){
+                                new Swiper('.ms-slideLinkPic', {
+                                    wrapperClass: 'ms-wrapper',
+                                    slideClass: 'ms-slide',
+                                    slideActiveClass : 'ms-slide-active',
+                                    slidesPerView: 'auto'
+                                });
+                            })();
+                        },500)
+                    </script>
+                </div>
+                <!-- 幻灯块 滑动图片链接 结束 -->
+            </div>
+        </div>
+        
+        <div class="ms-indexFloor ms-backgroundNone">
+            <div class="ms-special">
+                <a href="/wap/topic-detail-15.html" class="ms-specialPadding">
+
+                    <!-- 专题头部开始 -->
+                    <div class="author">
+                        <div class="pic"><img src="http://s1.hgcang.com/bsimg/dede_uploads/allimg/171123/1-1G1231JF40-L.png" alt=""></div>
+                        <p>名创优选</p>
+                    </div>
+                    <!-- 专题头部结束 -->
+
+                    <!-- 专题图片开始 -->
+                    <img src="http://s1.hgcang.com/bsimg/dede_uploads/allimg/171123/1-1G1231KZ70-L.jpg" alt="">
+                    <!-- 专题图片结束 -->
+
+                    <!-- 专题 info 开始 -->
+                    <div class="info">
+                        <div class="line1">
+                            <h4>一到节日就断货の群宠好物</h4>
+                            <p class="price">¥ <span>9</span>起</p>
+                        </div>
+                        <div class="desc">感恩节来临，“断货王”TOP5提前抢</div>
+                    </div>
+                    <!-- 专题 info 结束 -->
+                </a>
+            </div>
+        </div>
+        <include file="Public/footer" />
+    </div>
+</body>
+</html>

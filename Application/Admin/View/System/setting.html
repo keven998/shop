@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>{$plugin.name}配置</h4>     
+                            <a href="javascript:history.go(-1)">
+                                <button class="btn btn-default"><i class="fa fa-level-up"></i>返回</button>
+                            </a> 
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <form action="" class="form-horizontal" method="post">
+                            <table class="table table-hover contact-template-form">
+                                <tbody>
+                                    <volist name="plugin.config" id="config">
+                                        <tr>
+                                            <td width="20%" align="right">{$config.label}：</td>
+                                            <td>
+                                                <if condition="$config['type'] eq 'select'">
+                                                    <select name="config[{$config['name']}]" class="form-control w-300">
+                                                        <volist name="config.option" id="option" key="o">
+                                                            <option <if condition="$config_value[$config['name']] eq $o">selected</if>  value="{$o}">{$option}</option>
+                                                        </volist>
+                                                    </select>
+                                                <elseif condition="$config['type'] eq 'textarea'"/>
+                                                    <textarea rows="6" cols="90" name="config[{$config['name']}]" class="form-control w-300">{$config_value[$config['name']]}</textarea>
+                                                <else />
+                                                    <input type="{$config['type']}" value="{$config_value[$config['name']]}" class="form-control w-300" name="config[{$config['name']}]"/>
+                                                </if>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                    <tr>
+                                        <td width="20%"></td>
+                                        <td>
+                                            <input type="hidden" name="id" value="{$spec.id}">
+                                            <button class="btn btn-primary">提 交</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>    
+                        </form>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+</body>
+</html>

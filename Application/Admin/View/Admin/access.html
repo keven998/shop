@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <a href="{:U('admin/role')}">
+                            <button class="btn btn-default margin-top"><i class="fa fa-level-up"></i>返回</button>
+                        </a> 
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <div id="warp">
+                            <form action="{:U('admin/setAccess')}" method="post">    
+                                <foreach name="node" item="app">
+                                    <div class="app">
+                                        <p>
+                                            <strong>{$app.title}</strong>
+                                            <label><input type="checkbox" name="access[]" value="{$app.id}_1" level='1' <if condition="$app['access']">checked</if>>全选</label>
+                                        </p>
+                                        <foreach name="app.child" item="action">
+                                            <dl>
+                                                <dt>
+                                                    <strong>{$action.title}</strong>
+                                                    <label><input type="checkbox" name="access[]" value="{$action.id}_2" level='2' <if condition="$action['access']">checked</if>>全选</label>
+                                                </dt>
+                                                <foreach name="action.child" item="method">
+                                                    <dd>
+                                                        <span>{$method.title}</span>
+                                                        <input type="checkbox" name="access[]" value="{$method.id}_3" level='3' <if condition="$method['access']">checked</if>>
+                                                    </dd>
+                                                </foreach>
+                                            </dl>
+                                        </foreach>
+                                    </div>
+                                </foreach>
+                                <input type="hidden" name="rid" value="{$rid}" />
+                                <button class="btn btn-primary" style="margin:20px auto;">提交</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+     <script type="text/javascript">
+        $(function(){
+            $('input[level =1]').click(function(){
+                var inputs = $(this).parents('.app').find('input');
+                $(this).is(':checked') ? inputs.prop('checked',true) : inputs.prop('checked',false);
+            })
+            $('input[level =2]').click(function(){
+                var inputs = $(this).parents('dl').find('input');
+                $(this).is(':checked') ? inputs.prop('checked',true) : inputs.prop('checked',false);
+            })
+        })
+    </script>
+</body>
+</html>

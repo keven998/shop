@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="cn">
+<head>
+    <meta charset="UTF-8" />
+    <title>订单打印</title>
+    <link rel="shortcut icon" href="__ADMIN_IMAGES__/favicon.png" type="image/x-icon">
+    <link href="__ADMIN_CSS__/bootstrap.min.css" rel="stylesheet" media="all" />
+    <script type="text/javascript" src="__ADMIN_JS__/jquery-1.9.2.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div style="page-break-after: always;">
+        <h1 class="text-center">订单信息</h1>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <td style="width: 50%;">发送自</td>
+                <td style="width: 50%;">订单详情</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><address>
+                    <strong>{$shop.web_name}</strong><br />
+                    {$shop.web_address}            </address>
+                    <b>电话:</b> {$shop.web_mobile}<br />
+                    <b>订单 ID:</b> {$order.order_id}<br />
+                    <b>配送方式:</b> {$order.shipping_name}<br />
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <td style="width: 50%;"><b>到</b></td>
+                <td style="width: 50%;"><b>联系</b></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{$order.province}&nbsp;&nbsp;{$order.city}&nbsp;&nbsp;{$order.district}<br />{$order.address}</td>
+                <td>{$order.mobile}<br/>
+                    </td>
+            </tr>
+            </tbody>
+        </table>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+
+                <td><b>商品</b></td>
+                <td><b>属性</b></td>
+                <td><b>数量</b></td>
+                <td><b>单价</b></td>
+                <td class="text-right"><b>小计</b></td>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="orderGoods" id="good">
+                <tr>
+                    <td>
+                        {$good.goods_name}
+                    </td>
+                    <td>{$good.spec_key_name}</td>
+                    <td>{$good.goods_number}</td>
+                    <td>{$good.goods_price}</td>
+                    <td class="text-right">{$good.goods_total}</td>
+                </tr>
+            </volist>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

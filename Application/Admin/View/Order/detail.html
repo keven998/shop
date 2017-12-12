@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+    <link href="__ADMIN_PLUGINS__/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+    <script src="__ADMIN_PLUGINS__/daterangepicker/moment.min.js" type="text/javascript"></script>
+    <script src="__ADMIN_PLUGINS__/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>订单详情</h4>      
+                            <a href="javascript:history.go(-1)" data-toggle="tooltip" title="" class="btn btn-default" data-original-title="返回">返回</a>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="search-box row">
+                        <div class="col-md-10">
+                            <!-- <if condition="$order['order_status'] lt 2">
+                            <a href="{:U('Admin/order/edit_order',array('order_id'=>$order['order_id']))}" data-toggle="tooltip" title="" class="btn btn-primary " data-original-title="编辑">修改订单</a>
+                            </if>
+                            <if condition="($split eq 1) and ($order['order_status'] lt 2)">
+                            <a href="{:U('Admin/order/split_order',array('order_id'=>$order['order_id']))}" data-toggle="tooltip" title="" class="btn btn-primary pull-right" data-original-title="编辑">拆分订单</a>
+                            </if> -->
+                            
+                        </div>
+                        <div class="col-md-2" style="text-align:right">
+                            
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <!--新订单列表 基本信息-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title text-center">基本信息</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                    <tr>
+                                        <td>订单 ID:</td>
+                                        <td>订单号:</td>
+                                        <td>会员:</td>
+                                        <td>电话:</td>
+                                        <td>应付:</td>
+                                        <td>订单 状态:</td>
+                                        <td>下单时间:</td>
+                                        <td>支付时间:</td>
+                                        <td>支付方式:</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{$order.order_id}</td>
+                                        <td>{$order.order_sn}</td>
+                                        <td>{$order.consignee}</td>
+                                        <td>{$order.mobile}</td>
+                                        <td>{$order.order_amount}</td>
+                                        <td id="order-status">{$order_status[$order[order_status]]} / {$pay_status[$order[pay_status]]}<if condition="$order['pay_code'] eq 'cod'"><span style="color: red">(货到付款)</span></if> / {$shipping_status[$order[shipping_status]]}</td>
+                                        <td>{$order.add_time|date='Y-m-d H:i',###}</td>
+                                        <td><if condition="$order.pay_time neq 0">
+                                                {$order.pay_time|date='Y-m-d H:i',###}
+                                         <else/>
+                                            N
+                                         </if>
+                                        </td>             
+                                        <td id="pay-type">
+                                            {$order.pay_name|default='其他方式'}
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--新订单列表 收货人信息-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title text-center">收货信息</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-bordered">
+                                    <tbody><tr>
+                                    <td>收货人:</td>
+                                    <td>联系方式:</td>
+                                    <td>地址:</td>
+                                    <td>邮编:</td>
+                                    <td>配送方式:</td>
+                             
+                                    </tr>
+                                    <tr>
+                                        <td>{$order.consignee}</td>
+                                        <td>{$order.mobile}</td>
+                                        <td>{$order.address2}</td>
+                                        <td>
+                                            <if condition="$order.zipcode neq ''">
+                                                {$order.zipcode}
+                                                <else/>
+                                                N
+                                            </if>
+                                        </td>
+                                        <td>
+                                            {$order.shipping_name}
+                                            <if condition="$order[shipping_name]">
+                                                <a href="{:U('Admin/Order/shipping_print',array('order_id'=>$order['order_id'],'code'=>$order['shipping_code']))}" target="_blank" class="btn btn-primary input-sm" onclick="">打印快递单</a>
+                                            </if>
+                                        </td>
+                                      
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--新订单列表 商品信息-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title text-center">商品信息 </h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <td class="text-left">商品</td>
+                                        <td class="text-left">属性</td>
+                                        <td class="text-right">数量</td>
+                                        <td class="text-right">单品价格</td>
+                                        <td class="text-right">会员折扣价</td>
+                                        <td class="text-right">单品小计</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <volist name="orderGoods" id="good">
+                                        <tr>
+                                            <td class="text-left"><a href="{:U('/Admin/Goods/addEditGoods',array('id'=>$good['goods_id']))}">{$good.goods_name}</a>
+                                            </td>
+                                            <td class="text-left">{$good.spec_key_name}</td>
+                                            <td class="text-right">{$good.goods_number}</td>
+                                            <td class="text-right">{$good.goods_price}</td>
+                                            <td class="text-right">{$good.member_goods_price}</td>
+                                            <td class="text-right">{$good.goods_total}</td>
+                                        </tr>
+                                    </volist>
+
+                                    <tr>
+                                        <td colspan="4" class="text-right">小计:</td>
+                                        <td class="text-right">{$order.goods_amount}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        <!--新订单列表 费用信息-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title text-center">费用信息
+                                    <a class="btn btn-primary btn-xs" data-original-title="修改费用" title="" data-toggle="tooltip" href="{:U('Admin/Order/editprice',array('order_id'=>$order['order_id']))}">
+                                    <i class="fa fa-pencil"></i>
+                                </a></h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                    <tr>
+                                        <td class="text-right">小计:</td>
+                                        <td class="text-right">运费:</td>
+                                        <td class="text-right">积分 (-{$order.integral}):</td>
+                                        <td class="text-right">余额抵扣</td>
+                                        <td class="text-right">优惠券抵扣</td>
+                                        <td class="text-right">价格调整:</td>
+                                        <td class="text-right">应付:</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right">{$order.goods_amount}</td>
+                                        <td class="text-right">+{$order.shipping_fee}</td>
+                                        <td class="text-right">-{$order.integral_money}</td>
+                                        <td class="text-right">-{$order.use_money}</td>
+                                        <td class="text-right">-{$order.coupon_price}</td>
+                                        <td class="text-right">减:{$order.discount}</td>
+                                        <td class="text-right">{$order.order_amount}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        <!--新订单列表 操作信息-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title text-center">操作信息</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                    <tr>
+                                        <div class="row">
+                                            <td class="text-right col-sm-2"><p class="margin">操作备注：</p></td>
+                                            <td colspan="3">
+                                                <form id="order-action">
+                                                    <textarea name="note" placeholder="请输入操作备注" rows="3" class="form-control"></textarea>
+                                                </form>
+                                            </td>
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <div class="row">
+                                            <td class="text-right col-sm-2"><p class="margin">当前可执行操作：</p></td>
+                                            <td colspan="3">
+                                                <div class="input-group">
+                                                    <foreach name="button" item="vo" key="k">
+                                                        <if condition="$k eq 'pay_cancel'">
+                                                            <a class="btn btn-primary margin" href="javascript:void(0)" data-url="{:U('Order/pay_cancel',array('order_id'=>$order['order_id']))}" onclick="pay_cancel(this)">{$vo}</a>
+                                                        <elseif condition="$k eq 'delivery'"/>                                                 
+                                                            <a class="btn btn-primary margin" href="{:U('Order/delivery_info',array('order_id'=>$order['order_id']))}">{$vo}</a>
+                                                        <elseif condition="$k eq 'refund'"/>
+                                                            <!--退货商品列表-->
+                                                            <input class="btn btn-primary" type="button" onclick="selectGoods2({$order['order_id']})" value="退货申请">     
+                                                        <else/>
+                                                        <button class="btn btn-primary margin" onclick="ajax_submit_form('order-action','{:U('Admin/order/order_action',array('order_id'=>$order['order_id'],'type'=>$k))}');" type="button" id="confirm">
+                                                        {$vo}</button>
+                                                        </if>
+                                                    </foreach>                                
+                                                </div>
+                                            </td>
+                                        </div>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!--新订单列表 操作记录信息-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title text-center">操作记录</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <td class="text-center">操作者</td>
+                                        <td class="text-center">操作时间</td>
+                                        <td class="text-center">订单状态</td>
+                                        <td class="text-center">付款状态</td>
+                                        <td class="text-center">发货状态</td>
+                                        <td class="text-center">描述</td>
+                                        <td class="text-center">备注</td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <volist name="action_log" id="log">
+                                        <tr>
+                                            <td class="text-center">{$log.action_user}</td>
+                                            <td class="text-center">{$log.log_time|date='Y-m-d H:i:s',###}</td>
+                                            <td class="text-center">{$order_status[$log[order_status]]}</td>
+                                            <td class="text-center">{$pay_status[$log[pay_status]]}<if condition="$order['pay_code'] eq 'code'"><span style="color: red">(货到付款)</span></if></td>
+                                            <td class="text-center">{$shipping_status[$log[shipping_status]]}</td>
+                                            <td class="text-center">{$log.status_desc}</td>
+                                            <td class="text-center">{$log.action_note}</td>
+                                        </tr>
+                                    </volist>
+                                    </tbody>
+                                </table>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+</body>
+</html>

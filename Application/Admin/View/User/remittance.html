@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header clearfix">
+                        <div class="pull-left">
+                            <h4>汇款记录</h4>      
+                        </div>
+                        
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="search-box row">
+                        <div class="col-md-8">
+                            <form action="" method="get">
+                                <div class="form-group">
+                                    <span class="pull-left form-span">会员ID:</span>
+                                    <input type="text" name="user_id" value="{$Think.get.user_id}" class="form-control" placeholder="请输入会员ID">
+                                </div>
+                                <div class="form-group">
+                                    <span class="pull-left form-span">收款账号:</span>
+                                    <input type="text" name="account_bank" value="{$Think.get.account_bank}" class="form-control" placeholder="请输入收款账号">
+                                </div>
+                                <div class="form-group">
+                                    <span class="pull-left form-span">收款账户名:</span>
+                                    <input type="text" name="account_name" value="{$Think.get.account_name}" class="form-control" placeholder="请输入收款账户名">
+                                </div>
+                                <div class="form-group btn-search">
+                                    <button class="btn btn-default" ><span class="glyphicon glyphicon-search"></span> 筛选</button>
+                                </div>  
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <table class="table table-hover table-header">
+                            <thead>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>会员ID</td>
+                                    <td>收款银行</td>
+                                    <td>收款账号</td>
+                                    <td>收款账户名</td>
+                                    <td>申请金额</td>
+                                    <td>状态</td>
+                                    <td>操作时间</td>
+                                    <td>备注</td>
+                                </tr>
+                            </thead>
+                            <if condition="$list['data']">
+                                <tbody>
+                                    <foreach name="list.data" item="vo"> 
+                                        <tr>
+                                            <td>{$vo.id}</td>
+                                            <td><a href="{:U('user/detail',array('user_id'=>$vo['user_id']))}">{$vo.user_id}</a></td>
+                                            <td>{$vo.bank_name}</td>
+                                            <td>{$vo.account_bank}</td>
+                                            <td>{$vo.account_name}</td>
+                                            <td>{$vo.money}</td>
+                                            <td>支付成功</td>
+                                            <td>{$vo.add_time|date="Y-m-d H:i",###}</td>
+                                            <td>{$vo.remark}</td>
+                                        </tr>
+                                    </foreach>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="9" align="right">{$list.page}</td>
+                                    </tr>
+                                </tfoot>
+                            <else />
+                                <tr>
+                                    <td colspan="9">暂无数据</td>
+                                </tr>
+                            </if>
+                        </table>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+</body>
+</html>

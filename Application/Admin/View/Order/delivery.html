@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+    <link href="__ADMIN_PLUGINS__/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+    <script src="__ADMIN_PLUGINS__/daterangepicker/moment.min.js" type="text/javascript"></script>
+    <script src="__ADMIN_PLUGINS__/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>商品列表</h4>      
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="search-box row">
+                        <div class="col-md-8">
+                            <form action="" method="get">
+                                <div class="form-group">
+                                    <span class="pull-left form-span">收货人:</span>
+                                    <input type="text" name="consignee" value="{$Think.get.consignee}" class="form-control" placeholder="请输入关键词">
+                                </div>
+                                <div class="form-group">
+                                    <span class="pull-left form-span">订单编号:</span>
+                                    <input type="text" name="order_sn" value="{$Think.get.order_sn}" class="form-control" placeholder="请输入关键词">
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" name="intro">
+                                        <option value="">发货状态</option>
+                                        <option value="0">未发货</option>
+                                        <option value="1">已发货</option>
+                                        <option value="2">部分发货</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group btn-search">
+                                    <button class="btn btn-default" ><span class="glyphicon glyphicon-search"></span> 筛选</button>
+                                </div>  
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{:U('goods/addGoods')}" class="btn btn-primary pull-right ">导出Excel</a>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <table class="table table-hover table-header">
+                            <thead>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>订单编号</td>
+                                    <td>下单时间</td>
+                                    <td>收货人</td>
+                                    <td>联系电话</td>
+                                    <td>所选物流</td>
+                                    <td>物流费用</td>
+                                    <td>支付时间</td>
+                                    <td>订单总价</td>
+                                    <td class="w10">操作</td>
+                                </tr>
+                            </thead>
+                            <if condition="$orderList['data']">
+                                <tbody>
+                                    <volist name="orderList.data" id="list">
+                                        <tr>
+                                            <td><input type="checkbox" name="selected[]" value="6">
+                                                <input type="hidden" name="shipping_code[]" value="flat.flat"></td>
+                                            <td>{$list.order_sn}</td>
+                                            <td>{$list.add_time|date='Y-m-d H:i',###}</td>
+                                            <td>{$list.consignee}</td>
+                                            <td>{$list.mobile}</td>
+                                            <td>{$list.shipping_name}</td>
+                                            <td>{$list.shipping_price}</td>
+                                            <td>
+                                                <if condition="$list[pay_time] gt 0">
+                                                  {$list.pay_time|date='Y-m-d H:i',###}
+                                                <else/>
+                                                       货到付款 
+                                                </if>
+                                            </td>
+                                            <td>{$list.order_amount}</td>
+                                            <td>
+                                                <if condition="$list['shipping_status'] neq 1">
+                                                <a href="{:U('Admin/order/delivery_info',array('order_id'=>$list['order_id']))}" data-toggle="tooltip" title="" class="btn btn-info" data-original-title="查看详情">去发货</a>
+                                                <else/>
+                                                <a href="{:U('Admin/order/detail',array('order_id'=>$list['order_id']))}" data-toggle="tooltip" title="" class="btn btn-info" data-original-title="查看详情"><i class="fa fa-eye"></i></a>
+                                                </if>
+                                            </td>
+                                        </tr>
+                                    </volist>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="13" align="right">{$list.page}</td>
+                                    </tr>
+                                </tfoot>
+                            <else />
+                                <tr>
+                                    <td colspan="13">暂无数据</td>
+                                </tr>
+                            </if>
+                        </table>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+</body>
+</html>

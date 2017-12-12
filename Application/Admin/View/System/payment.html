@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>支付方式</h4>      
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <table class="table table-hover table-header">
+                            <thead>
+                                <tr>
+                                    <td>支付方式名称</td>
+                                    <td>支付方式描述</td>
+                                    <td class="w10">操作</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <foreach name="payment" item="vo"> 
+                                    <tr>
+                                        <td>{$vo.name}</td>
+                                        <td>{$vo.desc}</td>  
+                                        <td>
+                                            <if condition="$vo['status'] eq 0">
+                                                <p><a onclick="installPlugin('{$vo.type}','{$vo.code}',1)" href="#" class="btn btn-primary" role="button">一键安装</a> </p>
+                                                <else />
+                                                <p><a onclick="installPlugin('{$vo.type}','{$vo.code}',0)" href="#" class="btn btn-danger" role="button">卸载</a>
+                                                    <a href="{:U('Admin/system/setting',array('type'=>$vo['type'],'code'=>$vo['code']))}" class="btn btn-primary" role="button">配置</a>
+                                                </p>
+                                            </if>
+                                        </td>
+                                    </tr>
+                                </foreach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+    <script type="text/javascript">
+    //插件安装(卸载)
+    function installPlugin(type,code,type2){
+
+        var url = '/index.php?m=Admin&c=system&a=install&type='+type+'&code='+code+'&install='+type2;
+
+        $.get(url,function(data){
+            var obj = JSON.parse(data);
+            layer.msg(obj.msg,{shade: [0.5, '#333']});
+            if(obj.status == 1){
+                parent.location.reload();
+            }
+        })
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+    <link href="__ADMIN_PLUGINS__/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+    <script src="__ADMIN_PLUGINS__/daterangepicker/moment.min.js" type="text/javascript"></script>
+    <script src="__ADMIN_PLUGINS__/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>订单发货</h4>      
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <!--表单数据-->
+                        <form method="post" id="return_form" action="{:U('Admin/Order/return_info')}">                    
+                            <!--通用信息-->
+                            <div class="tab-content col-md-10">                       
+                                <div class="tab-pane active" id="tab_tongyong">                           
+                                    <table class="table table-bordered">
+                                        <tbody>
+                                        <tr>
+                                            <td class="col-sm-2">订单编号：</td>
+                                            <td class="col-sm-8">
+                                                <a href="{:U('Admin/order/detail',array('order_id'=>$return_goods['order_id']))}">{$return_goods.order_sn}</a>
+                                            </td>
+                                        </tr>  
+                                        <tr>
+                                            <td>用户：</td>
+                                            <td>                    
+                                                {$user.nickname}
+                                            </td>
+                                        </tr>  
+                                        <tr>
+                                            <td>申请日期：</td>
+                                            <td>                    
+                                                {$return_goods.addtime|date="Y-m-d H:i",###}
+                                            </td>
+                                        </tr>                                  
+                                        <tr>
+                                            <td>商品名称：</td>
+                                            <td >
+                                                <a href="{:U('Home/Goods/goodsInfo',array('id'=>$return_goods[goods_id]))}" target="_blank">{$goods[goods_name]}</a>                      
+                                            </td>
+                                        </tr>  
+                                        <tr>
+                                            <td>退换货：</td>
+                                            <td>
+                                             <div class="form-group col-xs-3">
+                                                <select  name="type"  class="form-control">
+                                                     <option value="0" <if condition="$return_goods['type'] eq 0">selected="selected"</if>>退货</option>
+                                                     <option value="1" <if condition="$return_goods['type'] eq 1">selected="selected"</if>>换货</option>
+                                                </select>
+                                              </div>
+                                                  <a href="{:U('Admin/user/account_edit',array('id'=>$return_goods[user_id],'use_money'=>$goods[shop_price],'desc'=>'退货退款到余额'))}">                                          
+                                                  <input class="btn btn-primary" type="button"  value="退款到用户余额">
+                                                  </a>
+                                              
+                                            </td>
+                                        </tr>  
+                                        <tr>
+                                            <td>退货描述：</td>
+                                            <td>                    
+                                                <textarea name="reason" id="reason" cols="" rows="" readonly="readonly" class="area" style="width:400px; height:120px;">{$return_goods['reason']}</textarea>                                        
+                                            </td>
+                                        </tr>  
+                                        <tr>
+                                            <td>用户上传照片：</td>
+                                            <td>
+                                                <volist name="return_goods[imgs]" id="item">  
+                                                    <a href="{$item}" target="_blank"><img src="{$item}" width="85" height="85" /></a>&nbsp;&nbsp;&nbsp;                            
+                                                </volist>                                          
+                                            </td>
+                                        </tr>                                    
+                                        <tr>
+                                            <td>状态：</td>
+                                            <td>
+                                                <div class="form-group  col-xs-3">
+                                                    <select class="form-control" name="status">
+                                                         <option value="0" <if condition="$return_goods['status'] eq 0">selected="selected"</if>>未处理</option>
+                                                         <option value="1" <if condition="$return_goods['status'] eq 1">selected="selected"</if>>处理中</option>
+                                                         <option value="2" <if condition="$return_goods['status'] eq 2">selected="selected"</if>>已完成</option>                                             
+                                                    </select>
+                                                </div>
+                                            </td>
+                                        </tr>     
+                                        <tr>
+                                            <td>处理备注：</td>
+                                            <td>                    
+                                                <textarea name="remark" id="remark" cols="" rows=""  class="area" style="width:400px; height:120px;">{$return_goods['remark']}</textarea>                                        
+                                            </td>
+                                        </tr>                                                                                                                                                          
+                                        </tbody> 
+                                        <tfoot>
+                                            <tr>
+                                            <td><input type="hidden" name="id" value="{$id}">
+                                            </td>
+                                            <td class="text-right"><input class="btn btn-primary" type="submit"  value="保存"></td></tr>
+                                        </tfoot>                               
+                                    </table>
+                                </div>                           
+                            </div>              
+                        </form><!--表单数据-->
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+</body>
+</html>

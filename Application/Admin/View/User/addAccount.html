@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>调节会员账户</h4>     
+                            <a href="javascript:history.go(-1)">
+                                <button class="btn btn-default"><i class="fa fa-level-up"></i>返回</button>
+                            </a> 
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <form action="{:U('user/addAccount',array('user_id'=>$user_id))}" class="form-horizontal" method="post">
+                            <table class="table table-hover contact-template-form">
+                                <tbody>
+                                    <tr>
+                                        <td width="20%" align="right">可用金额：</td>
+                                        <td>
+                                            <div class="form-inline">
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="exampleInputEmail3">可用金额</label>
+                                                    <select name="money_act_type" class="form-control" id="">
+                                                        <option value="1">增加</option>
+                                                        <option value="0">减少</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="exampleInputEmail3">Email address</label>
+                                                    <input type="text" class="form-control" name="use_money" value="0" id="exampleInputEmail3" placeholder="">
+                                                </div>
+                                            </div>                                            
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">冻结金额：</td>
+                                        <td>
+                                            <div class="form-inline">
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="exampleInputEmail3">冻结金额</label>
+                                                    <select name="frozen_act_type" class="form-control" id="">
+                                                        <option value="1">增加</option>
+                                                        <option value="0">减少</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="exampleInputEmail3">Email address</label>
+                                                    <input type="text" class="form-control" name="frozen_money" value="0" id="exampleInputEmail3" placeholder="">
+                                                </div>
+                                            </div>                                            
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">积分：</td>
+                                        <td>
+                                            <div class="form-inline">
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="exampleInputEmail3">积分</label>
+                                                    <select name="point_act_type" class="form-control" id="">
+                                                        <option value="1">增加</option>
+                                                        <option value="0">减少</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="exampleInputEmail3">Email address</label>
+                                                    <input type="text" class="form-control" name="pay_points" value="0" id="exampleInputEmail3" placeholder="">
+                                                </div>
+                                            </div>                                            
+                                        </td>
+                                    </tr>      
+                                    <tr>
+                                        <td width="20%" align="right">操作备注：</td>
+                                        <td>
+                                            <textarea name="change_desc" id="" class="form-control w-300" ></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%"></td>
+                                        <td>
+                                            <button class="btn btn-primary" type="submit">提 交</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>    
+                        </form>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+</body>
+</html>

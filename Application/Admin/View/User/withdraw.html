@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header clearfix">
+                        <div class="pull-left">
+                            <h4>提现记录</h4>      
+                        </div>
+                        
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="search-box row">
+                        <div class="col-md-12">
+                            <form action="" method="get">
+                                <div class="form-group">
+                                    <span class="pull-left form-span">支付状态:</span>
+                                    <select name="pay_status" id="" class="form-control">
+                                        <option value="">请选择</option>
+                                        <option value="0" <if condition="$_REQUEST['pay_status'] heq '0'">selected</if>>待支付</option>
+                                        <option value="1" <if condition="$_REQUEST['pay_status'] eq '1'">selected</if>>已支付</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <span class="pull-left form-span">会员ID:</span>
+                                    <input type="text" name="user_id" value="{$Think.get.user_id}" class="form-control" placeholder="请输入会员ID">
+                                </div>
+                                <div class="form-group btn-search">
+                                    <button class="btn btn-default" ><span class="glyphicon glyphicon-search"></span> 筛选</button>
+                                </div>  
+                            </form>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <table class="table table-hover table-header">
+                            <thead>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>会员ID</td>
+                                    <td>申请时间</td>
+                                    <td>申请金额</td>
+                                    <td>银行名称</td>
+                                    <td>银行账号</td>
+                                    <td>银行账户</td>
+                                    <td>支付状态</td>
+                                    <td class="w10">操作</td>
+                                </tr>
+                            </thead>
+                            <if condition="$list['data']">
+                                <tbody>
+                                    <foreach name="list.data" item="vo"> 
+                                        <tr>
+                                            <td>{$vo.id}</td>
+                                            <td><a href="{:U('user/detail',array('user_id'=>$vo['user_id']))}">{$vo.user_id}</a></td>
+                                            <td>{$vo.add_time|date="Y-m-d H:i",###}</td>
+                                            <td>{$vo.money}</td>
+                                            <td>{$vo.bank_name}</td>
+                                            <td>{$vo.account_bank}</td>
+                                            <td>{$vo.account_name}</td>
+                                            <td>
+                                                <if condition="$vo['status'] eq 0">申请中</if>                                        
+                                                <if condition="$vo['status'] eq 1">申请成功</if>
+                                                <if condition="$vo['status'] eq 2">申请失败</if>
+                                            </td>
+                                            <td>
+                                                <a href="{:U('user/editWithdraw',array('id'=>$vo['id']))}">编辑</a>
+                                                <if condition="in_array($vo['status'],array(0,2))">
+                                                    <span class="text-explode">|</span>
+                                                    <a href="{:U('user/delWithdraw',array('id'=>$vo['id']))}">删除</a>
+                                                </if>
+                                            </td>
+                                        </tr>
+                                    </foreach>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="9" align="right">{$list.page}</td>
+                                    </tr>
+                                </tfoot>
+                            <else />
+                                <tr>
+                                    <td colspan="9">暂无数据</td>
+                                </tr>
+                            </if>
+                        </table>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+</body>
+</html>

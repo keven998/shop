@@ -1,0 +1,24 @@
+<div class="ms-nav-floor">
+    <nav class="ms-nav" id="footerMenu">
+        <a href="/" class="item <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'index' ">active</if>">
+            <i class="ms-icon <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'index' ">ms-icon-home-active<else />ms-icon-home</if>"></i>
+            <span>首页</span>
+        </a>
+        <a href="{:U('topic/index')}" class="item <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'topic' ">active</if>">
+            <i class="ms-icon <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'topic' ">ms-icon-rect-active<else />ms-icon-rect</if>"></i>
+            <span>专题</span>
+        </a>
+        <a href="{:U('category/index')}" class="item <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'category' ">active</if>">
+            <i class="ms-icon <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'category' ">ms-icon-category-active<else />ms-icon-category</if>"></i>
+            <span>分类</span>
+        </a>
+        <a href="{:U('cart/index')}" class="item <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'cart' ">active</if>">
+            <i class="ms-icon <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'cart' ">ms-icon-cart-active<else />ms-icon-cart</if>" id="footerCartNumber"></i>
+            <span>购物车</span>
+        </a>
+        <a href="{:U('user/index')}" class="item <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'user' ">active</if>">
+            <i class="ms-icon <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'user' ">ms-icon-user-active<else />ms-icon-user</if>"></i>
+            <span>我的</span>
+        </a>
+    </nav>
+</div>

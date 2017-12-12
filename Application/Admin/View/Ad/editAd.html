@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+    <link href="__ADMIN_PLUGINS__/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+    <script src="__ADMIN_PLUGINS__/daterangepicker/moment.min.js" type="text/javascript"></script>
+    <script src="__ADMIN_PLUGINS__/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>编辑广告</h4>     
+                            <a href="javascript:history.go(-1)">
+                                <button class="btn btn-default"><i class="fa fa-level-up"></i>返回</button>
+                            </a> 
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <form action="{:U('ad/editAd')}" class="form-horizontal" method="post" onsubmit="return checkName();" id="addEditAdForm">
+                            <input type="hidden" name="ad_id" value="{$data.ad_id}" />
+                            <table class="table table-hover contact-template-form">
+                                <tbody>
+                                    <tr>
+                                        <td width="20%" align="right">广告位名称：</td>
+                                        <td>
+                                            <input type="text" name="ad_name" value="{$data.ad_name|default="自定义广告名称"}" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">广告类型：</td>
+                                        <td>
+                                            <select name="media_type" class="form-control w-300">
+                                                 <option value="0">图片</option>                                             
+                                                 <option value="1">flash</option>
+                                            </select>    
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">广告位置：</td>
+                                        <td>
+                                            <select name="pid" class="form-control w-300">
+                                                <foreach name="ad_position_list" item="vo">
+                                                    <option value="{$vo.position_id}" <if condition="$data[pid] eq $vo[position_id]">selected</if>>{$vo.position_name}</option>
+                                                </foreach>
+                                            </select>    
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">开始日期：</td>
+                                        <td>
+                                            <input type="text" name="start_time" id="start_time" value="{$data.start_time|date="Y-m-d",###}" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">结束时间：</td>
+                                        <td>
+                                            <input type="text" name="end_time" id="end_time" value="{$data.end_time|date="Y-m-d",###}" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">广告链接：</td>
+                                        <td>
+                                            <input type="text" name="ad_link" value="{$data.ad_link}" class="form-control w-300" placeholder="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">广告图片：</td>
+                                        <td>
+                                            <div class="col-sm-3">
+                                                <input type="text" class="form-control" style="width:350px;margin-left:-15px;" name="ad_code" id="ad_code" value="{$data.ad_code}" >
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <input type="button" class="btn btn-default" onClick="GetUploadify(1,'ad_code','ad','')"  value="上传图片"/>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%" align="right">默认排序：</td>
+                                        <td>
+                                            <input type="text" class="form-control w-300" name="orderby" value="{$data.orderby}" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="20%"></td>
+                                        <td>
+                                            <button class="btn btn-primary">提 交</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>    
+                        </form>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#start_time').daterangepicker({
+            format:"YYYY-MM-DD",
+            singleDatePicker: true,
+            showDropdowns: true,
+            minDate:'<?php echo date("Y-m-d");?>',
+            maxDate:'2030-01-01',
+            startDate:'<?php echo date("Y-m-d");?>',
+            locale : {
+                applyLabel : '确定',
+                cancelLabel : '取消',
+                fromLabel : '起始时间',
+                toLabel : '结束时间',
+                customRangeLabel : '自定义',
+                daysOfWeek : [ '日', '一', '二', '三', '四', '五', '六' ],
+                monthNames : [ '一月', '二月', '三月', '四月', '五月', '六月','七月', '八月', '九月', '十月', '十一月', '十二月' ],
+                firstDay : 1
+            }
+        });
+        $('#end_time').daterangepicker({
+            format:"YYYY-MM-DD",
+            singleDatePicker: true,
+            showDropdowns: true,
+            minDate:'<?php echo date("Y-m-d");?>',
+            maxDate:'2030-01-01',
+            startDate:'<?php echo date("Y-m-d");?>',
+            /*
+            startDate: moment().startOf('day'),
+            endDate: moment(),
+            minDate: '01/01/2014',    //最小时间
+            maxDate : moment(), //最大时间
+            dateLimit : {
+                days : 30
+            }, //起止时间的最大间隔
+            showDropdowns : true,
+            showWeekNumbers : false, //是否显示第几周
+            timePicker : true, //是否显示小时和分钟
+            timePickerIncrement : 60, //时间的增量，单位为分钟
+            timePicker12Hour : false, //是否使用12小时制来显示时间
+            ranges : {
+                '最近1小时': [moment().subtract('hours',1), moment()],
+                '今日': [moment().startOf('day'), moment()],
+                '昨日': [moment().subtract('days', 1).startOf('day'), moment().subtract('days', 1).endOf('day')],
+                '最近7日': [moment().subtract('days', 6), moment()],
+                '最近30日': [moment().subtract('days', 29), moment()]
+            },
+            opens : 'right', //日期选择框的弹出位置
+            buttonClasses : [ 'btn btn-default' ],
+            applyClass : 'btn-small btn-primary blue',
+            cancelClass : 'btn-small',
+            format : 'YYYY-MM-DD HH:mm:ss', //控件中from和to 显示的日期格式
+            separator : ' to ',
+            */
+            locale : {
+                applyLabel : '确定',
+                cancelLabel : '取消',
+                fromLabel : '起始时间',
+                toLabel : '结束时间',
+                customRangeLabel : '自定义',
+                daysOfWeek : [ '日', '一', '二', '三', '四', '五', '六' ],
+                monthNames : [ '一月', '二月', '三月', '四月', '五月', '六月','七月', '八月', '九月', '十月', '十一月', '十二月' ],
+                firstDay : 1
+            }
+        });
+
+        
+
+    });
+    function checkName(){
+        var name = $("#addEditAdForm").find("input[name='ad_name']").val();
+        if($.trim(name) == '')
+        {
+            layer.msg('广告位名称不能为空！')
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>

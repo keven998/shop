@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>品牌列表</h4>      
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="search-box row">
+                        <div class="col-md-8">
+                            <form action="" method="get">
+                                <div class="form-group">
+                                    <span class="pull-left form-span">关键词:</span>
+                                    <input type="text" name="brand_name" value="{$Think.get.brand_name}" class="form-control" placeholder="请输入关键词">
+                                </div>
+                                <div class="form-group btn-search">
+                                    <button class="btn btn-default" ><span class="glyphicon glyphicon-search"></span> 筛选</button>
+                                </div>  
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{:U('goods/addBrand')}" class="btn btn-primary pull-right ">添加品牌</a>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <table class="table table-hover table-header">
+                            <thead>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>品牌名称</td>
+                                    <td>LOGO</td>
+                                    <td>是否显示</td>
+                                    <td>排序</td>
+                                    <td class="w10">操作</td>
+                                </tr>
+                            </thead>
+                            <if condition="$list['data']">
+                                <tbody>
+                                    <foreach name="list.data" item="vo"> 
+                                        <tr>
+                                            <td>{$vo.brand_id}</td>
+                                            <td>{$vo.brand_name}</td>
+                                            <td><a href="{$vo.brand_logo}" target="_blank"><img src="{$vo.brand_logo}" width="20px" height="20px" alt="" /></a></td>
+                                            <td><img width="20" height="20" src="__ADMIN_IMAGES__/<if condition='$vo[is_show] eq 1'>yes.png<else />cancel.png</if>" onclick="changeTableVal('brand','brand_id','{$vo.brand_id}','is_show',this)"/></td>
+                                           
+                                            <td>{$vo.sort}</td>                                            
+                                            <td>
+                                                <a href="{:U('goods/editBrand',array('brand_id'=>$vo['brand_id']))}">编辑</a>
+                                                <span class="text-explode">|</span>
+                                                <a href="{:U('goods/delBrand',array('brand_id'=>$vo['brand_id']))}">删除</a>
+                                            </td>
+                                        </tr>
+                                    </foreach>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="6" align="right">{$list.page}</td>
+                                    </tr>
+                                </tfoot>
+                            <else />
+                                <tr>
+                                    <td colspan="6">暂无数据</td>
+                                </tr>
+                            </if>
+                        </table>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+</body>
+</html>

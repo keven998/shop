@@ -1,0 +1,450 @@
+<div class="subNavBox">
+    <div class="sBox">
+        <div class="subNav <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'admin' ">sublist-up<else />sublist-down</if>">
+            <span class="title-icon glyphicon <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'admin' ">glyphicon-chevron-down<else />glyphicon-chevron-right</if>"></span>
+            <span class="sublist-title">管理管理</span>
+        </div>
+        <ul class="navContent" <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'admin' ">style="display:block"<else />style="display:none"</if>>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'admin') and (strtolower($Think.const.ACTION_NAME) eq 'index') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />管理员列表
+                </div>
+                <a href="{:U('admin/index')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">管理员列表</span>
+                </a> 
+            </li>
+            <!--<li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'admin') and (strtolower($Think.const.ACTION_NAME) eq 'role') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />角色管理
+                </div>
+                <a href="{:U('admin/role')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">角色管理</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'admin') and (strtolower($Think.const.ACTION_NAME) eq 'node') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />节点管理
+                </div>
+                <a href="{:U('admin/node')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">节点管理</span>
+                </a> 
+            </li>-->
+        </ul>
+    </div>
+    <div class="sBox">
+        <div class="subNav <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'user' ">sublist-up<else />sublist-down</if>">
+            <span class="title-icon glyphicon <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'user' ">glyphicon-chevron-down<else />glyphicon-chevron-right</if>"></span>
+            <span class="sublist-title">会员管理</span>
+        </div>
+        <ul class="navContent" <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'user' ">style="display:block"<else />style="display:none"</if>>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'user') and (strtolower($Think.const.ACTION_NAME) eq 'index') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />会员列表
+                </div>
+                <a href="{:U('user/index')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">会员列表</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'user') and (strtolower($Think.const.ACTION_NAME) eq 'rank') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />会员等级
+                </div>
+                <a href="{:U('user/rank')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">会员等级</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'user') and (strtolower($Think.const.ACTION_NAME) eq 'recharge') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />充值记录
+                </div>
+                <a href="{:U('user/recharge')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">充值记录</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'user') and (strtolower($Think.const.ACTION_NAME) eq 'withdraw') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />提现申请
+                </div>
+                <a href="{:U('user/withdraw')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">提现申请</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'user') and (strtolower($Think.const.ACTION_NAME) eq 'remittance') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />汇款记录
+                </div>
+                <a href="{:U('user/remittance')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">汇款记录</span>
+                </a> 
+            </li>
+        </ul>
+    </div>
+    <div class="sBox">
+        <div class="subNav <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'goods' ">sublist-up<else />sublist-down</if>">
+            <span class="title-icon glyphicon <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'goods' ">glyphicon-chevron-down<else />glyphicon-chevron-right</if>"></span>
+            <span class="sublist-title">商品管理</span>
+        </div>
+        <ul class="navContent" <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'goods' ">style="display:block"<else />style="display:none"</if>>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'goods') and (strtolower($Think.const.ACTION_NAME) eq 'category') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />商品分类
+                </div>
+                <a href="{:U('goods/category')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">商品分类</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'goods') and (strtolower($Think.const.ACTION_NAME) eq 'index') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />商品列表
+                </div>
+                <a href="{:U('goods/index')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">商品列表</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'goods') and (strtolower($Think.const.ACTION_NAME) eq 'goodstypelist') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />商品类型
+                </div>
+                <a href="{:U('goods/goodsTypeList')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">商品类型</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'goods') and (strtolower($Think.const.ACTION_NAME) eq 'speclist') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />商品规格
+                </div>
+                <a href="{:U('goods/specList')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">商品规格</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'goods') and (strtolower($Think.const.ACTION_NAME) eq 'goodsattributelist') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />商品属性
+                </div>
+                <a href="{:U('goods/goodsAttributeList')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">商品属性</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'goods') and (strtolower($Think.const.ACTION_NAME) eq 'brand') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />品牌列表
+                </div>
+                <a href="{:U('goods/brand')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">品牌列表</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'goods') and (strtolower($Think.const.ACTION_NAME) eq 'comment') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />商品评论
+                </div>
+                <a href="{:U('goods/comment')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">商品评论</span>
+                </a> 
+            </li>
+        </ul>
+    </div>
+    <div class="sBox">
+        <div class="subNav <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'order' ">sublist-up<else />sublist-down</if>">
+            <span class="title-icon glyphicon <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'order' ">glyphicon-chevron-down<else />glyphicon-chevron-right</if>"></span>
+            <span class="sublist-title">订单管理</span>
+        </div>
+        <ul class="navContent" <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'order' ">style="display:block"<else />style="display:none"</if>>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'order') and (strtolower($Think.const.ACTION_NAME) eq 'index') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />订单列表
+                </div>
+                <a href="{:U('order/index')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">订单列表</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'order') and (strtolower($Think.const.ACTION_NAME) eq 'delivery') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />发货单
+                </div>
+                <a href="{:U('order/delivery')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">发货单</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'order') and (strtolower($Think.const.ACTION_NAME) eq 'returnlist') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />退货单
+                </div>
+                <a href="{:U('order/returnList')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">退货单</span>
+                </a> 
+            </li>
+        </ul>
+    </div>
+    <div class="sBox">
+        <div class="subNav <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'promotion' ">sublist-up<else />sublist-down</if>">
+            <span class="title-icon glyphicon <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'promotion' ">glyphicon-chevron-down<else />glyphicon-chevron-right</if>"></span>
+            <span class="sublist-title">促销管理</span>
+        </div>
+        <ul class="navContent" <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'promotion' ">style="display:block"<else />style="display:none"</if>>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'promotion') and (strtolower($Think.const.ACTION_NAME) eq 'flash') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />抢购管理
+                </div>
+                <a href="{:U('promotion/flash')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">抢购管理</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'promotion') and (strtolower($Think.const.ACTION_NAME) eq 'prom') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />商品促销
+                </div>
+                <a href="{:U('promotion/prom')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">商品促销</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'promotion') and (strtolower($Think.const.ACTION_NAME) eq 'groupbuy') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />团购管理
+                </div>
+                <a href="{:U('promotion/groupBuy')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">团购管理</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'promotion') and (strtolower($Think.const.ACTION_NAME) eq 'order') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />订单促销
+                </div>
+                <a href="{:U('promotion/order')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">订单促销</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'promotion') and (strtolower($Think.const.ACTION_NAME) eq 'coupon') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />代金券管理
+                </div>
+                <a href="{:U('promotion/coupon')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">代金券管理</span>
+                </a> 
+            </li>
+        </ul>
+    </div>
+    <div class="sBox">
+        <div class="subNav <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'ad' ">sublist-up<else />sublist-down</if>">
+            <span class="title-icon glyphicon <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'ad' ">glyphicon-chevron-down<else />glyphicon-chevron-right</if>"></span>
+            <span class="sublist-title">广告管理</span>
+        </div>
+        <ul class="navContent" <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'ad' ">style="display:block"<else />style="display:none"</if>>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'ad') and (strtolower($Think.const.ACTION_NAME) eq 'index') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />广告列表
+                </div>
+                <a href="{:U('ad/index')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">广告列表</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'ad') and (strtolower($Think.const.ACTION_NAME) eq 'position') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />广告位置
+                </div>
+                <a href="{:U('ad/position')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">广告位置</span>
+                </a> 
+            </li>
+        </ul>
+    </div>
+    <div class="sBox">
+        <div class="subNav <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'article' ">sublist-up<else />sublist-down</if>">
+            <span class="title-icon glyphicon <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'article' ">glyphicon-chevron-down<else />glyphicon-chevron-right</if>"></span>
+            <span class="sublist-title">内容管理</span>
+        </div>
+        <ul class="navContent" <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'article' ">style="display:block"<else />style="display:none"</if>>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'article') and (strtolower($Think.const.ACTION_NAME) eq 'index') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />内容管理
+                </div>
+                <a href="{:U('article/index')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">内容管理</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'article') and (strtolower($Think.const.ACTION_NAME) eq 'category') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />文章分类
+                </div>
+                <a href="{:U('article/category')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">文章分类</span>
+                </a> 
+            </li>
+        </ul>
+    </div>
+    <div class="sBox">
+        <div class="subNav <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'wechat' ">sublist-up<else />sublist-down</if>">
+            <span class="title-icon glyphicon <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'wechat' ">glyphicon-chevron-down<else />glyphicon-chevron-right</if>"></span>
+            <span class="sublist-title">微信管理</span>
+        </div>
+        <ul class="navContent" <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'wechat' ">style="display:block"<else />style="display:none"</if>>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'wechat') and (strtolower($Think.const.ACTION_NAME) eq 'menu') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />菜单管理
+                </div>
+                <a href="{:U('wechat/menu')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">菜单管理</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'wechat') and (strtolower($Think.const.ACTION_NAME) eq 'text') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />关键词回复
+                </div>
+                <a href="{:U('wechat/text')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">关键词回复</span>
+                </a> 
+            </li>
+        </ul>
+    </div>
+    <div class="sBox">
+        <div class="subNav <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'system' ">sublist-up<else />sublist-down</if>">
+            <span class="title-icon glyphicon <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'system' ">glyphicon-chevron-down<else />glyphicon-chevron-right</if>"></span>
+            <span class="sublist-title">系统设置</span>
+        </div>
+        <ul class="navContent" <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'system' ">style="display:block"<else />style="display:none"</if>>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'system') and (strtolower($Think.const.ACTION_NAME) eq 'index') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />网站设置
+                </div>
+                <a href="{:U('system/index')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">网站设置</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'system') and (strtolower($Think.const.ACTION_NAME) eq 'friendlink') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />友情链接
+                </div>
+                <a href="{:U('system/friendlink')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">友情链接</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'system') and (strtolower($Think.const.ACTION_NAME) eq 'region') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />区域管理
+                </div>
+                <a href="{:U('system/region')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">区域管理</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'system') and (strtolower($Think.const.ACTION_NAME) eq 'payment') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />支付方式
+                </div>
+                <a href="{:U('system/payment')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">支付方式</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'system') and (strtolower($Think.const.ACTION_NAME) eq 'shipping') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />配送方式
+                </div>
+                <a href="{:U('system/shipping')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">配送方式</span>
+                </a> 
+            </li>
+        </ul>
+    </div>
+    <div class="sBox">
+        <div class="subNav <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'database' ">sublist-up<else />sublist-down</if>">
+            <span class="title-icon glyphicon <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'database' ">glyphicon-chevron-down<else />glyphicon-chevron-right</if>"></span>
+            <span class="sublist-title">数据管理</span>
+        </div>
+        <ul class="navContent" <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'database' ">style="display:block"<else />style="display:none"</if>>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'database') and (strtolower($Think.const.ACTION_NAME) eq 'index') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />数据备份
+                </div>
+                <a href="{:U('database/index')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">数据备份</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'database') and (strtolower($Think.const.ACTION_NAME) eq 'restore') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />数据还原
+                </div>
+                <a href="{:U('database/restore')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">数据还原</span>
+                </a> 
+            </li>
+        </ul>
+    </div>
+    <div class="sBox">
+        <div class="subNav <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'report' ">sublist-up<else />sublist-down</if>">
+            <span class="title-icon glyphicon <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'report' ">glyphicon-chevron-down<else />glyphicon-chevron-right</if>"></span>
+            <span class="sublist-title">统计报表</span>
+        </div>
+        <ul class="navContent" <if condition="strtolower($Think.const.CONTROLLER_NAME) eq 'report' ">style="display:block"<else />style="display:none"</if>>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'report') and (strtolower($Think.const.ACTION_NAME) eq 'index') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />销售概况
+                </div>
+                <a href="{:U('report/index')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">销售概况</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'report') and (strtolower($Think.const.ACTION_NAME) eq 'saletop') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />销售排行
+                </div>
+                <a href="{:U('report/saletop')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">销售排行</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'report') and (strtolower($Think.const.ACTION_NAME) eq 'user') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />会员统计
+                </div>
+                <a href="{:U('report/user')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">会员统计</span>
+                </a> 
+            </li>
+            <li <if condition="(strtolower($Think.const.CONTROLLER_NAME) eq 'report') and (strtolower($Think.const.ACTION_NAME) eq 'finance') ">class="active"</if>>
+                <div class="showtitle" style="width:100px;">
+                    <img src="__ADMIN_IMAGES__/leftimg.png" />财务统计
+                </div>
+                <a href="{:U('report/finance')}">
+                    <span class="sublist-icon glyphicon glyphicon-record"></span>
+                    <span class="sub-title">财务统计</span>
+                </a> 
+            </li>
+        </ul>
+    </div>
+</div>

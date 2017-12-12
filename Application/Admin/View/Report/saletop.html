@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>销售排行</h4>      
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="search-box row">
+                        <div class="col-md-8">
+                            <form action="" method="post">                          
+                                <div class="col-xs-5">         
+                                    <div class="input-group margin">
+                                      <div class="input-group-addon">
+                                            选择时间  <i class="fa fa-calendar"></i>
+                                      </div>
+                                      <input type="text" class="form-control pull-right" name="timegap" value="{$timegap}" id="start_time">
+                                    </div>
+                                </div>  
+                                <div class="col-xs-1"><input class="btn btn-block btn-info margin" type="submit" value="确定"></div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <table class="table table-hover table-header">
+                            <thead>
+                                <tr>
+                                    <td>排行</td>
+                                    <td>商品名称</td>
+                                    <td>货号</td>
+                                    <td>销售量</td>
+                                    <td>销售额</td>
+                                    <td>均价</td>
+                                </tr>
+                            </thead>
+                            <foreach name="list" item="vo" key="k" >
+                                <tr role="row">
+                                    <td>{$k+1}</td>
+                                    <td>{$vo.goods_name}</td>
+                                    <td>{$vo.goods_sn}</td>
+                                    <td>{$vo.sale_num}</td>                            
+                                    <td>{$vo.sale_amount}</td>
+                                    <td>{$vo['sale_amount']/$vo.sale_num|round=###,2}</td>
+                                </tr>
+                            </foreach>
+                        </table>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+</body>
+</html>

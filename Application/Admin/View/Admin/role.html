@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>角色管理</h4>      
+                        </div>
+                        <a href="{:U('admin/addRole')}" class="btn btn-primary pull-right margin-top">添加角色</a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <table class="table  table-header">
+                            <thead>
+                                <tr>
+                                    <td class="w10">ID</td>
+                                    <td>角色名称</td>
+                                    <td>描述</td>
+                                    <td class="w15">操作</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <foreach name="role" item="vo">
+                                    <tr>
+                                        <td>{$vo.id}</td>
+                                        <td>{$vo.name}</td>
+                                        <td>{$vo.remark}</td>
+                                        <td>
+                                            <a href="{:U('admin/access', array('rid'=>$vo['id']))}">配置权限</a><span class="text-explode">|</span><a href="{:U('admin/editRole', array('rid'=>$vo['id']))}">修改</a><span class="text-explode">|</span><a href="{:U('admin/delRole', array('rid'=>$vo['id']))}">删除</a>
+                                        </td>
+                                    </tr>
+                                </foreach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+</body>
+</html>

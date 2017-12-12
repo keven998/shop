@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <include file="Public/meta" />
+    <link href="__ADMIN_PLUGINS__/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+    <script src="__ADMIN_PLUGINS__/daterangepicker/moment.min.js" type="text/javascript"></script>
+    <script src="__ADMIN_PLUGINS__/daterangepicker/daterangepicker.js" type="text/javascript"></script>
+</head>
+<body>
+    <include file="Public/navbar"/>
+    <div class="down-main">
+        <div class="left-main left-full">
+            <div class="sidebar-fold"><span class="glyphicon glyphicon-menu-hamburger"></span></div>
+            <include file="Public/sidebar" />
+        </div>
+        <div class="right-product right-full">
+            <div class="container-fluid">
+                <div class="info-center">
+                    <div class="page-header">
+                        <div class="pull-left">
+                            <h4>销售明细</h4>      
+                            <a href="javascript:history.go(-1)">
+                                <button class="btn btn-default"><i class="fa fa-level-up"></i>返回</button>
+                            </a> 
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <form action="" method="post">
+                                    <div class="col-xs-2">
+                                        <div class="form-group margin">
+                                          <select name="cat_id" id="cat_id" class="form-control">
+                                            <option value="0">所有分类</option>
+                                            <foreach name="categoryList" item="v" key="k" >
+                                                <option value="{$v['cat_id']}" <if condition="$cat_id eq $v[cat_id]">selected</if>> {$v['cat_name']}</option>
+                                            </foreach>
+                                          </select>
+                                      </div>
+                                    </div>  
+                                    <div class="col-xs-2">
+                                        <div class="form-group margin">
+                                          <select name="brand_id" id="brand_id" class="form-control">
+                                            <option value="0">所有品牌</option>
+                                                <foreach name="brandList" item="v" key="k" >
+                                                   <option value="{$v['brand_id']}" <if condition="$brand_id eq $v[brand_id]">selected</if>>{$v['brand_name']}</option>
+                                                </foreach>
+                                          </select>
+                                        </div>      
+                                    </div>              
+                                    <div class="col-xs-4">         
+                                        <div class="input-group margin">
+                                            <div class="input-group-addon">
+                                                选择时间  <i class="fa fa-calendar"></i>
+                                            </div>
+                                           <input type="text" class="form-control pull-right" name="timegap" value="{$timegap}" id="start_time">
+                                        </div>
+                                    </div>  
+                                    <div class="col-xs-1"><input class="btn btn-block btn-info margin" type="submit" value="确定"></div>
+                                </form>
+                            </div>
+                        </div>
+                        <table class="table table-hover table-header">
+                            <thead>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>商品名称</td>
+                                    <td>货号</td>
+                                    <td>数量</td>
+                                    <td>售价</td>
+                                    <td>出售日期</td>
+                                </tr>
+                            </thead>
+                            <foreach name="list" item="vo" key="k" >
+                                <tr role="row">
+                                    <td>{$vo.order_id}</td>
+                                    <td>{$vo.goods_name}</td>
+                                    <td>{$vo.goods_sn}</td>
+                                    <td>{$vo.goods_num}</td>                           
+                                    <td>{$vo.goods_price}</td>
+                                    <td>{$vo.add_time|date="Y-m-d",###}</td>
+                                </tr>
+                            </foreach>
+                            <tr>
+                                <td colspan="6" align="right">{$page}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>       
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="__ADMIN_JS__/common.js"></script>
+    <script src="__ADMIN_JS__/echart/echarts.min.js" type="text/javascript"></script>
+    <script src="__ADMIN_JS__/echart/macarons.js"></script>
+    <script src="__ADMIN_JS__/echart/china.js"></script>
+    <script src="__ADMIN_JS__/dist/js/app.js" type="text/javascript"></script>
+</body>
+</html>
