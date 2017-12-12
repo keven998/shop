@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="./css/idangerous.swiper.css">
+    <link rel="stylesheet" href="./css/app.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="./js/jquery-1.8.3.min.js"></script>
+    <script src="./js/idangerous.swiper.min.js"></script>
+    <script src="./js/plugins/Modal.js"></script>
+</head>
+<body>
+    <div class="xheader">
+        <div class="headerTop">
+            <div class="x-main">
+                <div class="topLeft">
+                    <span>名创优选 - 超越严选的品质</span>
+                </div>
+                <div class="topRight">
+                    <div class="login topLogin">
+                            <span>
+                                <a href="">登录</a>
+                            </span>
+                        <span>
+                                <a href="">注册</a>
+                            </span>
+                    </div>
+                    <div class="userBoard x-hide topLoginMember">
+                        <div class="vip"></div>
+                        <div class="userID">
+                            <span id="topNickname" onclick="location.href='/member.html'"></span>
+                            <div class="more">
+                                <a href="javascript:;">
+                                    <div class="userGuide">
+                                        <ul class="center" id="topUCenterMenu">
+                                            <li class="active" onclick="(function (){location.href='/member-index.html';})()">个人信息</li>
+                                            <li onclick="(function (){location.href='/member-orders.html';})()">订单管理</li>
+                                            <li onclick="(function (){location.href='/member-receiver.html';})()">地址管理</li>
+                                            <li onclick="(function (){location.href='/member-coupon.html';})()">优惠管理</li>
+                                            <li onclick="(function (){location.href='/member-favorite.html';})()">收藏夹</li>
+                                            <li onclick="(function (){location.href='/passport-logout.html';})()">退出登录</li>
+                                        </ul>
+                                        <div class="bottom"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>
+                            <div></div>
+                            <a href="/member-orders.html" target="_blank">订单管理</a>
+                        </li>
+                        <li>
+                            <div></div>
+                            <a href="http://p.qiao.baidu.com/im/index?siteid=11018217&amp;ucid=22851248&amp;cw=170918135943703" target="_blank">在线客服</a>
+                        </li>
+                        <li>
+                            <div></div>
+                            <a href="/article-index_question-i-13.html" target="_blank">帮助中心</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="headerBottom">
+            <div class="x-main x-main-x">
+                <div class="rel">
+                    <div class="logo"><a href="/index.html"><img src="http://s2.hgcang.com/bsimg/ec/public/images/ba/c7/bac73f16daf0d8ba9c628b63c507acbf.png?x-oss-process=style/high" alt=""></a></div>
+                    <div class="x-floor x-floor-x">
+                        <div class="search">
+                            <form action="/search-result.html" method="post" id="searchbar_331" async="false">
+                                <button class="searchBtn"></button>
+                                <input type="text" name="search_keywords" placeholder="输入关键词寻找宝贝" value="" autocomplete="off">
+                            </form>
+                            <script>
+                                $('#searchbar_'+'331').on('submit',function(){
+                                    var keywords = $("input[name='search_keywords']").val();
+                                    if(keywords=='')
+                                    {
+                                        Modal.alert({content:"关键词不能为空",title:'标题'}); return false;
+                                    }
+                                })
+                            </script>
+                            <div class="searchBoard x-hide">
+                                <div class="recommend">
+                                    <h1 class="x-gray">大家都在搜索</h1>
+                                    <li><a href="/gallery.html?is_search=1&amp;scontent=n,西餐套装">西餐套装</a></li>
+                                    <li><a href="/gallery.html?is_search=1&amp;scontent=n,小夜灯">小夜灯</a></li>
+                                    <li><a href="/gallery.html?is_search=1&amp;scontent=n,多功能便携风扇">多功能便携风扇</a></li>
+                                </div>
+                            </div>
+                            <script>
+                                $(function () {
+                                    var $inp = $('.search').find('input');
+                                    var $board = $('.searchBoard');
+                                    $inp.focus(function () {
+                                        $board.removeClass('x-hide');
+                                    })
+                                    $board.mouseout(function () {
+                                        $board.addClass('x-hide');
+                                    })
+                                    $board.mouseover(function () {
+                                        $board.removeClass('x-hide');
+                                    })
+                                })
+                                function clickHistoryWord(words) {
+                                    $('#searchbar_331').find('input[name="search_keywords"]').val(words);
+                                    $('#searchbar_331').submit();
+                                }
+
+                                $('#ms-jsCloseHistory').on('click', function (e) {
+
+                                    if ($('.searchBoard .recommend').html() != '') {
+                                        $('.searchBoard').find('.recent').remove();
+                                        $('#ms-jsCloseHistory').remove();
+                                    } else {
+                                        $('.searchBoard').remove();
+                                    }
+
+                                    $.ajax({
+                                        url : '/search-clear_history_search.html',
+                                        success : function () {
+
+                                        }
+                                    });
+                                })
+                            </script>
+                        </div>
+                    </div>
+                    <div class="cart" id="topMinCart"><!-- 购物车数量 -->
+                        <div class="news">0</div>
+                    </div>
+                    <script>
+                        function getTopMinCart(isShow) {
+                            var isShow = isShow === false ? false : true;
+                            $.post("/cart-view.html",{},function (d) {
+                                $('#topMinCart').html(d);
+                                $('#topMinCartHide').html(d);
+                                if (isShow) {
+                                    var floatBar = $('.x-floatHeader')
+                                    var flag  = floatBar.hasClass('floatDown')
+                                    if(!flag){
+                                        $('#topMinCart').children('.cartBoard').removeClass('x-hide');
+                                        setTimeout(function () {
+                                            $('#topMinCart').children('.cartBoard').addClass('x-hide');
+                                        }, 2000);
+                                    }else{
+                                        $('#topMinCartHide').children('.cartBoard').removeClass('x-hide');
+                                        setTimeout(function () {
+                                            $('#topMinCartHide').children('.cartBoard').addClass('x-hide');
+                                        }, 2000);
+                                    }
+                                }
+                            });
+                        }
+                        $(document).on('click', '#topMinCart', function(e) {
+                            if ('topMinCart' == e.target.getAttribute('id')) {
+                                location.href='/cart.html'
+                            }
+                        });
+
+                        $(document).on('click', '#topMinCartHide', function(e) {
+                            if ('topMinCartHide' == e.target.getAttribute('id')) {
+                                location.href='/cart.html'
+                            }
+                        });
+
+                        $(document).on('click', '.topMinCartDeleted', function (e) {
+                            //删除商品
+                            $.post($(this).data('href'),{},function (d) {
+                                $('#topMinCart').html(d);
+                                $('#topMinCartHide').html(d);
+                                var floatBar = $('.x-floatHeader')
+                                var flag  = floatBar.hasClass('floatDown')
+                                if(!flag){
+                                    $('#topMinCart').children('.cartBoard').removeClass('x-hide');
+                                }else{
+                                    $('#topMinCartHide').children('.cartBoard').removeClass('x-hide');
+                                }
+                            });
+                        });
+                        getTopMinCart(false);
+                        //setInterval(getTopMinCart, 5000);
+                    </script>
+                </div>
+                <div class="nav nav8">
+                    <div class="x-floor">
+
+                        <ul class="navLeft" id="topCatMenu">
+                            <li>
+
+                                <a href="/index.html">首页</a>
+
+                            </li>
+
+
+                            <li id="parent_cat_id_16">
+                                <a href="/category-channel-16-16.html">居家</a>
+                                <div class="secMenu">
+                                    <div class="x-main">
+
+                                        <div class="menuBox" onclick="location.href ='/category-channel-16-36.html#cid36'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/e8/77/e8774700c28a9bd652fcd2a932cd89cb.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>拖鞋</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-16-48.html#cid48'">
+                                            <div class="imgbox">
+                                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/7d/17/7d17d26d75b30d2399327cbdc844e803.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>清洁保鲜</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-16-51.html#cid51'">
+                                            <div class="imgbox">
+                                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/3d/6d/3d6d3e4cbd7dbba4be986ce7b2bc6b37.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>家饰</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-16-55.html#cid55'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/30/82/30826bdc5bd0d6a03e443d3f0e9e92fa.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>收纳</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-16-56.html#cid56'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/23/e9/23e95cd68ee4ddc09a960f9356655c9f.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>浴室用品</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-16-59.html#cid59'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/68/07/68073ff759dab562b5c743094d663933.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>布艺软装</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li id="parent_cat_id_14">
+                                <a href="/category-channel-14-14.html">餐厨</a>
+                                <div class="secMenu">
+                                    <div class="x-main">
+
+                                        <div class="menuBox" onclick="location.href ='/category-channel-14-15.html#cid15'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/ca/3a/ca3aca05172fcb5b9f0c1fd3acf6546c.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>杯壶</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-14-35.html#cid35'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/5a/29/5a2982231560ac1a2bb6bc93ff69f390.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>餐具</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-14-53.html#cid53'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/5f/58/5f58f1406c0495dcdc706ac69530dcba.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>功能厨具</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li id="parent_cat_id_20">
+                                <a href="/category-channel-20-20.html">服装</a>
+                                <div class="secMenu">
+                                    <div class="x-main">
+
+                                        <div class="menuBox" onclick="location.href ='/category-channel-20-21.html#cid21'">
+                                            <div class="imgbox">
+                                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/de/ca/deca7090242243346ff945524f96de82.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>T恤</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-20-23.html#cid23'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/4e/f2/4ef214b4d837f76d029e237c753bce5c.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>内衣</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-20-45.html#cid45'">
+                                            <div class="imgbox">
+                                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/6b/9f/6b9f7eda29a6ad0fb5f8f90deab61c27.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>丝袜</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-20-26.html#cid26'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/e6/cc/e6cc448cfbf9f9710b89b3800e5047a7.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>袜子</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-20-29.html#cid29'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/33/df/33dfee385249917f6f11907a986cc3f0.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>内裤</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-20-58.html#cid58'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/32/c8/32c85c60ca62bc31c8426223857aac5d.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>服饰配件</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li id="parent_cat_id_18">
+                                <a href="/category-channel-18-18.html">美护</a>
+                                <div class="secMenu">
+                                    <div class="x-main">
+
+                                        <div class="menuBox" onclick="location.href ='/category-channel-18-19.html#cid19'">
+                                            <div class="imgbox">
+                                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/d3/ba/d3bab8cad77b7b2182921a60be4bdfff.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>美妆</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-18-52.html#cid52'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/ca/e0/cae04bde18981a7d1d2445417c179e0c.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>身体护理</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-18-32.html#cid32'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/01/9b/019b25cfce32eba0e105d43d8d00716a.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>口腔护理</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-18-41.html#cid41'">
+                                            <div class="imgbox">
+                                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/ff/ff/ffff95659fd8e6a927dfc7bb75d0f8f8.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>洗发护发</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-18-33.html#cid33'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/1f/d1/1fd1716bbdd74ed25266cf6a1c9b73b6.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>美护工具</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li id="parent_cat_id_27">
+                                <a href="/category-channel-27-27.html">出行</a>
+                                <div class="secMenu">
+                                    <div class="x-main">
+
+                                        <div class="menuBox" onclick="location.href ='/category-channel-27-28.html#cid28'">
+                                            <div class="imgbox">
+                                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/2f/2a/2f2a172c62799a95994a79dd4f53cf57.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>旅行用品</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-27-54.html#cid54'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/ba/d1/bad1705e6c2e70b27d41ce599bf76a52.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>箱包</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li id="parent_cat_id_37">
+                                <a href="/category-channel-37-37.html">电器</a>
+                                <div class="secMenu">
+                                    <div class="x-main">
+
+                                        <div class="menuBox" onclick="location.href ='/category-channel-37-17.html#cid17'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/47/85/4785ed6cca6bf5c3ab9cc2bd7bc8d6cd.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>生活电器</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-37-39.html#cid39'">
+                                            <div class="imgbox">
+                                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/9e/c0/9ec0640fbf4112a48ded4689656f2be5.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>数码</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li id="parent_cat_id_49">
+                                <a href="/category-channel-49-49.html">系列</a>
+                                <div class="secMenu">
+                                    <div class="x-main">
+
+                                        <div class="menuBox" onclick="location.href ='/category-channel-49-50.html#cid50'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/12/5c/125cbbb8c10f3da24b6b084a1cf80369.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>粉红豹</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <ul class="navRight">
+                        <li id="topTopicMenu"><a href="/topic.html">专题</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="x-floor">
+        <div class="x-floatHeader x-whiteBox">
+            <div class="x-main" style="position: initial;">
+                <div class="pic">
+                    <img src="./images/logo_69.png" alt="">
+                </div>
+                <ul class="nav" id="topCatMenuHide">
+                    <li>
+                        <a href="/index.html">首页</a>
+                    </li>
+                    <li id="parent_cat_id_16">
+                        <a href="/category-channel-16-16.html">居家</a>
+                        <div class="secMenu" style="opacity: 0;">
+                            <div class="x-main">
+                                <div class="menuBox" onclick="location.href ='/category-channel-16-36.html#cid36'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/e8/77/e8774700c28a9bd652fcd2a932cd89cb.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>拖鞋</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-16-48.html#cid48'">
+                                    <div class="imgbox">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/7d/17/7d17d26d75b30d2399327cbdc844e803.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>清洁保鲜</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-16-51.html#cid51'">
+                                    <div class="imgbox">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/3d/6d/3d6d3e4cbd7dbba4be986ce7b2bc6b37.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>家饰</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-16-55.html#cid55'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/30/82/30826bdc5bd0d6a03e443d3f0e9e92fa.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>收纳</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-16-56.html#cid56'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/23/e9/23e95cd68ee4ddc09a960f9356655c9f.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>浴室用品</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-16-59.html#cid59'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/68/07/68073ff759dab562b5c743094d663933.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>布艺软装</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="parent_cat_id_14">
+                        <a href="/category-channel-14-14.html">餐厨</a>
+                        <div class="secMenu" style="opacity: 0;">
+                            <div class="x-main">
+                                <div class="menuBox" onclick="location.href ='/category-channel-14-15.html#cid15'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/ca/3a/ca3aca05172fcb5b9f0c1fd3acf6546c.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>杯壶</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-14-35.html#cid35'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/5a/29/5a2982231560ac1a2bb6bc93ff69f390.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>餐具</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-14-53.html#cid53'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/5f/58/5f58f1406c0495dcdc706ac69530dcba.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>功能厨具</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="parent_cat_id_20">
+                        <a href="/category-channel-20-20.html">服装</a>
+                        <div class="secMenu" style="opacity: 0;">
+                            <div class="x-main">
+                                <div class="menuBox" onclick="location.href ='/category-channel-20-21.html#cid21'">
+                                    <div class="imgbox">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/de/ca/deca7090242243346ff945524f96de82.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>T恤</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-20-23.html#cid23'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/4e/f2/4ef214b4d837f76d029e237c753bce5c.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>内衣</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-20-45.html#cid45'">
+                                    <div class="imgbox">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/6b/9f/6b9f7eda29a6ad0fb5f8f90deab61c27.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>丝袜</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-20-26.html#cid26'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/e6/cc/e6cc448cfbf9f9710b89b3800e5047a7.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>袜子</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-20-29.html#cid29'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/33/df/33dfee385249917f6f11907a986cc3f0.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>内裤</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-20-58.html#cid58'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/32/c8/32c85c60ca62bc31c8426223857aac5d.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>服饰配件</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="parent_cat_id_18">
+                        <a href="/category-channel-18-18.html">美护</a>
+                        <div class="secMenu" style="opacity: 0;">
+                            <div class="x-main">
+                                <div class="menuBox" onclick="location.href ='/category-channel-18-19.html#cid19'">
+                                    <div class="imgbox">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/d3/ba/d3bab8cad77b7b2182921a60be4bdfff.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>美妆</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-18-52.html#cid52'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/ca/e0/cae04bde18981a7d1d2445417c179e0c.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>身体护理</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-18-32.html#cid32'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/01/9b/019b25cfce32eba0e105d43d8d00716a.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>口腔护理</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-18-41.html#cid41'">
+                                    <div class="imgbox">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/ff/ff/ffff95659fd8e6a927dfc7bb75d0f8f8.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>洗发护发</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-18-33.html#cid33'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/1f/d1/1fd1716bbdd74ed25266cf6a1c9b73b6.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>美护工具</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="parent_cat_id_27">
+                        <a href="/category-channel-27-27.html">出行</a>
+                        <div class="secMenu" style="opacity: 0;">
+                            <div class="x-main">
+                                <div class="menuBox" onclick="location.href ='/category-channel-27-28.html#cid28'">
+                                    <div class="imgbox">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/2f/2a/2f2a172c62799a95994a79dd4f53cf57.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>旅行用品</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-27-54.html#cid54'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/ba/d1/bad1705e6c2e70b27d41ce599bf76a52.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>箱包</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="parent_cat_id_37">
+                        <a href="/category-channel-37-37.html">电器</a>
+                        <div class="secMenu" style="opacity: 0;">
+                            <div class="x-main">
+                                <div class="menuBox" onclick="location.href ='/category-channel-37-17.html#cid17'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/47/85/4785ed6cca6bf5c3ab9cc2bd7bc8d6cd.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>生活电器</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-37-39.html#cid39'">
+                                    <div class="imgbox">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/9e/c0/9ec0640fbf4112a48ded4689656f2be5.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>数码</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="parent_cat_id_49">
+                        <a href="/category-channel-49-49.html">系列</a>
+                        <div class="secMenu" style="opacity: 0;">
+                            <div class="x-main">
+                                <div class="menuBox" onclick="location.href ='/category-channel-49-50.html#cid50'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/12/5c/125cbbb8c10f3da24b6b084a1cf80369.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>粉红豹</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="rel newrightnav">
+                    <div class="login topLogin">
+                        <span><a href="/passport.html">登录</a></span>
+                        <span><a href="/passport-signup.html">注册</a></span>
+                    </div>
+                    <div class="more topLoginMember x-hide">
+                        <div class="rel">
+                            <div class="userGuide" style="opacity: 0;">
+                                <ul class="center" id="topUCenterMenuHide">
+                                    <li class="active" onclick="(function (){location.href='/member-index.html';})()">个人信息</li>
+                                    <li onclick="(function (){location.href='/member-orders.html';})()">订单管理</li>
+                                    <li onclick="(function (){location.href='/member-receiver.html';})()">地址管理</li>
+                                    <li onclick="(function (){location.href='/member-coupon.html';})()">优惠管理</li>
+                                    <li onclick="(function (){location.href='/member-favorite.html';})()">收藏夹</li>
+                                    <li onclick="(function (){location.href='/passport-logout.html';})()">退出登录</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart" id="topMinCartHide"><!-- 购物车数量 -->
+                        <div class="news">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $('#topCatMenuHide').html($('#topCatMenu').html());
+            $('#topUCenterMenuHide').html($('#topUCenterMenu').html());
+
+            $(function () {
+                var $box = $('.x-floatHeader');
+                var $secMenu = $box.find('.secMenu');
+                var $userGuide = $box.find('.userGuide');
+                var $cartBoard = $box.find('.cartBoard');
+
+                $(window).scroll(function () {
+                    var num = $(this).scrollTop();
+                    if (num > 239) {
+                        $box.addClass('floatDown');
+                        opa1($secMenu);
+                        opa1($userGuide);
+                        opa1($cartBoard);
+                    } else {
+                        $box.removeClass('floatDown');
+                        opa0($secMenu);
+                        opa0($userGuide);
+                        opa0($cartBoard);
+                    }
+                })
+
+                function opa0(element) {
+                    element.css('opacity', '0');
+                }
+                function opa1(element) {
+                    element.css('opacity', '1');
+                }
+
+                // 购物车弹窗显示与消失
+                $('.cart').mouseover(function () {
+                    $(this).children('.cartBoard').removeClass('x-hide')
+                })
+                $('.cart').mouseout(function () {
+                    $(this).children('.cartBoard').addClass('x-hide')
+                })
+            });
+            $.post("/passport-get_login_member.html",{},function (d) {
+                //已经登录
+                var d=eval('('+d+')');
+                if(typeof(d.data) == 'object') {
+                    var nickname = d.data.nickname || d.data.login_mobile;
+                    nickname = nickname.length > 11 ? nickname.slice(0, 11) + '...' : nickname;
+                    $('#topNickname').text(nickname);
+                    $('.topLoginMember').removeClass('x-hide');
+                    $('.topLogin').addClass('x-hide');
+                }else {
+                    $('.topLoginMember').addClass('x-hide');
+                    $('.topLogin').removeClass('x-hide');
+                }
+            });
+        </script>
+    </div>
+    <div class="x-whiteBox">
+
+        <div class="x-main">
+
+            <!-- 地址栏 开始 -->
+            <div class="rowBoard" id="select_shipping">
+                <!-- 地址参数 -->
+                <input type="hidden" name="address" value="4769">
+                <input type="hidden" name="address_area" value="mainland:北京/北京市/东城区:575">
+
+                <h1 class="topBar x-row x-gray topBar-x">收货地址</h1>
+                <!-- 收货地址 开始 -->
+                <div class="content" id="address_show_area">
+                    <div class="x-adress">
+                        <div class="defaultAd">
+                            默认地址        </div>
+                        <a class="x-red" href="javascript:AddressMethods.showArea('edit');">编辑</a>
+                        <div class="edit">
+                            <div>
+                                <h1 class="x-gray">收货人：</h1>
+                                <input readonly="readonly" name="consignee" id="selected_consignee" type="text" value="曾先生">
+                                <input readonly="readonly" name="phone" id="selected_mobile" type="text" value="131****4579">
+                            </div>
+                            <div>
+                                <h1 class="x-gray">收货地址：</h1>
+                                <input readonly="readonly" name="adress" id="selected_addr" type="text" value="北京市东城区11">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="change">
+                        <a href="javascript:Modal_addressChoice();" class="x-blue">切换地址</a>
+                        <button class="x-norBtn" onclick="AddressMethods.showArea('add');">新建地址</button>
+                    </div>
+                </div>
+                <!-- 收货地址 结束 -->
+
+                <!-- 编辑地址 开始 -->
+                <div class="content" id="address_edit_area" style="display:none;">
+
+                    <form action="#" method="post" id="editForm" class="x-editAddress" onsubmit="return false">
+
+                        <p>所在地区 :</p>
+                        <input type="hidden" name="addr_id" value="4769">
+                        <input type="hidden" name="response_json" value="true">
+                        <input type="hidden" id="editArea" package="mainland" name="area" value="mainland:北京/北京市/东城区:575" data-optionsid="1,64,575">
+                        <input type="hidden" id="editAreaIds" name="areaIds" value="1,64,575">
+                        <select name="province" id="editProvince">
+                            <option value=""> 请选择 </option>
+                        </select>
+                        <select name="city" id="editCity">
+                            <option value=""> 请选择 </option>
+                        </select>
+                        <select name="district" id="editDistrict">
+                            <option value=""> 请选择 </option>
+                        </select>
+                        <div class="addressTitle">
+                            <p>详细地址 :</p>
+                            <textarea name="addr" class="addressCotent" type="text" placeholder="街道，门牌号码" id="edit_address">11</textarea>
+                        </div>
+                        <div class="etc">
+                            <p>收货人 :</p>
+                            <input name="name" type="text" id="edit_receiver" value="曾先生">
+                            <p class="pl">手机号码 :</p>
+                            <input name="mobile" type="text" id="edit_mobile" value="13148464579">
+                        </div>
+                        <div class="set">
+                            <input type="hidden" id="edit_default_addr" name="def_addr" value="1">
+                            <div class="x-checkbox x-checkboxC" id="edit_default"></div>
+                            <span>设为默认</span>
+                        </div>
+                    </form>
+
+                    <div class="btnGroup">
+                        <button id="editSubmit" class="x-redBtn">保存地址</button>
+                        <button class="x-norBtn" onclick="AddressMethods.showArea('show');">取消</button>
+                    </div>
+                </div>
+                <!-- 编辑地址 结束 -->
+
+                <!-- 添加地址 开始 -->
+                <div class="content" id="address_add_area" style="display:none;">
+
+                    <form action="#" method="post" id="addForm" class="x-editAddress" onsubmit="return false">
+
+                        <p>所在地区 :</p>
+                        <input type="hidden" name="addr_id" value="">
+                        <input type="hidden" name="response_json" value="true">
+                        <input type="hidden" id="addArea" package="mainland" name="area" value="" data-optionsid="">
+                        <select name="province" id="addProvince">
+                            <option value=""> 请选择 </option>
+                        </select>
+                        <select name="city" id="addCity">
+                            <option value=""> 请选择 </option>
+                        </select>
+                        <select name="district" id="addDistrict">
+                            <option value=""> 请选择 </option>
+                        </select>
+                        <div class="addressTitle">
+                            <p>详细地址 :</p>
+                            <textarea name="addr" class="addressCotent" type="text" placeholder="街道，门牌号码" id="add_address"></textarea>
+                        </div>
+                        <div class="etc">
+                            <p>收货人 :</p>
+                            <input name="name" type="text" id="add_receiver">
+                            <p class="pl">手机号码 :</p>
+                            <input name="mobile" type="text" id="add_mobile">
+                        </div>
+                        <div class="set">
+                            <input type="hidden" id="add_default_addr" name="def_addr" value="0">
+                            <div class="x-checkbox" id="add_default"></div>
+                            <span>设为默认</span>
+                        </div>
+                    </form>
+
+                    <div class="btnGroup">
+                        <button id="addSubmit" class="x-redBtn">保存地址</button>
+                        <button class="x-norBtn" onclick="AddressMethods.showArea('show');">取消</button>
+                    </div>
+                </div>
+                <!-- 添加地址 结束 -->
+
+                <div style="display: none" id="addrList">
+                    <ul class="x-addressList">
+                        <li>
+                            <div class="x-radio x-pt5 radio-item x-radioC" data-index="4769"></div>
+                            <div class="item x-pl20">
+                                <span class="addr_item_name">曾先生</span>
+                                <span class="x-pl10 addr_item_mobile">131****4579</span>
+                                <span class="x-gold x-pl10 addr_item_def">( 默认 )</span>
+                                <p class="x-pt5 addr_item_ship_area">北京市东城区11</p>
+                                <span class="addr_item_complete_mobile" style="display: none">13148464579</span>
+                                <span class="addr_item_area" style="display: none">mainland:北京/北京市/东城区:575</span>
+                                <span class="addr_item_areaIds" style="display: none">1,64,575</span>
+                                <span class="addr_item_addr" style="display: none">11</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <script>
+                    var json_addr_list = JSON.parse('[{"addr_id":"4769","member_id":"18808","name":"\u66fe\u5148\u751f","lastname":null,"firstname":null,"area":"mainland:\u5317\u4eac\/\u5317\u4eac\u5e02\/\u4e1c\u57ce\u533a:575","addr":"11","zip":null,"tel":null,"mobile":"13148464579","day":"\u4efb\u610f\u65e5\u671f","time":"\u4efb\u610f\u65f6\u95f4\u6bb5","def_addr":"1","areaIds":"1,64,575"}]');
+
+                    $('#edit_default').click(function () {
+                        var flag = $(this).hasClass('x-checkboxC');
+                        if (flag) {
+                            $('input[name="def_addr"]').val(0);
+                            $(this).removeClass('x-checkboxC');
+                        } else {
+                            $('input[name="def_addr"]').val(1);
+                            $(this).addClass('x-checkboxC');
+                        }
+                    });
+
+                    $('#add_default').click(function () {
+                        var flag = $(this).hasClass('x-checkboxC');
+                        if (flag) {
+                            $('input[name="def_addr"]').val(0);
+                            $(this).removeClass('x-checkboxC');
+                        } else {
+                            $('input[name="def_addr"]').val(1);
+                            $(this).addClass('x-checkboxC');
+                        }
+                    });
+
+                    $(function () {
+                        confirmAddr();
+                    });
+
+                    function Modal_addressChoice() {
+                        var html = $('#addrList').html();
+                        Modal.alert({
+                            title: '选择地址',
+                            content: html,
+                            isCall : true,
+                            onSuccess : function () {
+                                var addrList = $('.x-addressList').children('li');
+
+                                var item;
+                                for (var i = 0; i < addrList.length; i++) {
+                                    item = addrList.eq(i);
+                                    if (item.children('div.radio-item').hasClass('x-radioC')) {
+                                        var consignee = item.find('.addr_item_name').html(); // 收件人
+                                        var mobile = item.find('.addr_item_mobile').html(); // 过滤的手机号码，主页使用
+                                        var ship_area = item.find('.addr_item_ship_area').html(); // 具体地址列表，主页使用
+                                        var complete_mobile = item.find('.addr_item_complete_mobile').html(); // 完整的手机号码，编辑页面使用
+                                        var area = item.find('.addr_item_area').html(); // 系统地址，编辑页面使用
+                                        var addr = item.find('.addr_item_addr').html(); // 街道地址，编辑页面使用
+                                        var areaIds = item.find('.addr_item_areaIds').html(); // 地址id，编辑页面使用
+
+                                        var def = item.find('.addr_item_def').html();
+                                        var defHtml = def ? '默认地址' : ''; // 是否默认，主页使用
+                                        break;
+                                    }
+                                }
+
+                                if (!item) {
+                                    Modal.black({"text": "请选择地址"});
+                                    return false;
+                                }
+
+                                // 选择记录的显示
+                                $('input[name="address"]').val(item.children('div.radio-item').data('index'));
+                                $('input[name="address_area"]').val(area);
+                                $('#selected_consignee').val(consignee);
+                                $('#selected_mobile').val(mobile);
+                                $('#selected_addr').val(ship_area);
+                                $('.defaultAd').html(defHtml);
+
+                                // 编辑记录的显示
+                                $('#address_edit_area').find('input[name="addr_id"]').val(item.children('div.radio-item').data('index'));
+                                $('#address_edit_area').find('input[name="area"]').val(area);
+                                $('#editAreaIds').val(areaIds);
+                                $('#edit_address').html(addr);
+                                $('#edit_receiver').val(consignee);
+                                $('#edit_mobile').val(complete_mobile);
+                                def ? $('#edit_default').addClass('x-checkboxC') : $('#edit_default').removeClass('x-checkboxC');
+                                def ? $('#edit_default_addr').val(1) : $('#edit_default_addr').val(0);
+
+                                confirmAddr();
+
+                                Modal.remove();
+
+                                MainMethods.getTotalPrice();
+                            }
+                        })
+                    }
+
+                    function confirmAddr() {
+                        $('#confirm_consignee').html($('#selected_consignee').val());
+                        $('#confirm_mobile').html($('#selected_mobile').val());
+                        $('#confirm_addr').html($('#selected_addr').val());
+                    }
+
+                    $(document).on('click', 'div.radio-item', function () {
+                        var addrList = $(document).find('div.x-ModalContent').children('ul.x-addressList').children('li');
+                        var originAddrList = $(document).find('#addrList').children('ul.x-addressList').children('li');
+
+                        for (var i = 0; i< addrList.length; i++) {
+                            addrList.eq(i).children('div.radio-item').removeClass('x-radioC');
+                            originAddrList.eq(i).children('div.radio-item').removeClass('x-radioC');
+                        }
+
+                        var index = $(this).data('index');
+                        $(this).addClass('x-radioC');
+                        for (var i = 0; i< originAddrList.length; i++) {
+                            if (originAddrList.eq(i).children('div.radio-item').data('index') == index) {
+                                originAddrList.eq(i).children('div.radio-item').addClass('x-radioC');
+                            }
+                        }
+                    })
+                </script>        </div>
+            <!-- 地址栏 结束 -->
+
+            <!--  -->
+            <div class="rowBoard">
+                <div class="topBar x-row x-gray">
+                    <span>商品信息</span>
+                    <span>单价</span>
+                    <span>数量</span>
+                    <span>小计</span>
+                    <span>实付</span>
+                </div>
+                <div class="contentB x-pt0 clearfix">
+
+                    <!-- 商品列表 开始 -->
+                    <ul class="cartList" id="mainCartList">
+                        <!-- 子遍历 开始 -->
+                        <li>
+                            <div class="imgbox">
+                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/2b/74/2b74c19c0d5e3de6557beae3e5aa622d.jpg?x-oss-process=style/high" alt="免水洗发喷雾50ml">
+                            </div>
+                            <div class="data">
+                                <p>免水洗发喷雾50ml</p>
+                                <div>
+                                    <span style="max-width:120px;white-space: nowrap; text-overflow: ellipsis;overflow: hidden;">香味：清新海洋</span>
+                                </div>
+                            </div>
+                            <div class="price">
+                                <!--<p class="x-del">¥159</p>-->
+                                <p>¥9.9</p>
+                            </div>
+                            <div class="count">1</div>
+                            <span class="subtotal">¥9.9</span>
+                            <span class="x-red">¥9.9</span>
+
+                            <input type="hidden" id="goods_58_319_store" value="352">
+                            <input type="hidden" id="goods_58_319_name" value="免水洗发喷雾50ml">
+                            <input type="hidden" id="goods_58_319_num" value="1">
+                        </li>
+                        <!-- 子遍历 结束 -->
+                        <!-- 赠品 开始 -->
+                        <!-- 赠品 结束 -->
+                    </ul>
+                </div>
+                <!-- 商品列表 结束 -->
+                <div class="boardBottom x-row clearfix">
+                    <div class="bdB x-gray">
+                        <span>使用优惠券</span>
+                        <span class="normBtn normUp"></span>
+                        <span style="padding-left:20px;">兑换优惠券：</span>
+                        <div class="codeBar">
+                            <input type="text" name="input_memc_code" placeholder="请输入兑换码">
+                            <button class="verifi" id="exchange">兑换</button>
+                        </div>
+
+
+                        <!-- 优惠券 -->
+                        <input type="hidden" name="coupon_code" id="coupon_code" value=""> <!-- 购物车优惠券标识 -->
+                        <input type="hidden" name="memc_code" value=""> <!-- 优惠券码 -->
+
+                        <!-- <input type="hidden" name="is_select_coupon" value="1"> -->
+                        <!-- <input type="hidden" name="coupon_condition" value="0"> --> <!-- 优惠最高优惠券满足金额 -->
+                        <input type="hidden" name="default_coupon_code" value=""> <!-- 优惠最高优惠券码 -->
+                        <input type="hidden" name="default_coupon_name" value="未选中"> <!-- 优惠最高优惠券名称 -->
+                        <!-- 优惠券选择 开始 -->
+
+                        <span class="x-red" id="coupon_name"></span>
+                        <div class="x-bgcFFF x-couponList" style="display: none">
+
+                            <div class="x-couponHolder"></div>
+                            <!-- 子遍历 结束 -->
+                        </div>
+                        <!-- 优惠券选择 结束 -->
+                    </div>
+                    <div class="bdB sum">
+                        <div class="price">
+                            <p><span id="cost_item">¥9.9</span></p>
+                            <p><span class="cost_freight">¥8.00</span></p>
+                            <p>
+                                <span id="couponCash"><span class="icon">¥</span>0.00</span>
+                            </p>
+                        </div>
+                        <div class="sumTitle">
+                            <p>商品总金额：</p>
+                            <p>运费：</p>
+                            <p>订单优惠金额：</p>
+                        </div>
+                    </div>
+                    <div class="btnBar">
+                        <div>
+                            <h1>应付金额&nbsp;:</h1>
+                            <span class="x-red" id="total_amount">¥17.9</span>
+                        </div>
+                        <div class="x-gray">
+                            <p>收货地址：</p>
+                            <p id="confirm_addr">北京市东城区11</p>
+                            <p class="pl20">收货人：</p>
+                            <p id="confirm_consignee">曾先生</p>
+                            <p id="confirm_mobile">131****4579</p>
+                        </div>
+                        <div>
+                            <div class="x-checkbox submitOrder x-checkboxC" id="agreement"></div>
+                            <span>我已同意</span>
+                            <a href="/article-help_service-i-service.html" class="x-blue" target="_blank">《名创优品用户服务协议》</a>
+                        </div>
+                        <button class="orderBtn gray x-redBtn" id="orderCreate">提交订单</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="x-footer">
+        <div class="x-whiteBoard footerTop">
+            <div class="x-main">
+                <ul>
+                    <li>
+                        <h1>服务热线</h1> <h2>400-9965-022</h2> <span>9:00 - 21:00</span>
+                    </li>
+                    <li class="middle">
+                        <h1>名创优选品牌宣言</h1> <p> 名创优品旗下电商品牌，从名创优品2000家线下旗舰店筛选最优质的产品，秉承从选料，设计，生产，检测都严苛把控，只为把优质的商品送到你面前。 </p>
+                    </li>
+                    <li>
+                        <h1>扫码关注公众号&nbsp;</h1>
+                        <p></p>
+                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/67/c2/67c275e04d456892a6922878b842ce60.png?1505372243#h">
+                    </li>
+                </ul>
+                <ul>
+                </ul>
+            </div>
+        </div>
+        <div class="footerBottom">
+            <div class="x-main">
+                <div class="x-main">
+                    <ul class="borderB">
+                        <li>
+                            <img src="./images/footerIcon1.png" alt=""> <span>名创优选质量保障</span>
+                        </li>
+                        <li>
+                            <img src="./images/footerIcon2.png" alt=""> <span>全场满79元包邮</span>
+                        </li>
+                        <li>
+                            <img src="./images/footerIcon3.png" alt=""> <span>30天无理由退换</span>
+                        </li>
+                    </ul>
+                    <ul class="link">
+                        <li>
+                            <a href="/article-index_question-i-13.html">常见问题</a>
+                        </li>
+                        <li>
+                            <a href="/article-index_aftersale-i-15.html">售后服务</a>
+                        </li>
+                        <li>
+                            <a href="/article-index_acceptance-i-14.html">配送与验收</a>
+                        </li>
+                        <li>
+                            <a href="http://p.qiao.baidu.com/im/index?siteid=11018217&amp;ucid=22851248&amp;cw=170918135943703">联系客服</a>
+                        </li>
+                        <li>
+                            <a href="/article-index_privacy-i-25.html">隐私政策</a>
+                        </li>
+                        <li>
+                            <a href="/article-index_service-i-24.html">服务协议</a>
+                        </li>
+                    </ul>
+                    <p>©&nbsp;2017&nbsp;MINISO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;备案号：粤ICP备15008399号-3</p>
+                    <p>为了更好的体验，推荐您使用Chrome浏览器</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

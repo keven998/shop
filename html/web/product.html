@@ -1,0 +1,2130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="./css/idangerous.swiper.css">
+    <link rel="stylesheet" href="./css/app.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <script src="./js/jquery-1.8.3.min.js"></script>
+    <script src="./js/idangerous.swiper.min.js"></script>
+    <script src="./js/plugins/Modal.js"></script>
+</head>
+<body>
+    <div class="xheader">
+        <div class="headerTop">
+            <div class="x-main">
+                <div class="topLeft">
+                    <span>名创优选 - 超越严选的品质</span>
+                </div>
+                <div class="topRight">
+                    <div class="login topLogin">
+                            <span>
+                                <a href="">登录</a>
+                            </span>
+                        <span>
+                                <a href="">注册</a>
+                            </span>
+                    </div>
+                    <div class="userBoard x-hide topLoginMember">
+                        <div class="vip"></div>
+                        <div class="userID">
+                            <span id="topNickname" onclick="location.href='/member.html'"></span>
+                            <div class="more">
+                                <a href="javascript:;">
+                                    <div class="userGuide">
+                                        <ul class="center" id="topUCenterMenu">
+                                            <li class="active" onclick="(function (){location.href='/member-index.html';})()">个人信息</li>
+                                            <li onclick="(function (){location.href='/member-orders.html';})()">订单管理</li>
+                                            <li onclick="(function (){location.href='/member-receiver.html';})()">地址管理</li>
+                                            <li onclick="(function (){location.href='/member-coupon.html';})()">优惠管理</li>
+                                            <li onclick="(function (){location.href='/member-favorite.html';})()">收藏夹</li>
+                                            <li onclick="(function (){location.href='/passport-logout.html';})()">退出登录</li>
+                                        </ul>
+                                        <div class="bottom"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>
+                            <div></div>
+                            <a href="/member-orders.html" target="_blank">订单管理</a>
+                        </li>
+                        <li>
+                            <div></div>
+                            <a href="http://p.qiao.baidu.com/im/index?siteid=11018217&amp;ucid=22851248&amp;cw=170918135943703" target="_blank">在线客服</a>
+                        </li>
+                        <li>
+                            <div></div>
+                            <a href="/article-index_question-i-13.html" target="_blank">帮助中心</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="headerBottom">
+            <div class="x-main x-main-x">
+                <div class="rel">
+                    <div class="logo"><a href="/index.html"><img src="http://s2.hgcang.com/bsimg/ec/public/images/ba/c7/bac73f16daf0d8ba9c628b63c507acbf.png?x-oss-process=style/high" alt=""></a></div>
+                    <div class="x-floor x-floor-x">
+                        <div class="search">
+                            <form action="/search-result.html" method="post" id="searchbar_331" async="false">
+                                <button class="searchBtn"></button>
+                                <input type="text" name="search_keywords" placeholder="输入关键词寻找宝贝" value="" autocomplete="off">
+                            </form>
+                            <script>
+                                $('#searchbar_'+'331').on('submit',function(){
+                                    var keywords = $("input[name='search_keywords']").val();
+                                    if(keywords=='')
+                                    {
+                                        Modal.alert({content:"关键词不能为空",title:'标题'}); return false;
+                                    }
+                                })
+                            </script>
+                            <div class="searchBoard x-hide">
+                                <div class="recommend">
+                                    <h1 class="x-gray">大家都在搜索</h1>
+                                    <li><a href="/gallery.html?is_search=1&amp;scontent=n,西餐套装">西餐套装</a></li>
+                                    <li><a href="/gallery.html?is_search=1&amp;scontent=n,小夜灯">小夜灯</a></li>
+                                    <li><a href="/gallery.html?is_search=1&amp;scontent=n,多功能便携风扇">多功能便携风扇</a></li>
+                                </div>
+                            </div>
+                            <script>
+                                $(function () {
+                                    var $inp = $('.search').find('input');
+                                    var $board = $('.searchBoard');
+                                    $inp.focus(function () {
+                                        $board.removeClass('x-hide');
+                                    })
+                                    $board.mouseout(function () {
+                                        $board.addClass('x-hide');
+                                    })
+                                    $board.mouseover(function () {
+                                        $board.removeClass('x-hide');
+                                    })
+                                })
+                                function clickHistoryWord(words) {
+                                    $('#searchbar_331').find('input[name="search_keywords"]').val(words);
+                                    $('#searchbar_331').submit();
+                                }
+
+                                $('#ms-jsCloseHistory').on('click', function (e) {
+
+                                    if ($('.searchBoard .recommend').html() != '') {
+                                        $('.searchBoard').find('.recent').remove();
+                                        $('#ms-jsCloseHistory').remove();
+                                    } else {
+                                        $('.searchBoard').remove();
+                                    }
+
+                                    $.ajax({
+                                        url : '/search-clear_history_search.html',
+                                        success : function () {
+
+                                        }
+                                    });
+                                })
+                            </script>
+                        </div>
+                    </div>
+                    <div class="cart" id="topMinCart"><!-- 购物车数量 -->
+                        <div class="news">0</div>
+                    </div>
+                    <script>
+                        function getTopMinCart(isShow) {
+                            var isShow = isShow === false ? false : true;
+                            $.post("/cart-view.html",{},function (d) {
+                                $('#topMinCart').html(d);
+                                $('#topMinCartHide').html(d);
+                                if (isShow) {
+                                    var floatBar = $('.x-floatHeader')
+                                    var flag  = floatBar.hasClass('floatDown')
+                                    if(!flag){
+                                        $('#topMinCart').children('.cartBoard').removeClass('x-hide');
+                                        setTimeout(function () {
+                                            $('#topMinCart').children('.cartBoard').addClass('x-hide');
+                                        }, 2000);
+                                    }else{
+                                        $('#topMinCartHide').children('.cartBoard').removeClass('x-hide');
+                                        setTimeout(function () {
+                                            $('#topMinCartHide').children('.cartBoard').addClass('x-hide');
+                                        }, 2000);
+                                    }
+                                }
+                            });
+                        }
+                        $(document).on('click', '#topMinCart', function(e) {
+                            if ('topMinCart' == e.target.getAttribute('id')) {
+                                location.href='/cart.html'
+                            }
+                        });
+
+                        $(document).on('click', '#topMinCartHide', function(e) {
+                            if ('topMinCartHide' == e.target.getAttribute('id')) {
+                                location.href='/cart.html'
+                            }
+                        });
+
+                        $(document).on('click', '.topMinCartDeleted', function (e) {
+                            //删除商品
+                            $.post($(this).data('href'),{},function (d) {
+                                $('#topMinCart').html(d);
+                                $('#topMinCartHide').html(d);
+                                var floatBar = $('.x-floatHeader')
+                                var flag  = floatBar.hasClass('floatDown')
+                                if(!flag){
+                                    $('#topMinCart').children('.cartBoard').removeClass('x-hide');
+                                }else{
+                                    $('#topMinCartHide').children('.cartBoard').removeClass('x-hide');
+                                }
+                            });
+                        });
+                        getTopMinCart(false);
+                        //setInterval(getTopMinCart, 5000);
+                    </script>
+                </div>
+                <div class="nav nav8">
+                    <div class="x-floor">
+
+                        <ul class="navLeft" id="topCatMenu">
+                            <li>
+
+                                <a href="/index.html">首页</a>
+
+                            </li>
+
+
+                            <li id="parent_cat_id_16">
+                                <a href="/category-channel-16-16.html">居家</a>
+                                <div class="secMenu">
+                                    <div class="x-main">
+
+                                        <div class="menuBox" onclick="location.href ='/category-channel-16-36.html#cid36'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/e8/77/e8774700c28a9bd652fcd2a932cd89cb.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>拖鞋</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-16-48.html#cid48'">
+                                            <div class="imgbox">
+                                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/7d/17/7d17d26d75b30d2399327cbdc844e803.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>清洁保鲜</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-16-51.html#cid51'">
+                                            <div class="imgbox">
+                                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/3d/6d/3d6d3e4cbd7dbba4be986ce7b2bc6b37.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>家饰</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-16-55.html#cid55'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/30/82/30826bdc5bd0d6a03e443d3f0e9e92fa.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>收纳</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-16-56.html#cid56'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/23/e9/23e95cd68ee4ddc09a960f9356655c9f.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>浴室用品</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-16-59.html#cid59'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/68/07/68073ff759dab562b5c743094d663933.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>布艺软装</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li id="parent_cat_id_14">
+                                <a href="/category-channel-14-14.html">餐厨</a>
+                                <div class="secMenu">
+                                    <div class="x-main">
+
+                                        <div class="menuBox" onclick="location.href ='/category-channel-14-15.html#cid15'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/ca/3a/ca3aca05172fcb5b9f0c1fd3acf6546c.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>杯壶</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-14-35.html#cid35'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/5a/29/5a2982231560ac1a2bb6bc93ff69f390.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>餐具</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-14-53.html#cid53'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/5f/58/5f58f1406c0495dcdc706ac69530dcba.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>功能厨具</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li id="parent_cat_id_20">
+                                <a href="/category-channel-20-20.html">服装</a>
+                                <div class="secMenu">
+                                    <div class="x-main">
+
+                                        <div class="menuBox" onclick="location.href ='/category-channel-20-21.html#cid21'">
+                                            <div class="imgbox">
+                                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/de/ca/deca7090242243346ff945524f96de82.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>T恤</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-20-23.html#cid23'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/4e/f2/4ef214b4d837f76d029e237c753bce5c.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>内衣</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-20-45.html#cid45'">
+                                            <div class="imgbox">
+                                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/6b/9f/6b9f7eda29a6ad0fb5f8f90deab61c27.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>丝袜</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-20-26.html#cid26'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/e6/cc/e6cc448cfbf9f9710b89b3800e5047a7.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>袜子</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-20-29.html#cid29'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/33/df/33dfee385249917f6f11907a986cc3f0.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>内裤</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-20-58.html#cid58'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/32/c8/32c85c60ca62bc31c8426223857aac5d.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>服饰配件</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li id="parent_cat_id_18">
+                                <a href="/category-channel-18-18.html">美护</a>
+                                <div class="secMenu">
+                                    <div class="x-main">
+
+                                        <div class="menuBox" onclick="location.href ='/category-channel-18-19.html#cid19'">
+                                            <div class="imgbox">
+                                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/d3/ba/d3bab8cad77b7b2182921a60be4bdfff.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>美妆</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-18-52.html#cid52'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/ca/e0/cae04bde18981a7d1d2445417c179e0c.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>身体护理</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-18-32.html#cid32'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/01/9b/019b25cfce32eba0e105d43d8d00716a.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>口腔护理</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-18-41.html#cid41'">
+                                            <div class="imgbox">
+                                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/ff/ff/ffff95659fd8e6a927dfc7bb75d0f8f8.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>洗发护发</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-18-33.html#cid33'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/1f/d1/1fd1716bbdd74ed25266cf6a1c9b73b6.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>美护工具</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li id="parent_cat_id_27">
+                                <a href="/category-channel-27-27.html">出行</a>
+                                <div class="secMenu">
+                                    <div class="x-main">
+
+                                        <div class="menuBox" onclick="location.href ='/category-channel-27-28.html#cid28'">
+                                            <div class="imgbox">
+                                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/2f/2a/2f2a172c62799a95994a79dd4f53cf57.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>旅行用品</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-27-54.html#cid54'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/ba/d1/bad1705e6c2e70b27d41ce599bf76a52.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>箱包</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li id="parent_cat_id_37">
+                                <a href="/category-channel-37-37.html">电器</a>
+                                <div class="secMenu">
+                                    <div class="x-main">
+
+                                        <div class="menuBox" onclick="location.href ='/category-channel-37-17.html#cid17'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/47/85/4785ed6cca6bf5c3ab9cc2bd7bc8d6cd.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>生活电器</p>
+                                        </div>
+                                        <div class="menuBox" onclick="location.href ='/category-channel-37-39.html#cid39'">
+                                            <div class="imgbox">
+                                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/9e/c0/9ec0640fbf4112a48ded4689656f2be5.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>数码</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                            <li id="parent_cat_id_49">
+                                <a href="/category-channel-49-49.html">系列</a>
+                                <div class="secMenu">
+                                    <div class="x-main">
+
+                                        <div class="menuBox" onclick="location.href ='/category-channel-49-50.html#cid50'">
+                                            <div class="imgbox">
+                                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/12/5c/125cbbb8c10f3da24b6b084a1cf80369.png?x-oss-process=style/high" alt="">
+                                            </div>
+                                            <p>粉红豹</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <ul class="navRight">
+                        <li id="topTopicMenu"><a href="/topic.html">专题</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="x-floor">
+        <div class="x-floatHeader x-whiteBox">
+            <div class="x-main" style="position: initial;">
+                <div class="pic">
+                    <img src="./images/logo_69.png" alt="">
+                </div>
+                <ul class="nav" id="topCatMenuHide">
+                    <li>
+                        <a href="/index.html">首页</a>
+                    </li>
+                    <li id="parent_cat_id_16">
+                        <a href="/category-channel-16-16.html">居家</a>
+                        <div class="secMenu" style="opacity: 0;">
+                            <div class="x-main">
+                                <div class="menuBox" onclick="location.href ='/category-channel-16-36.html#cid36'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/e8/77/e8774700c28a9bd652fcd2a932cd89cb.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>拖鞋</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-16-48.html#cid48'">
+                                    <div class="imgbox">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/7d/17/7d17d26d75b30d2399327cbdc844e803.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>清洁保鲜</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-16-51.html#cid51'">
+                                    <div class="imgbox">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/3d/6d/3d6d3e4cbd7dbba4be986ce7b2bc6b37.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>家饰</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-16-55.html#cid55'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/30/82/30826bdc5bd0d6a03e443d3f0e9e92fa.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>收纳</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-16-56.html#cid56'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/23/e9/23e95cd68ee4ddc09a960f9356655c9f.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>浴室用品</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-16-59.html#cid59'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/68/07/68073ff759dab562b5c743094d663933.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>布艺软装</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="parent_cat_id_14">
+                        <a href="/category-channel-14-14.html">餐厨</a>
+                        <div class="secMenu" style="opacity: 0;">
+                            <div class="x-main">
+                                <div class="menuBox" onclick="location.href ='/category-channel-14-15.html#cid15'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/ca/3a/ca3aca05172fcb5b9f0c1fd3acf6546c.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>杯壶</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-14-35.html#cid35'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/5a/29/5a2982231560ac1a2bb6bc93ff69f390.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>餐具</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-14-53.html#cid53'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/5f/58/5f58f1406c0495dcdc706ac69530dcba.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>功能厨具</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="parent_cat_id_20">
+                        <a href="/category-channel-20-20.html">服装</a>
+                        <div class="secMenu" style="opacity: 0;">
+                            <div class="x-main">
+                                <div class="menuBox" onclick="location.href ='/category-channel-20-21.html#cid21'">
+                                    <div class="imgbox">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/de/ca/deca7090242243346ff945524f96de82.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>T恤</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-20-23.html#cid23'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/4e/f2/4ef214b4d837f76d029e237c753bce5c.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>内衣</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-20-45.html#cid45'">
+                                    <div class="imgbox">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/6b/9f/6b9f7eda29a6ad0fb5f8f90deab61c27.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>丝袜</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-20-26.html#cid26'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/e6/cc/e6cc448cfbf9f9710b89b3800e5047a7.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>袜子</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-20-29.html#cid29'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/33/df/33dfee385249917f6f11907a986cc3f0.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>内裤</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-20-58.html#cid58'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/32/c8/32c85c60ca62bc31c8426223857aac5d.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>服饰配件</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="parent_cat_id_18">
+                        <a href="/category-channel-18-18.html">美护</a>
+                        <div class="secMenu" style="opacity: 0;">
+                            <div class="x-main">
+                                <div class="menuBox" onclick="location.href ='/category-channel-18-19.html#cid19'">
+                                    <div class="imgbox">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/d3/ba/d3bab8cad77b7b2182921a60be4bdfff.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>美妆</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-18-52.html#cid52'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/ca/e0/cae04bde18981a7d1d2445417c179e0c.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>身体护理</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-18-32.html#cid32'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/01/9b/019b25cfce32eba0e105d43d8d00716a.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>口腔护理</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-18-41.html#cid41'">
+                                    <div class="imgbox">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/ff/ff/ffff95659fd8e6a927dfc7bb75d0f8f8.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>洗发护发</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-18-33.html#cid33'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/1f/d1/1fd1716bbdd74ed25266cf6a1c9b73b6.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>美护工具</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="parent_cat_id_27">
+                        <a href="/category-channel-27-27.html">出行</a>
+                        <div class="secMenu" style="opacity: 0;">
+                            <div class="x-main">
+                                <div class="menuBox" onclick="location.href ='/category-channel-27-28.html#cid28'">
+                                    <div class="imgbox">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/2f/2a/2f2a172c62799a95994a79dd4f53cf57.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>旅行用品</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-27-54.html#cid54'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/ba/d1/bad1705e6c2e70b27d41ce599bf76a52.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>箱包</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="parent_cat_id_37">
+                        <a href="/category-channel-37-37.html">电器</a>
+                        <div class="secMenu" style="opacity: 0;">
+                            <div class="x-main">
+                                <div class="menuBox" onclick="location.href ='/category-channel-37-17.html#cid17'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/47/85/4785ed6cca6bf5c3ab9cc2bd7bc8d6cd.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>生活电器</p>
+                                </div>
+                                <div class="menuBox" onclick="location.href ='/category-channel-37-39.html#cid39'">
+                                    <div class="imgbox">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/9e/c0/9ec0640fbf4112a48ded4689656f2be5.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>数码</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li id="parent_cat_id_49">
+                        <a href="/category-channel-49-49.html">系列</a>
+                        <div class="secMenu" style="opacity: 0;">
+                            <div class="x-main">
+                                <div class="menuBox" onclick="location.href ='/category-channel-49-50.html#cid50'">
+                                    <div class="imgbox">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/12/5c/125cbbb8c10f3da24b6b084a1cf80369.png?x-oss-process=style/high" alt="">
+                                    </div>
+                                    <p>粉红豹</p>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="rel newrightnav">
+                    <div class="login topLogin">
+                        <span><a href="/passport.html">登录</a></span>
+                        <span><a href="/passport-signup.html">注册</a></span>
+                    </div>
+                    <div class="more topLoginMember x-hide">
+                        <div class="rel">
+                            <div class="userGuide" style="opacity: 0;">
+                                <ul class="center" id="topUCenterMenuHide">
+                                    <li class="active" onclick="(function (){location.href='/member-index.html';})()">个人信息</li>
+                                    <li onclick="(function (){location.href='/member-orders.html';})()">订单管理</li>
+                                    <li onclick="(function (){location.href='/member-receiver.html';})()">地址管理</li>
+                                    <li onclick="(function (){location.href='/member-coupon.html';})()">优惠管理</li>
+                                    <li onclick="(function (){location.href='/member-favorite.html';})()">收藏夹</li>
+                                    <li onclick="(function (){location.href='/passport-logout.html';})()">退出登录</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart" id="topMinCartHide"><!-- 购物车数量 -->
+                        <div class="news">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $('#topCatMenuHide').html($('#topCatMenu').html());
+            $('#topUCenterMenuHide').html($('#topUCenterMenu').html());
+
+            $(function () {
+                var $box = $('.x-floatHeader');
+                var $secMenu = $box.find('.secMenu');
+                var $userGuide = $box.find('.userGuide');
+                var $cartBoard = $box.find('.cartBoard');
+
+                $(window).scroll(function () {
+                    var num = $(this).scrollTop();
+                    if (num > 239) {
+                        $box.addClass('floatDown');
+                        opa1($secMenu);
+                        opa1($userGuide);
+                        opa1($cartBoard);
+                    } else {
+                        $box.removeClass('floatDown');
+                        opa0($secMenu);
+                        opa0($userGuide);
+                        opa0($cartBoard);
+                    }
+                })
+
+                function opa0(element) {
+                    element.css('opacity', '0');
+                }
+                function opa1(element) {
+                    element.css('opacity', '1');
+                }
+
+                // 购物车弹窗显示与消失
+                $('.cart').mouseover(function () {
+                    $(this).children('.cartBoard').removeClass('x-hide')
+                })
+                $('.cart').mouseout(function () {
+                    $(this).children('.cartBoard').addClass('x-hide')
+                })
+            });
+            $.post("/passport-get_login_member.html",{},function (d) {
+                //已经登录
+                var d=eval('('+d+')');
+                if(typeof(d.data) == 'object') {
+                    var nickname = d.data.nickname || d.data.login_mobile;
+                    nickname = nickname.length > 11 ? nickname.slice(0, 11) + '...' : nickname;
+                    $('#topNickname').text(nickname);
+                    $('.topLoginMember').removeClass('x-hide');
+                    $('.topLogin').addClass('x-hide');
+                }else {
+                    $('.topLoginMember').addClass('x-hide');
+                    $('.topLogin').removeClass('x-hide');
+                }
+            });
+        </script>
+    </div>
+    <div class="x-whiteBox">
+        <div class="x-main clearfix">
+
+            <div class="page">
+                <a href="/index.html">首页</a>            <span>&gt;</span>
+                <a href="/category-channel-18.html">美护</a>            <span>&gt;</span>
+                <a href="/category-channel-18-41.html#cid41">洗发护发</a>            <span>&gt;</span>
+                <a href="#">免水洗发喷雾50ml</a>        </div>
+
+
+
+
+            <div class="x-picSection x-main">
+
+                <div class="Pleft x-picShower">
+                    <div class="mainPic imgbox">
+                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/60/57/60578fb1ae27e656a7975447143fe513.jpg?x-oss-process=style/high" alt="">
+                    </div>
+
+                    <ul>
+                        <li class="imgbox" data-mainpicurl="http://s1.hgcang.com/bsimg/ec/public/images/96/08/96082780b48f8e80c9f0d16470ef3369.jpg?x-oss-process=style/high"><img src="http://s1.hgcang.com/bsimg/ec/public/images/96/08/96082780b48f8e80c9f0d16470ef3369.jpg?x-oss-process=style/high" alt=""></li>
+                        <li class="imgbox active" data-mainpicurl="http://s1.hgcang.com/bsimg/ec/public/images/60/57/60578fb1ae27e656a7975447143fe513.jpg?x-oss-process=style/high"><img src="http://s1.hgcang.com/bsimg/ec/public/images/60/57/60578fb1ae27e656a7975447143fe513.jpg?x-oss-process=style/high" alt=""></li>
+                        <li class="imgbox" data-mainpicurl="http://s2.hgcang.com/bsimg/ec/public/images/e0/ed/e0ed571b6dec34ae13081fd5627eda3b.jpg?x-oss-process=style/high"><img src="http://s1.hgcang.com/bsimg/ec/public/images/e0/ed/e0ed571b6dec34ae13081fd5627eda3b.jpg?x-oss-process=style/high" alt=""></li>
+                        <li class="imgbox" data-mainpicurl="http://s1.hgcang.com/bsimg/ec/public/images/39/5d/395d1e41480c92485d42f5b5bc68a346.jpg?x-oss-process=style/high"><img src="http://s2.hgcang.com/bsimg/ec/public/images/39/5d/395d1e41480c92485d42f5b5bc68a346.jpg?x-oss-process=style/high" alt=""></li>
+                        <li class="imgbox" data-mainpicurl="http://s2.hgcang.com/bsimg/ec/public/images/31/a9/31a94c02e44fa333bdfcbb6540b3f4c0.jpg?x-oss-process=style/high"><img src="http://s2.hgcang.com/bsimg/ec/public/images/31/a9/31a94c02e44fa333bdfcbb6540b3f4c0.jpg?x-oss-process=style/high" alt=""></li>
+                        <!--<li class="active"><img src="../static/images/item12.png" alt=""></li>-->
+                    </ul>
+                </div>
+                <div class="Pright">
+                    <h2>免水洗发喷雾50ml</h2>
+                    <p class="x-gray">免水洗去油喷雾</p>
+                    <div class="limited x-hide">
+                        <span class="x-fsz18">限时抢购</span>
+
+                        <span id="msCountdown">
+                        <span>该商品剩余抢购时间</span>
+                        <span class="x-fsz18 x-limitH">99</span>
+                        <span>时</span>
+                        <span class="x-fsz18 x-limitM">59</span>
+                        <span>分</span>
+                        <span class="x-fsz18 x-limitS">59</span>
+                        <span>秒</span>
+                    </span>
+                        <a href="/special.html" class="x-flr">更多抢购 &gt;</a>
+
+
+
+
+                        <!-- <span class="timesUp">抢购已结束</span> -->
+
+
+
+                    </div>
+                    <div class="x-row">
+                        <span>售价</span>
+                        <div class="x-red x-price">¥9.9</div>
+                        <div class="x-del x-originPrice x-hide">原价:&nbsp;<span></span></div>
+                        <br>
+                        <span>服务</span>
+                        <ul class="service">
+                            <li>30天无忧退换货</li>
+                            <li>
+                                <div></div><span>48小时快速退款</span></li>
+                            <li>
+                                <div></div><span>满79元包邮</span></li>
+                            <li>
+                                <div></div><span>优选全球甄选</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="chioceBoard">
+                        <div class="x-chioser">
+                            <div class="typeText" data-spec-id="18" id="type_0">
+                                <h1>香味</h1>
+                                <ul>
+                                    <li class="" data-private-id="1504614371138" id="item_1504614371138" data-mainpicurl="http://s2.hgcang.com/bsimg/ec/public/images/02/7b/027b6dafd0ea9bd6ce8efdd8c69bffea.jpg?x-oss-process=style/high">阳光柠檬</li>
+                                    <li class="active" data-private-id="1504614371139" id="item_1504614371139" data-mainpicurl="http://s2.hgcang.com/bsimg/ec/public/images/2b/74/2b74c19c0d5e3de6557beae3e5aa622d.jpg?x-oss-process=style/high">清新海洋</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <h1>数量</h1>
+                        <div class="count">
+                            <span class="reduce reduceDis"></span>
+                            <input id="selectedNum" value="1" class="quantity" onkeydown="if(event.keyCode==13)event.keyCode=9" onkeypress="if ((event.keyCode<48 || event.keyCode>57)) event.returnValue=false">
+                            <span class="plus"></span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="btnBar">
+                        <button hidden="" disabled="disabled" id="ButtonDisabled" style="display: none;">商品售罄</button>
+                        <button class="x-redBtn2 shopping" id="ButtonFastBuy" style="display: inline-block;">立即购买</button>
+                        <button class="x-redBtn" id="ButtonAddCart" style="display: inline-block;">
+                            <img src="public/app/siteyx/statics/static/images/cart2.png" alt="">
+                            加入购物车
+                        </button>
+                        <button class="x-collectBtn x-colDone x-red collection-btn">已收藏</button>
+
+                        <!-- <button class="x-collectBtn">收藏</button> -->
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+            <div class="fav x-main mt58 x-whiteBoard">
+
+                <h1>猜你喜欢</h1>
+
+
+                <div class="x-listHide min-container" style="cursor: -webkit-grab;">
+                    <div class="swiper-wrapper" style="width: 3656px; height: 330px; transform: translate3d(-914px, 0px, 0px); transition-duration: 0s;"><div class="swiper-slide swiper-no-swiping swiper-slide-duplicate" style="width: 914px; height: 330px;">
+                        <div class="itemList">
+
+                            <div class="item">
+                                <a class="imgbox imgbox-x" href="/product-567.html">
+                                    <img src="http://s2.hgcang.com/bsimg/ec/public/images/8b/91/8b917bbeb727961e97eb56a0138a9cfc.png?x-oss-process=style/high" alt="mini poni水感丝滑雾面唇釉">
+                                    <div class="x-Ptag">6色可选</div>                        </a>
+                                <div class="tagBox">
+                                </div>
+                                <a class="title" href="http://s2.hgcang.com/bsimg/ec/public/images/8b/91/8b917bbeb727961e97eb56a0138a9cfc.png?x-oss-process=style/high">mini poni水感丝滑雾面唇釉</a>
+                                <span>¥24.9</span>
+                            </div>
+
+
+                            <div class="item">
+                                <a class="imgbox imgbox-x" href="/product-409.html">
+                                    <img src="http://s1.hgcang.com/bsimg/ec/public/images/5b/4d/5b4d2727ba355451b76a5ebac3fdfd0e.png?x-oss-process=style/high" alt="粉红豹 慵懒款毛绒公仔">
+                                    <div class="x-Ptag">2款可选</div>                        </a>
+                                <div class="tagBox">
+                                </div>
+                                <a class="title" href="http://s2.hgcang.com/bsimg/ec/public/images/5b/4d/5b4d2727ba355451b76a5ebac3fdfd0e.png?x-oss-process=style/high">粉红豹 慵懒款毛绒公仔</a>
+                                <span>¥39.9</span>
+                            </div>
+
+
+                            <div class="item">
+                                <a class="imgbox imgbox-x" href="/product-435.html">
+                                    <img src="http://s1.hgcang.com/bsimg/ec/public/images/83/82/83827e16a31a32a79ffa443edd847d76.png?x-oss-process=style/high" alt="可视型蒸汽温热眼罩">
+                                    <div class="x-Ptag">5片装</div>                        </a>
+                                <div class="tagBox">
+                                </div>
+                                <a class="title" href="http://s2.hgcang.com/bsimg/ec/public/images/83/82/83827e16a31a32a79ffa443edd847d76.png?x-oss-process=style/high">可视型蒸汽温热眼罩</a>
+                                <span>¥14.9</span>
+                            </div>
+
+
+                            <div class="item">
+                                <a class="imgbox imgbox-x" href="/product-345.html">
+                                    <img src="http://s1.hgcang.com/bsimg/ec/public/images/f3/10/f3105ddec9d5ea579478b1eb05d21241.png?x-oss-process=style/high" alt="2条装强·15D超密莱卡包芯丝棉裆丝袜">
+                                    <div class="x-Ptag">3色可选</div>                        </a>
+                                <div class="tagBox">
+                                </div>
+                                <a class="title" href="http://s2.hgcang.com/bsimg/ec/public/images/f3/10/f3105ddec9d5ea579478b1eb05d21241.png?x-oss-process=style/high">2条装强·15D超密莱卡包芯丝棉裆丝袜</a>
+                                <span>¥29.9</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                        <div class="swiper-slide swiper-no-swiping swiper-slide-visible swiper-slide-active" style="width: 914px; height: 330px;">
+                            <div class="itemList">
+
+                                <div class="item">
+                                    <a class="imgbox imgbox-x" href="/product-487.html">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/ae/3c/ae3ca2e8f02a6c3cd948424338a1a2fd.png?x-oss-process=style/high" alt="持久保湿香体喷雾">
+                                        <div class="x-Ptag">3种香味</div>                        </a>
+                                    <div class="tagBox">
+                                    </div>
+                                    <a class="title" href="http://s1.hgcang.com/bsimg/ec/public/images/ae/3c/ae3ca2e8f02a6c3cd948424338a1a2fd.png?x-oss-process=style/high">持久保湿香体喷雾</a>
+                                    <span>¥9.9</span>
+                                </div>
+
+
+                                <div class="item">
+                                    <a class="imgbox imgbox-x" href="/product-318.html">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/58/48/58480c02b18a9122e702dfedee926d0c.png?x-oss-process=style/high" alt="免水洗发喷雾50ml">
+                                        <div class="x-Ptag">2款可选</div>                        </a>
+                                    <div class="tagBox">
+                                    </div>
+                                    <a class="title" href="http://s1.hgcang.com/bsimg/ec/public/images/58/48/58480c02b18a9122e702dfedee926d0c.png?x-oss-process=style/high">免水洗发喷雾50ml</a>
+                                    <span>¥9.9</span>
+                                </div>
+
+
+                                <div class="item">
+                                    <a class="imgbox imgbox-x" href="/product-86.html">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/98/a8/98a8d51e5b2c4b6e806ec6a73a79f38a.png?x-oss-process=style/high" alt="持久不脱妆自动眉笔">
+                                        <div class="x-Ptag">4色可选</div>                        </a>
+                                    <div class="tagBox">
+                                    </div>
+                                    <a class="title" href="http://s2.hgcang.com/bsimg/ec/public/images/98/a8/98a8d51e5b2c4b6e806ec6a73a79f38a.png?x-oss-process=style/high">持久不脱妆自动眉笔</a>
+                                    <span>¥9.9</span>
+                                </div>
+
+
+                                <div class="item">
+                                    <a class="imgbox imgbox-x" href="/product-176.html">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/9c/ec/9cec2847267a347cf0bf7488bd1d4140.png?x-oss-process=style/high" alt="保龄球手提杯250ml">
+                                        <div class="x-Ptag">4色可选</div>                        </a>
+                                    <div class="tagBox">
+                                    </div>
+                                    <a class="title" href="http://s1.hgcang.com/bsimg/ec/public/images/9c/ec/9cec2847267a347cf0bf7488bd1d4140.png?x-oss-process=style/high">保龄球手提杯250ml</a>
+                                    <span>¥9.9</span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="swiper-slide swiper-no-swiping" style="width: 914px; height: 330px;">
+                            <div class="itemList">
+
+                                <div class="item">
+                                    <a class="imgbox imgbox-x" href="/product-567.html">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/8b/91/8b917bbeb727961e97eb56a0138a9cfc.png?x-oss-process=style/high" alt="mini poni水感丝滑雾面唇釉">
+                                        <div class="x-Ptag">6色可选</div>                        </a>
+                                    <div class="tagBox">
+                                    </div>
+                                    <a class="title" href="http://s2.hgcang.com/bsimg/ec/public/images/8b/91/8b917bbeb727961e97eb56a0138a9cfc.png?x-oss-process=style/high">mini poni水感丝滑雾面唇釉</a>
+                                    <span>¥24.9</span>
+                                </div>
+
+
+                                <div class="item">
+                                    <a class="imgbox imgbox-x" href="/product-409.html">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/5b/4d/5b4d2727ba355451b76a5ebac3fdfd0e.png?x-oss-process=style/high" alt="粉红豹 慵懒款毛绒公仔">
+                                        <div class="x-Ptag">2款可选</div>                        </a>
+                                    <div class="tagBox">
+                                    </div>
+                                    <a class="title" href="http://s2.hgcang.com/bsimg/ec/public/images/5b/4d/5b4d2727ba355451b76a5ebac3fdfd0e.png?x-oss-process=style/high">粉红豹 慵懒款毛绒公仔</a>
+                                    <span>¥39.9</span>
+                                </div>
+
+
+                                <div class="item">
+                                    <a class="imgbox imgbox-x" href="/product-435.html">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/83/82/83827e16a31a32a79ffa443edd847d76.png?x-oss-process=style/high" alt="可视型蒸汽温热眼罩">
+                                        <div class="x-Ptag">5片装</div>                        </a>
+                                    <div class="tagBox">
+                                    </div>
+                                    <a class="title" href="http://s2.hgcang.com/bsimg/ec/public/images/83/82/83827e16a31a32a79ffa443edd847d76.png?x-oss-process=style/high">可视型蒸汽温热眼罩</a>
+                                    <span>¥14.9</span>
+                                </div>
+
+
+                                <div class="item">
+                                    <a class="imgbox imgbox-x" href="/product-345.html">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/f3/10/f3105ddec9d5ea579478b1eb05d21241.png?x-oss-process=style/high" alt="2条装强·15D超密莱卡包芯丝棉裆丝袜">
+                                        <div class="x-Ptag">3色可选</div>                        </a>
+                                    <div class="tagBox">
+                                    </div>
+                                    <a class="title" href="http://s2.hgcang.com/bsimg/ec/public/images/f3/10/f3105ddec9d5ea579478b1eb05d21241.png?x-oss-process=style/high">2条装强·15D超密莱卡包芯丝棉裆丝袜</a>
+                                    <span>¥29.9</span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="swiper-slide swiper-no-swiping swiper-slide-duplicate" style="width: 914px; height: 330px;">
+                            <div class="itemList">
+
+                                <div class="item">
+                                    <a class="imgbox imgbox-x" href="/product-487.html">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/ae/3c/ae3ca2e8f02a6c3cd948424338a1a2fd.png?x-oss-process=style/high" alt="持久保湿香体喷雾">
+                                        <div class="x-Ptag">3种香味</div>                        </a>
+                                    <div class="tagBox">
+                                    </div>
+                                    <a class="title" href="http://s1.hgcang.com/bsimg/ec/public/images/ae/3c/ae3ca2e8f02a6c3cd948424338a1a2fd.png?x-oss-process=style/high">持久保湿香体喷雾</a>
+                                    <span>¥9.9</span>
+                                </div>
+
+
+                                <div class="item">
+                                    <a class="imgbox imgbox-x" href="/product-318.html">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/58/48/58480c02b18a9122e702dfedee926d0c.png?x-oss-process=style/high" alt="免水洗发喷雾50ml">
+                                        <div class="x-Ptag">2款可选</div>                        </a>
+                                    <div class="tagBox">
+                                    </div>
+                                    <a class="title" href="http://s1.hgcang.com/bsimg/ec/public/images/58/48/58480c02b18a9122e702dfedee926d0c.png?x-oss-process=style/high">免水洗发喷雾50ml</a>
+                                    <span>¥9.9</span>
+                                </div>
+
+
+                                <div class="item">
+                                    <a class="imgbox imgbox-x" href="/product-86.html">
+                                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/98/a8/98a8d51e5b2c4b6e806ec6a73a79f38a.png?x-oss-process=style/high" alt="持久不脱妆自动眉笔">
+                                        <div class="x-Ptag">4色可选</div>                        </a>
+                                    <div class="tagBox">
+                                    </div>
+                                    <a class="title" href="http://s2.hgcang.com/bsimg/ec/public/images/98/a8/98a8d51e5b2c4b6e806ec6a73a79f38a.png?x-oss-process=style/high">持久不脱妆自动眉笔</a>
+                                    <span>¥9.9</span>
+                                </div>
+
+
+                                <div class="item">
+                                    <a class="imgbox imgbox-x" href="/product-176.html">
+                                        <img src="http://s2.hgcang.com/bsimg/ec/public/images/9c/ec/9cec2847267a347cf0bf7488bd1d4140.png?x-oss-process=style/high" alt="保龄球手提杯250ml">
+                                        <div class="x-Ptag">4色可选</div>                        </a>
+                                    <div class="tagBox">
+                                    </div>
+                                    <a class="title" href="http://s1.hgcang.com/bsimg/ec/public/images/9c/ec/9cec2847267a347cf0bf7488bd1d4140.png?x-oss-process=style/high">保龄球手提杯250ml</a>
+                                    <span>¥9.9</span>
+                                </div>
+
+                            </div>
+                        </div></div>
+                </div>
+
+                <div class="button-next"></div>
+                <div class="button-prev"></div>
+
+            </div>
+
+
+
+
+            <script>
+                $(function () {
+                    var swiperMin = new Swiper('.min-container', {
+                        loop: true,
+                        grabCursor: true,
+                        paginationClickable: true,
+                    })
+                    $('.fav .button-prev').on('click', function (e) {
+                        e.preventDefault()
+                        swiperMin.swipePrev()
+                    })
+                    $('.fav .button-next').on('click', function (e) {
+                        e.preventDefault()
+                        swiperMin.swipeNext()
+                    })
+                })
+            </script>
+
+
+
+
+
+
+            <div class="hot">
+                <h1 class="top">人气推荐</h1>
+                <div class="bottom">
+                    <div class="item">
+                        <a href="/product-301.html">
+                            <div class="imgbox">
+                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/32/cd/32cd5d41f99300349fa09021d37d81b8.png?x-oss-process=style/high" alt="魔棒车载出风口固体香水">
+                                <div class="x-Ptag">4色可选</div>                </div>
+                        </a>
+                        <a href="/product-301.html">魔棒车载出风口固体香水</a>
+                        <span class="x-red">¥28.9</span>
+                    </div>
+                    <div class="item">
+                        <a href="/product-83.html">
+                            <div class="imgbox">
+                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/b4/c0/b4c057fb2fc60e5415292b4a645d8393.png?x-oss-process=style/high" alt="节能环保小夜灯">
+                            </div>
+                        </a>
+                        <a href="/product-83.html">节能环保小夜灯</a>
+                        <span class="x-red">¥19.9</span>
+                    </div>
+                    <div class="item">
+                        <a href="/product-187.html">
+                            <div class="imgbox">
+                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/37/9f/379fb4cd2c350039e7a14c795d8f7da5.png?x-oss-process=style/high" alt="100%日本进口棉多用化妆棉180片">
+                            </div>
+                        </a>
+                        <a href="/product-187.html">100%日本进口棉多用化妆棉180片</a>
+                        <span class="x-red">¥9.9</span>
+                    </div>
+                    <div class="item">
+                        <a href="/product-181.html">
+                            <div class="imgbox">
+                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/2a/72/2a72c18b80b70ce5988db667e161597b.png?x-oss-process=style/high" alt="简约便携旅行套装5件套">
+                            </div>
+                        </a>
+                        <a href="/product-181.html">简约便携旅行套装5件套</a>
+                        <span class="x-red">¥9.9</span>
+                    </div>
+                    <div class="item">
+                        <a href="/product-186.html">
+                            <div class="imgbox">
+                                <img src="http://s2.hgcang.com/bsimg/ec/public/images/b2/7f/b27fd467bfb1d8fb6f659cd0bf1af4a0.png?x-oss-process=style/high" alt="三支装护龈极简瓷感牙刷">
+                            </div>
+                        </a>
+                        <a href="/product-186.html">三支装护龈极简瓷感牙刷</a>
+                        <span class="x-red">¥4.9</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+            <div class=" x-flr w750">
+                <div class="detailContent">
+                    <ul class="choicer">
+                        <li class="">详情</li>
+                        <li class="active"><span>评价</span><span class="x-red">( 26 )</span></li>
+                    </ul>
+
+
+                    <div class="x-detail" style="display: none;">
+
+                        <ul class="explanation x-gray">
+                            <li>
+                                <h1>品牌</h1>
+                                <span>MINISO</span>
+                            </li>
+                            <li>
+                                <h1>名称</h1>
+                                <span>免水洗发喷雾50ml</span>
+                            </li>
+                            <li>
+                                <h1>规格</h1>
+                                <span>50ml</span>
+                            </li>
+                            <li>
+                                <h1>成分</h1>
+                                <span>丁烷、丙烷、异丁烷、乙醇、玉米（ZEA MAYS）淀粉、香精</span>
+                            </li>
+                            <li>
+                                <h1>香味</h1>
+                                <span>阳光柠檬、清新海洋</span>
+                            </li>
+                            <li>
+                                <h1>保质期</h1>
+                                <span>3年</span>
+                            </li>
+                        </ul>
+                        <div class="ditailPic">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/59/60/59605da2bd57b242c24e58d861ac61de.jpg?1504856446#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/fc/e8/fce89f08277bf0e04b712317f7377ab8.jpg?1504856455#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/4f/6d/4f6df5d37dd6add63aa09eeaa1b47d01.jpg?1504856463#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/77/cd/77cd389658dafa5928d012b01854951d.jpg?1504856473#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/cd/e9/cde927142c78f9024f63a04ba7aec20b.jpg?1504856483#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/ae/90/ae90db97dfcb3d474609ea1cf9ae2650.jpg?1504856492#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/1b/ef/1bef8066723872dcb1de31fb612a2cb8.jpg?1504856501#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/bd/e5/bde54d1d0218beb31b653edc1f6699d3.jpg?1504856510#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/5a/53/5a53926bda42e44053f661287d1d0201.jpg?1504856519#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/17/f8/17f873ab08beef974f7b6f25c5f03aad.jpg?1504856526#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/13/9a/139af5cbf177adfb2745e4485c6618af.jpg?1504856536#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/30/d2/30d28d904252b2cec8c0b79009aef497.jpg?1504856545#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/0c/bd/0cbd1b7a37380f04a573add2fb402e39.jpg?1504856553#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/c2/cf/c2cfa697b4ca6e170ede96fb785ed682.jpg?1504856562#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/48/f6/48f6e489becb875a893bf38501f602fb.jpg?1504856571#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/f2/eb/f2ebf3daa6f530a2f40483c1da596165.jpg?1504856581#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/a0/ef/a0ef6762915e0b18fa644efb7973daf7.jpg?1504856590#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/68/79/6879cbe4a59bcb73dbfd29ffb6174060.jpg?1504856609#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/0e/3b/0e3bbfd78f0782e1d8324536f92294ac.jpg?1504856619#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/aa/e5/aae57c6065ea5e9fcdf226b27b5bd464.jpg?1504856627#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/d2/51/d25144896de0eb88cbf2f3beb9f464e7.jpg?1504856635#w">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/93/57/9357f9e24eadd31c295c09c81a1bc8c5.jpg?1504856643#w">                    <!--<img src="<img src="http://s1.hgcang.com/bsimg/ec/public/images/59/60/59605da2bd57b242c24e58d861ac61de.jpg?1504856446#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/fc/e8/fce89f08277bf0e04b712317f7377ab8.jpg?1504856455#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/4f/6d/4f6df5d37dd6add63aa09eeaa1b47d01.jpg?1504856463#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/77/cd/77cd389658dafa5928d012b01854951d.jpg?1504856473#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/cd/e9/cde927142c78f9024f63a04ba7aec20b.jpg?1504856483#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/ae/90/ae90db97dfcb3d474609ea1cf9ae2650.jpg?1504856492#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/1b/ef/1bef8066723872dcb1de31fb612a2cb8.jpg?1504856501#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/bd/e5/bde54d1d0218beb31b653edc1f6699d3.jpg?1504856510#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/5a/53/5a53926bda42e44053f661287d1d0201.jpg?1504856519#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/17/f8/17f873ab08beef974f7b6f25c5f03aad.jpg?1504856526#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/13/9a/139af5cbf177adfb2745e4485c6618af.jpg?1504856536#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/30/d2/30d28d904252b2cec8c0b79009aef497.jpg?1504856545#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/0c/bd/0cbd1b7a37380f04a573add2fb402e39.jpg?1504856553#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/c2/cf/c2cfa697b4ca6e170ede96fb785ed682.jpg?1504856562#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/48/f6/48f6e489becb875a893bf38501f602fb.jpg?1504856571#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/f2/eb/f2ebf3daa6f530a2f40483c1da596165.jpg?1504856581#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/a0/ef/a0ef6762915e0b18fa644efb7973daf7.jpg?1504856590#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/68/79/6879cbe4a59bcb73dbfd29ffb6174060.jpg?1504856609#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/0e/3b/0e3bbfd78f0782e1d8324536f92294ac.jpg?1504856619#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/aa/e5/aae57c6065ea5e9fcdf226b27b5bd464.jpg?1504856627#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/d2/51/d25144896de0eb88cbf2f3beb9f464e7.jpg?1504856635#w">
+<img src="http://s1.hgcang.com/bsimg/ec/public/images/93/57/9357f9e24eadd31c295c09c81a1bc8c5.jpg?1504856643#w">" alt="">-->
+                            <!--<img src="../static/images/图层-5.png" alt="">-->
+                        </div>
+                    </div>
+
+
+
+                    <div class="x-comment" style="display: block;">
+                        <div class="comTop">
+                            <h2>筛选 :</h2>
+                            <ul class="filter">
+                                <li class="DC active"><span>全部</span><span>(&nbsp;26&nbsp;)</span></li>
+                                <li class="DIC x-hide"><span>有图</span><span>( 0 )</span></li>
+                            </ul>
+                        </div>
+                        <ul class="comList"><li><div class="left"><div class="iconbox imgbox"><img src="/public/app/siteyx/statics/static/images/defualt.png" alt=""></div><div><div class="rank imgbox"><img src="http://s1.hgcang.com/bsimg/ec/public/images/7a/62/7a62171389bdef128cb35c461add86b9.png?x-oss-process=style/high" alt=""></div><div class="name">1***6</div></div></div><div class="right"><p>没看瓶子大小，回来貌似如两个胶棒大，味道还行</p><div class="imgList"><ul style="display:none;"></ul></div><span class="x-gray">香味：阳光柠檬</span><span class="x-gray x-flr">2017-12-05 19:45</span></div><div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper"></div><div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li><li><div class="left"><div class="iconbox imgbox"><img src="http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKd1Vhib4omj30Qm7oDJJnMTG7ibbXHyR1CmuAEBVzbbAVyRlNSbYNdpSd8br1p1YSXhmic3bbsKn1fg/0" alt=""></div><div><div class="rank imgbox"><img src="http://s1.hgcang.com/bsimg/ec/public/images/7a/62/7a62171389bdef128cb35c461add86b9.png?x-oss-process=style/high" alt=""></div><div class="name">他***神</div></div></div><div class="right"><p>很喜欢</p><div class="imgList"><ul style="display:none;"></ul></div><span class="x-gray">香味：阳光柠檬</span><span class="x-gray x-flr">2017-11-28 21:46</span></div><div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper"></div><div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li><li><div class="left"><div class="iconbox imgbox"><img src="http://wx.qlogo.cn/mmopen/vi_32/eU0nWlXaIfetuDFicXI08Pib0nRwsZrw2a6gZvAkcM4LJygw07ZmOmEQxUcDTylahibbpRTV2KuHCdy5Vf8qia3nAA/0" alt=""></div><div><div class="rank imgbox"><img src="http://s2.hgcang.com/bsimg/ec/public/images/7a/62/7a62171389bdef128cb35c461add86b9.png?x-oss-process=style/high" alt=""></div><div class="name">小***女</div></div></div><div class="right"><p>可以</p><div class="imgList"><ul style="display:none;"></ul></div><span class="x-gray">香味：阳光柠檬</span><span class="x-gray x-flr">2017-11-27 17:24</span></div><div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper"></div><div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li><li><div class="left"><div class="iconbox imgbox"><img src="http://wx.qlogo.cn/mmopen/vi_32/eU0nWlXaIfetuDFicXI08Pib0nRwsZrw2a6gZvAkcM4LJygw07ZmOmEQxUcDTylahibbpRTV2KuHCdy5Vf8qia3nAA/0" alt=""></div><div><div class="rank imgbox"><img src="http://s1.hgcang.com/bsimg/ec/public/images/7a/62/7a62171389bdef128cb35c461add86b9.png?x-oss-process=style/high" alt=""></div><div class="name">小***女</div></div></div><div class="right"><p>可以</p><div class="imgList"><ul style="display:none;"></ul></div><span class="x-gray">香味：清新海洋</span><span class="x-gray x-flr">2017-11-27 17:24</span></div><div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper"></div><div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li><li><div class="left"><div class="iconbox imgbox"><img src="http://wx.qlogo.cn/mmopen/vi_32/l8W3SEfertzlK6csQd23sVkYtXNzCtAmjs9ic7CZUIaAIMTquFJzh8ZcibhO4NmxLXMcD3s6DRrEMoThO89xY0ew/0" alt=""></div><div><div class="rank imgbox"><img src="http://s2.hgcang.com/bsimg/ec/public/images/7a/62/7a62171389bdef128cb35c461add86b9.png?x-oss-process=style/high" alt=""></div><div class="name">汤***姆</div></div></div><div class="right"><p>感觉还不错</p><div class="imgList"><ul style="display:none;"></ul></div><span class="x-gray">香味：阳光柠檬</span><span class="x-gray x-flr">2017-11-25 14:06</span></div><div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper"></div><div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li><li><div class="left"><div class="iconbox imgbox"><img src="http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIe6icOOjuqfhRhgcQl3AEIwAdicDaErdOcic2iaQrLiaAPibE1S8FwgJj7yRML9GwQA0yNXDiaAgsFyMawQ/0" alt=""></div><div><div class="rank imgbox"><img src="http://s2.hgcang.com/bsimg/ec/public/images/7a/62/7a62171389bdef128cb35c461add86b9.png?x-oss-process=style/high" alt=""></div><div class="name">A***y</div></div></div><div class="right"><p>好</p><div class="imgList"><ul style="display:none;"></ul></div><span class="x-gray">香味：阳光柠檬</span><span class="x-gray x-flr">2017-11-23 23:27</span></div><div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper"></div><div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li><li><div class="left"><div class="iconbox imgbox"><img src="/public/app/siteyx/statics/static/images/defualt.png" alt=""></div><div><div class="rank imgbox"><img src="http://s1.hgcang.com/bsimg/ec/public/images/7a/62/7a62171389bdef128cb35c461add86b9.png?x-oss-process=style/high" alt=""></div><div class="name">1***2</div></div></div><div class="right"><p>效果好好</p><div class="imgList"><ul style="display:none;"></ul></div><span class="x-gray">香味：清新海洋</span><span class="x-gray x-flr">2017-11-20 17:27</span></div><div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper"></div><div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li><li><div class="left"><div class="iconbox imgbox"><img src="http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTKKlicnRBVQwm3PoRGmzJfvbnzLPjQGof9Zo59mhKtJTRlyfYyvpr5tJNXvHaZTpjabOAZ2Weo1rVA/0" alt=""></div><div><div class="rank imgbox"><img src="http://s1.hgcang.com/bsimg/ec/public/images/7a/62/7a62171389bdef128cb35c461add86b9.png?x-oss-process=style/high" alt=""></div><div class="name">假***s</div></div></div><div class="right"><p>好</p><div class="imgList"><ul style="display:none;"></ul></div><span class="x-gray">香味：清新海洋</span><span class="x-gray x-flr">2017-11-20 14:28</span></div><div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper"></div><div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li><li><div class="left"><div class="iconbox imgbox"><img src="/public/app/siteyx/statics/static/images/defualt.png" alt=""></div><div><div class="rank imgbox"><img src="http://s1.hgcang.com/bsimg/ec/public/images/7a/62/7a62171389bdef128cb35c461add86b9.png?x-oss-process=style/high" alt=""></div><div class="name">1***6</div></div></div><div class="right"><p>性价比很高</p><div class="imgList"><ul style="display:none;"></ul></div><span class="x-gray">香味：清新海洋</span><span class="x-gray x-flr">2017-11-18 11:08</span></div><div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper"></div><div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li><li><div class="left"><div class="iconbox imgbox"><img src="/public/app/siteyx/statics/static/images/defualt.png" alt=""></div><div><div class="rank imgbox"><img src="http://s2.hgcang.com/bsimg/ec/public/images/7a/62/7a62171389bdef128cb35c461add86b9.png?x-oss-process=style/high" alt=""></div><div class="name">1***6</div></div></div><div class="right"><p>不错不错</p><div class="imgList"><ul style="display:none;"></ul></div><span class="x-gray">香味：阳光柠檬</span><span class="x-gray x-flr">2017-11-18 11:08</span></div><div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper"></div><div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li><li><div class="left"><div class="iconbox imgbox"><img src="/public/app/siteyx/statics/static/images/defualt.png" alt=""></div><div><div class="rank imgbox"><img src="http://s2.hgcang.com/bsimg/ec/public/images/7a/62/7a62171389bdef128cb35c461add86b9.png?x-oss-process=style/high" alt=""></div><div class="name">1***5</div></div></div><div class="right"><p>还没用，但至少种过草，希望不错！！</p><div class="imgList"><ul style="display:none;"></ul></div><span class="x-gray">香味：清新海洋</span><span class="x-gray x-flr">2017-11-17 15:28</span></div><div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper"></div><div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li><li><div class="left"><div class="iconbox imgbox"><img src="http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJ45FTjX8enVsbGaEoaG8R4cwr7vr9TfricJaMqMAzccgDdc0Mc6ZH3eyBrn7nW0UD52IAFiaX2vK1w/0" alt=""></div><div><div class="rank imgbox"><img src="http://s1.hgcang.com/bsimg/ec/public/images/7a/62/7a62171389bdef128cb35c461add86b9.png?x-oss-process=style/high" alt=""></div><div class="name">A***3</div></div></div><div class="right"><p>还没有用，用后追评</p><div class="imgList"><ul style="display:none;"></ul></div><span class="x-gray">香味：清新海洋</span><span class="x-gray x-flr">2017-11-17 08:47</span></div><div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper"></div><div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li><li><div class="left"><div class="iconbox imgbox"><img src="http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJ45FTjX8enVsbGaEoaG8R4cwr7vr9TfricJaMqMAzccgDdc0Mc6ZH3eyBrn7nW0UD52IAFiaX2vK1w/0" alt=""></div><div><div class="rank imgbox"><img src="http://s2.hgcang.com/bsimg/ec/public/images/7a/62/7a62171389bdef128cb35c461add86b9.png?x-oss-process=style/high" alt=""></div><div class="name">A***3</div></div></div><div class="right"><p>还没有用，用后追评</p><div class="imgList"><ul style="display:none;"></ul></div><span class="x-gray">香味：阳光柠檬</span><span class="x-gray x-flr">2017-11-17 08:47</span></div><div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper"></div><div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li><li><div class="left"><div class="iconbox imgbox"><img src="/public/app/siteyx/statics/static/images/defualt.png" alt=""></div><div><div class="rank imgbox"><img src="http://s1.hgcang.com/bsimg/ec/public/images/7a/62/7a62171389bdef128cb35c461add86b9.png?x-oss-process=style/high" alt=""></div><div class="name">1***0</div></div></div><div class="right"><p>气味挺好闻的，希望会有用</p><div class="imgList"><ul style="display:none;"></ul></div><span class="x-gray">香味：清新海洋</span><span class="x-gray x-flr">2017-11-15 15:00</span></div><div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper"></div><div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li><li><div class="left"><div class="iconbox imgbox"><img src="http://wx.qlogo.cn/mmopen/vi_32/WlHqRUJ4EaaA2mHTebHFG6vfdhhV2JSgKMoqrudWcSWqcic4P0BWm4Tgo8OXIs3ucAnN8DFcsQ8LCibWPptKjUcg/0" alt=""></div><div><div class="rank imgbox"><img src="http://s2.hgcang.com/bsimg/ec/public/images/7a/62/7a62171389bdef128cb35c461add86b9.png?x-oss-process=style/high" alt=""></div><div class="name">丰***ぅ</div></div></div><div class="right"><p>确实好用，喷一下油腻腻的头发就变干爽了</p><div class="imgList"><ul style="display:none;"></ul></div><span class="x-gray">香味：清新海洋</span><span class="x-gray x-flr">2017-11-15 11:58</span></div><div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper"></div><div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li><li><div class="left"><div class="iconbox imgbox"><img src="/public/app/siteyx/statics/static/images/defualt.png" alt=""></div><div><div class="rank imgbox"><img src="http://s2.hgcang.com/bsimg/ec/public/images/7a/62/7a62171389bdef128cb35c461add86b9.png?x-oss-process=style/high" alt=""></div><div class="name">1***5</div></div></div><div class="right"><p>味道好闻，很方便，救急的好东东。</p><div class="imgList"><ul style="display:none;"></ul></div><span class="x-gray">香味：阳光柠檬</span><span class="x-gray x-flr">2017-11-14 18:08</span></div><div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper"></div><div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li><li><div class="left"><div class="iconbox imgbox"><img src="http://wx.qlogo.cn/mmopen/vi_32/V5Q9iapkWRXZBBNzibmn9YxiaBKa7Amc4ZZu14KrTtKeBpz4SJhiatSqFj23stwpz7oLfpCAGPxyOHPwJosEVrfngg/0" alt=""></div><div><div class="rank imgbox"><img src="http://s1.hgcang.com/bsimg/ec/public/images/7a/62/7a62171389bdef128cb35c461add86b9.png?x-oss-process=style/high" alt=""></div><div class="name">J***n</div></div></div><div class="right"><p>效果超赞，好香</p><div class="imgList"><ul style="display:none;"></ul></div><span class="x-gray">香味：阳光柠檬</span><span class="x-gray x-flr">2017-11-13 23:29</span></div><div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper"></div><div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li><li><div class="left"><div class="iconbox imgbox"><img src="http://wx.qlogo.cn/mmopen/vi_32/V5Q9iapkWRXZBBNzibmn9YxiaBKa7Amc4ZZu14KrTtKeBpz4SJhiatSqFj23stwpz7oLfpCAGPxyOHPwJosEVrfngg/0" alt=""></div><div><div class="rank imgbox"><img src="http://s1.hgcang.com/bsimg/ec/public/images/7a/62/7a62171389bdef128cb35c461add86b9.png?x-oss-process=style/high" alt=""></div><div class="name">J***n</div></div></div><div class="right"><p>试用了一下，好赞，瞬间解决了一天下来油腻腻的头发，香香的，不刺鼻</p><div class="imgList"><ul style="display:none;"></ul></div><span class="x-gray">香味：清新海洋</span><span class="x-gray x-flr">2017-11-13 23:29</span></div><div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper"></div><div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li><li><div class="left"><div class="iconbox imgbox"><img src="http://wx.qlogo.cn/mmopen/DHV2c7yjnPs4yYDQ0L7yiatEYKI7ibN1sJ4hFIAXZ8ic2osqWq3syOSdC3I1WuBh0dp5alIoicAdEcJz0jkGUHoyibgSWFfh0ydDY/0" alt=""></div><div><div class="rank imgbox"><img src="http://s1.hgcang.com/bsimg/ec/public/images/7a/62/7a62171389bdef128cb35c461add86b9.png?x-oss-process=style/high" alt=""></div><div class="name">婉***瑤</div></div></div><div class="right"><p>不错不错</p><div class="imgList"><ul style="display:none;"></ul></div><span class="x-gray">香味：清新海洋</span><span class="x-gray x-flr">2017-11-11 14:34</span></div><div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper"></div><div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li><li><div class="left"><div class="iconbox imgbox"><img src="http://wx.qlogo.cn/mmopen/vi_32/iaRtAxhKDY3sia61ibCHlorZwX9MnSaMmhlMoNQD7o6Ob1F0EBF3iar5Um7ic6rREpnuEWyHlpMaskCozHyf26NlaGA/0" alt=""></div><div><div class="rank imgbox"><img src="http://s2.hgcang.com/bsimg/ec/public/images/7a/62/7a62171389bdef128cb35c461add86b9.png?x-oss-process=style/high" alt=""></div><div class="name">1***2</div></div></div><div class="right"><p>棒棒</p><div class="imgList"><ul style="display:none;"></ul></div><span class="x-gray">香味：阳光柠檬</span><span class="x-gray x-flr">2017-11-11 12:57</span></div><div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper"></div><div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li></ul>
+                        <div class="x-noComment x-hide"></div>
+                    </div>
+
+
+                </div>
+
+                <ul class="x-paging x-flr" style="display: inline-block;">
+                    <li class="pageP">上一页</li>
+                    <ul class="pageCount">
+                        <li class="etc x-hide" id="etcA">...</li>
+                        <li class="etc x-hide" id="etcB">...</li>
+                        <li class="active">1</li><li>2</li></ul>
+                    <li class="pageN">下一页</li>
+                </ul>
+
+
+
+
+
+                <div class="x-afterSale">
+                    <h1>售后说明</h1>
+                    <h2>优选承诺</h2>
+                    <p class="x-gray">
+                        名创优选平台销售并发货的商品，由名创优选提供相应的售后服务，请您放心购买！
+                    </p>
+                    <h2>正品保证</h2>
+                    <p class="x-gray">
+                        名创优选向您保证所售商品均为自营正品并可开具发票。
+                    </p>
+                    <h2>无忧退货</h2>
+                    <p class="x-gray">
+                        自收到商品之日起30天内，可在线申请无忧退换货服务（内裤、食品等特殊商品除外）<br>
+                    </p><h2>快递费用说明</h2>
+                    <p class="x-gray">
+                        单笔订单金额（不含运费）满79元免邮费；不满79元，每单收取8元运费。
+                    </p>
+                    <h2>发货说明</h2>
+                    <p class="x-gray">
+                        14点30前完成支付的订单当天发货，14点30完成支付后的订单第二天发货（节假日顺延，部分特殊商品7天内发货）
+                    </p>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+    <script>
+        //已选货品id
+        var selectedProductId;
+        //当前商品id
+        var goodsId = '58';
+        //产品规格信息
+        var specInfo = $.parseJSON('{"goods":{"18":{"1504614371138":{"private_spec_value_id":"1504614371138","spec_value":"\u9633\u5149\u67e0\u6aac","spec_value_id":"138","spec_goods_images":"0dc3a95fc1460848cf802c3ad36e0c72","spec_image":null,"spec_goods_default_images":"0dc3a95fc1460848cf802c3ad36e0c72"},"1504614371139":{"private_spec_value_id":"1504614371139","spec_value":"\u6e05\u65b0\u6d77\u6d0b","spec_value_id":"139","spec_goods_images":"84f42809ccbbc799199122e3d128aa7c","spec_image":null,"spec_goods_default_images":"84f42809ccbbc799199122e3d128aa7c"}}},"selected_spec":{"18":"1504614371138"},"product":{"1504614371138-318":{"product_id":"318","store":369,"price":"&yen;9.9","origin_price":"&yen;9.9","marketable":"true","spec_private_value_id":{"18":"1504614371138"}},"1504614371139-319":{"product_id":"319","store":352,"price":"&yen;9.9","origin_price":"&yen;9.9","marketable":"true","spec_private_value_id":{"18":"1504614371139"}}},"in_stock":"true","specification":{"18":{"spec_name":"\u9999\u5473","spec_type":"text"}}}');
+
+        //货品信息
+        var data = specInfo.product;
+        //促销类型ID ：限时购
+        var promotionTypeLimitId = '2';
+
+        var ProductRouter = {
+
+            addCart : function () {
+                return '/cart-add-goods.html';
+            }
+        }
+        //    console.log(specInfo);
+
+        $(function () {
+            //初始选中规格
+            initProduct();
+            //更改规格
+            choiser('#type_0 > ul > li', 1);
+            choiser('#type_1 > ul > li', 0);
+            //切换商品图片
+            picShower();
+            //加入购物车
+            addCart();
+            //立即购买
+            fastbuy();
+            //收藏
+            collection();
+            //切换详情/评论tab
+            changeTab();
+
+        })
+
+        //初始化选择规格
+        function initProduct() {
+            //有规格数据
+            if (specInfo.goods) {
+                var speNumArr = Object.keys(specInfo.goods);
+                var speNum = speNumArr.length;
+
+                //只有一个规格
+                if (speNum == 1) {
+                    for (var spec in specInfo.selected_spec) {
+                        for (var product in data) {
+                            var private_id = product.split('-')[0];
+                            if (data[product].store > 0 && data[product].marketable == 'true') {
+                                $('#item_' + private_id).removeClass('disable'); //移除置灰
+                            }
+                            if (specInfo.selected_spec[spec] == private_id) {
+                                if (data[product].store > 0 && data[product].marketable == 'true') {
+                                    changeButtonDisplay(true);
+                                } else {
+                                    changeButtonDisplay(false);
+                                }
+                                checkSpeInfo(data[product]);
+                                setProductId(data[product].product_id);
+                                $('#item_' + private_id).addClass('active'); //勾选
+                                $('#item_' + private_id).removeClass('disable'); //移除置灰
+                            }
+                        }
+                    }
+
+                } else {
+                    for (var selected in specInfo.selected_spec) {
+                        $('#item_' + specInfo.selected_spec[selected]).addClass('active'); //勾选
+                        $('#item_' + specInfo.selected_spec[selected]).removeClass('disable'); //移除置灰
+                    }
+
+                    for (var spec in specInfo.selected_spec) {
+                        for (var product in data) {
+                            if (data[product].spec_private_value_id[spec] == specInfo.selected_spec[spec]) {
+                                var selectedFlag = true;
+                                for (var private_id in data[product].spec_private_value_id) {
+                                    if (private_id != spec && (data[product].store > 0 && data[product].marketable == 'true')) {
+                                        $('#item_' + data[product].spec_private_value_id[private_id]).removeClass('disable'); //移除置灰
+                                    }
+                                    if (data[product].spec_private_value_id[private_id] != specInfo.selected_spec[private_id]) {
+                                        selectedFlag = false; //有一个规格非已选择就排除
+                                    }
+                                }
+                                //遍历到当前选中的商品
+                                if (selectedFlag) {
+                                    checkSpeInfo(data[product]);
+                                    setProductId(data[product].product_id);
+//                                for (var selected in specInfo.selected_spec) {
+//                                    $('#item_' + specInfo.selected_spec[selected]).addClass('active'); //勾选
+//                                    $('#item_' + specInfo.selected_spec[selected]).removeClass('disable'); //移除置灰
+//                                }
+                                    if (data[product].store > 0 && data[product].marketable == 'true') {
+                                        changeButtonDisplay(true);
+                                    } else {
+                                        changeButtonDisplay(false);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                //无规格数据
+                for (var product in data) {
+                    checkSpeInfo(data[product]);
+                    setProductId(data[product].product_id);
+                }
+            }
+
+        }
+
+        var reduce = $('.reduce')
+        var plus = $('.plus')
+        var speNum = $(".x-chioser").children().length; //规格行数目
+
+        //点击选择规格（注意：该方法只支持到两种规格的情况）
+        function choiser(clickNmae, arg1) {
+
+            $(document).on('click', clickNmae, function () {
+                //添加选择框
+                $(this).siblings('li').removeClass('active');
+                $(this).addClass('active');
+
+                //先把所有规格项全部置灰，后面判断规格组合所属商品的状态，可用时去除置灰
+                $('.x-chioser li').not('.active').addClass('disable'); //全部置灰
+                $(this).removeClass('disable');
+                changeButtonDisplay(false); //禁用按钮
+
+                var key_1 = arg1 == 1 ? 1 : 0; //非点击的规格行的key
+                var key_2 = arg1 == 1 ? 0 : 1; //点击的规格行的key
+
+                var clickId = $(this).attr('data-private-id'); //当前点击的规格项id
+                var otherSelectedSpeId = $('#type_'+key_1).find('.active').attr('data-private-id'); //非点击的规格行的已选择规格项id
+                //遍历商品
+                for (var item in data) {
+                    var ids = item.split('-')[key_1]; //商品的规格项id (其他规格行)
+                    var nowId = item.split('-')[key_2]; //商品的规格项id (当前点击规格行)
+
+                    if (speNum == 1) { //一个规格
+                        //遍历到当前选择商品
+                        if (clickId == nowId) {
+                            if (data[item].store > 0 && data[item].marketable == 'true') {
+                                changeButtonDisplay(true);
+                            } else {
+                                changeButtonDisplay(false);
+                            }
+                            checkSpeInfo(data[item]);
+                            setProductId(data[item].product_id);
+                        } else {
+                            if (data[item].store > 0 && data[item].marketable == 'true') {
+                                $('#item_' + nowId).removeClass('disable');
+                            } else {
+                                $('#item_' + nowId).addClass('disable');
+                            }
+                        }
+                    } else if (speNum == 2) { //两个规格
+                        if (clickId == nowId) {
+                            //对非点击的规格行的规格项进行设置
+                            if (data[item].store > 0 && data[item].marketable == 'true') {
+                                $('#item_' + ids).removeClass('disable');
+                            } else {
+                                if (!$('#item_' + ids).hasClass('active')) {
+                                    $('#item_' + ids).addClass('disable');
+                                }
+                            }
+
+                            //遍历到当前选择商品
+                            if (ids == otherSelectedSpeId) {
+                                if (data[item].store > 0 && data[item].marketable == 'true') {
+                                    changeButtonDisplay(true);
+                                } else {
+                                    changeButtonDisplay(false);
+                                }
+
+                                checkSpeInfo(data[item]);
+                                setProductId(data[item].product_id);
+                            }
+                        } else if (ids == otherSelectedSpeId) {
+                            //对点击的规格行的规格项进行设置
+                            if (data[item].store <= 0 || data[item].marketable == 'false') {
+                                $('#item_' + nowId).addClass('disable');
+                            } else {
+                                $('#item_' + nowId).removeClass('disable');
+                            }
+                        }
+                    }
+                }
+
+            })
+
+        }
+
+        /**
+         * 控制购买按钮,status为true显示购买按钮，status为false显示置灰按钮
+         * @param status
+         */
+        function changeButtonDisplay(status) {
+            if (status) {
+                $('#ButtonDisabled').hide();
+                $('#ButtonFastBuy').show();
+                $('#ButtonAddCart').show();
+                //重置数量选择框
+                $('.quantity').val(1);
+                $('.quantity').removeAttr('disabled');
+//            $('.reduce').removeClass('reduceDis');
+                $('.plus').removeClass('plusDis');
+            } else {
+                $('#ButtonDisabled').show();
+                $('#ButtonFastBuy').hide();
+                $('#ButtonAddCart').hide();
+                //禁用数量选择框
+                $('.reduce').addClass('reduceDis');
+                $('.plus').addClass('plusDis');
+                $('.quantity').attr('disabled', 'disabled');
+            }
+        }
+
+
+        var countDownFlag = true
+        //检查促销，补全价格
+        function checkSpeInfo(product) {
+            //刷新价格
+            $('.x-price').html(product.price)
+            //刷新数量选择框
+            QTY(product.store)
+
+            //进行促销：限时购
+            if (product.promotion != undefined && product.promotion.promotion_type_id == promotionTypeLimitId) {
+                $('.limited').removeClass('x-hide')
+                $('.x-originPrice').removeClass('x-hide')
+                $('.x-originPrice span').html(product.origin_price)
+
+                //倒计时
+                if (countDownFlag) {
+                    countDownFlag = false;
+
+                    var $limitH = $('.x-limitH')
+                    var $limitM = $('.x-limitM')
+                    var $limitS = $('.x-limitS')
+
+                    $('.limited').removeClass('x-hide')
+                    var endTime = product.promotion.end_time * 1000
+                    var nowTime = (new Date()).valueOf()
+                    var realTime = endTime - nowTime
+                    var time = new Date(parseInt(realTime) * 1000).toLocaleString();
+                    var h = parseInt(realTime / 3600000)
+                    var m = parseInt((realTime - h * 3600000) / 60000)
+                    var s = 59;
+
+                    setTime();
+
+                    function setTime(val) {
+
+                        if (h == 0 && m == 0 && s == 0) {
+                            $('#msCountdown').html('抢购已结束');
+                            setTimeout(function(){
+                                window.location.reload();//页面刷新
+                            }, 2000);
+                            return;
+//                        h = 0;
+//                        m = 0;
+//                        s = 0;
+                        } else {
+                            if (s > 0) {
+                                if (m == 0) {
+                                    h == 0 ? m = 0 : m = 59;
+                                    h > 0 ? h-- : h = 0;
+                                }
+                            } else if (s == 0) {
+                                s = 59;
+                                m > 0 ? m-- : m = 0;
+                            }
+                            s--;
+                        }
+
+                        $limitH.html(h)
+                        $limitM.html(m)
+                        $limitS.html(s)
+
+                        setTimeout(function () { setTime(val) }, 1000)
+                    }
+
+                }
+            } else {
+                if (product.hasOwnProperty('mktprice')) {
+                    $('.x-originPrice').removeClass('x-hide')
+                    $('.x-originPrice span').html(product.mktprice)
+                } else {
+                    $('.x-originPrice').addClass('x-hide')
+                }
+
+                $('.limited').addClass('x-hide')
+            }
+        }
+
+        // 库存方法
+        function QTY(numA) {
+            var QTYnum = numA;
+
+            // 初始化数量
+            $('.count>input').each(function () {
+                var that = $(this);
+                var $val = that.val();
+
+                if ($val == 1) {
+                    addName('reduce');
+                } else if ($val == 99 || $val == QTYnum) {
+                    addName('plus');
+                }
+            })
+
+            // 设置input最大可输入数
+            var maxNum
+            if (QTYnum <= 99) {
+                maxNum = QTYnum;
+            } else if (QTYnum > 99) {
+                maxNum = 99;
+            }
+            var thatCount = $('.quantity');
+            // 按加减键计算数量
+            $('.count').children('span').unbind('click').click(function () {
+                var that = $(this);
+                var num = parseInt(thatCount.val());
+                // 点击+的时候
+                if (that.hasClass('plus')) {
+                    if (!that.hasClass('plusDis')) {
+                        thatCount.val(num + 1);
+                        if (num + 1 >= maxNum) return addName('plus')
+                        removeName('reduce');
+                    }
+                } else {
+                    if (!that.hasClass('reduceDis')) {
+                        thatCount.val(num - 1);
+                        if (num == 2) return addName('reduce')
+                        removeName('plus');
+                    }
+                }
+
+            })
+
+            // 输入编辑
+            $('.count>input').unbind('input').bind({
+                'input propertychange': function () {
+                    // 计算数量，输入限制
+                    var that = $(this);
+                    var $val = that.val();
+
+                    if ($val == 0 || $val == '') {
+                        that.val(1);
+                        addName('reduce');
+                        addName('plus');
+                    } else if ($val == 1) {
+                        addName('reduce');
+                        removeName('plus');
+                    } else if ($val == maxNum) {
+                        addName('plus');
+                        removeName('reduce');
+                    } else if ($val > maxNum) {
+                        that.val(maxNum);
+                        addName('plus');
+                        removeName('reduce')
+                    } else {
+                        removeName('plus');
+                        removeName('reduce');
+                    }
+
+                },
+            })
+
+        }
+
+        function addName(className) {
+            $('.' + className).addClass(className + 'Dis');
+        }
+
+        function removeName(className) {
+            $('.' + className).removeClass(className + 'Dis');
+        }
+
+        // 切换商品图片
+        function picShower() {
+            var $picBox = $('.mainPic').children('img');
+            $('.x-picShower').find('li').hover(function () {
+                var thisSrc = $(this).attr('data-mainpicurl');
+
+                $(this).siblings('li').removeClass('active');
+                $(this).addClass('active');
+
+                $picBox.attr('src', thisSrc);
+            })
+
+            //点击规格换大图
+            $('.x-chioser li').click(function () {
+                if ($(this).hasClass('disable')) return;
+                var thisSrc = $(this).attr('data-mainpicurl');
+
+                $picBox.attr('src', thisSrc);
+            })
+        }
+
+        //加入购物车
+        function addCart() {
+            var addCartFlag = false;
+            $('#ButtonAddCart').click(function() {
+                if (addCartFlag) {
+                    return;
+                }
+                if (!checkIsSelected()) {
+                    return;
+                }
+
+                var json = {};
+                json.goods = {};
+                json.goods.goods_id = goodsId;
+                json.goods.product_id = selectedProductId;
+                json.goods.num = getSelectedNum();
+                json.response_json = true;
+                json.selected = 1; // 1为选中 0 为不选中
+
+                addCartFlag = true;
+                $.post(ProductRouter.addCart(), json, function(result) {
+                    addCartFlag = false;
+
+                    var msg = '';
+                    if (result.hasOwnProperty('error')) {
+                        msg = result.error;
+                    } else if (result.hasOwnProperty('success')) {
+                        msg = result.success;
+                    }
+
+                    //$("#ms-jsDetailSpecClose").click();
+
+                    Modal.black({text:msg});
+
+                    //更新小购物车商品数量
+                    (typeof getTopMinCart == 'function') && getTopMinCart();
+
+                }, "json");
+            })
+        }
+
+        //快速购买
+        function fastbuy() {
+            var fastBuyFlag = false;
+            $('#ButtonFastBuy').click(function() {
+                if (fastBuyFlag) {
+                    return;
+                }
+                if (!checkIsSelected()) {
+                    return;
+                }
+
+                var json = {};
+                json.btype = "is_fastbuy";
+                json.goods = {};
+                json.goods.goods_id = goodsId;
+                json.goods.product_id = selectedProductId;
+                json.goods.num = getSelectedNum();
+                json.min = 1;
+//            json.max = selectedStock;
+//            json.mini_cart = "true";
+                json.response_json = 'true';
+
+                fastBuyFlag = true;
+                $.post(ProductRouter.addCart(), json, function (data) {
+                    fastBuyFlag = false;
+                    if (data.hasOwnProperty('success')) {
+                        // 成功，页面跳转到确认订单页面
+                        //console.log(data.redirect + '?_time=' + Date.parse(new Date()));
+                        location.href = data.redirect;
+                    } else if (data.hasOwnProperty('error'))  {
+                        Modal.black({text:data.error});
+                    }
+                },"json");
+            });
+        }
+
+        //收藏按钮
+        function collection() {
+            $('.collection-btn').on('click', function() {
+                var _this = this;
+                var memberInfo = '1';
+
+                if(memberInfo == 0)
+                {
+                    location.href='/passport.html';return;
+                }
+                if($(this).hasClass('x-red'))
+                {
+                    var url = '/member-ajax_del_fav-58-goods.html';
+                    $.post(url,function(re){
+                        var re = $.parseJSON(re);
+                        if(re.success)
+                        {
+                            $(_this).removeClass('x-red').removeClass('x-colDone').html('收藏');
+                            Modal.black({'text':re.success});
+                        } else {
+                            Modal.black({'text':'取消失败'});
+                        }
+                    });
+                }else{
+                    var url = '/member-ajax_fav.html',
+                        gid = '58',
+                        param = 'type=goods&gid='+gid;
+                    $.post(url,param,function(re){
+                        var re = $.parseJSON(re);
+                        if(re.success)
+                        {
+                            $(_this).addClass('x-red').addClass('x-colDone').html('已收藏');
+                            Modal.black({'text':re.success});
+                        } else {
+                            Modal.black({'text':'收藏失败'});
+                        }
+                    });
+                }
+            })
+        }
+
+        //tab切换评论和详情
+        function changeTab() {
+
+            var $detail = $('.x-detail'),
+                $comment = $('.x-comment'),
+                $page = $('.x-paging');
+
+            $detail.show();
+            $comment.hide();
+            $page.hide();
+
+            $('.detailContent').children('.choicer').find('li').click(function () {
+                $(this).siblings('li').removeClass('active');
+                $(this).addClass('active');
+                if ($(this).index() == 0) { //详情页
+                    $detail.show();
+                    $comment.hide();
+                    $page.hide();
+                } else if ($(this).index() == 1) { //评论页
+                    $comment.show();
+                    $page.show();
+                    $detail.hide();
+                    loadComment();
+                }
+            })
+        }
+
+        //加载评论
+        function loadComment() {
+            var e;
+            var commentList;
+
+            var aLi = $('.filter>li');
+            var $DC = $('.DC');
+            var $DIC = $('.DIC');
+            var $com = $('.x-comment');
+            var $page = $('.x-paging');
+            var $pageCount = $('.pageCount');
+            var $etcA = $pageCount.find('#etcA');
+            var $etcB = $pageCount.find('#etcB');
+
+            var commentType = 0
+            var commentPage = 1
+
+            getCommentData(goodsId, commentType, commentPage);
+
+            // 全部/有图 切换
+            aLi.click(function () {
+
+                $(this).addClass('active')
+                $(this).siblings('li').removeClass('active')
+
+                if ($(this).hasClass('DC')) {
+                    commentType = 0
+                } else if ($(this).hasClass('DIC')) {
+                    commentType = 1
+                }
+
+                getCommentData(goodsId, commentType, 1);
+            })
+
+            // 设置页数变红
+            $pageCount.children('li').not('.etc').click(function () {
+                $(this).siblings('li').removeClass('active')
+                $(this).addClass('active')
+            })
+
+            //分页点击事件
+            $('.x-paging').not('.etc').unbind('click').on('click', 'li' , function () {
+                var that = $(this)
+                var $index = parseInt(that.html())
+                var page = parseInt($pageCount.children('.active').html())
+
+                if (isNaN($index)) {
+                    // 点击操作按钮的时候
+                    // nowPage = 1
+                    if (that.hasClass('pageP')) {
+                        // 点击上一页
+                        commentPage = page - 1
+                    } else if (that.hasClass('pageN')) {
+                        // 点击下一页
+                        commentPage = page + 1
+                    }
+                } else {
+                    // 点击数字的时候
+                    commentPage = $index
+                }
+
+                if (commentPage>=e.maxPage+1 || commentPage <1) { return}
+
+                getCommentData(goodsId, commentType, commentPage);
+            })
+
+            //从接口获取评论数据
+            function getCommentData(goodsId, type, page) {
+                var param = {};
+                param.goodId = goodsId; //商品id
+                param.page = page; //页码
+                param.type = type; //类型:0全部 1有图
+                var url = "/comment-ajax_get_comment.html";
+
+                $.get(url,param,function(rs){
+                    if(rs.hasOwnProperty('success')) {
+                        e = rs.data;
+                        commentList = e.commentList;
+
+                        // 全部数量
+                        $DC.children("span").eq(1).html('(&nbsp;' + e.discussCount + '&nbsp;)');
+                        // 有图数量
+                        if (e.discussImgCount > 0) {
+                            $DIC.removeClass('x-hide')
+                            $DIC.children("span").eq(1).html('(&nbsp;' + e.discussImgCount + '&nbsp;)');
+                        }
+
+                        // 生成评论
+                        commentP(e);
+
+                        // 生成分页
+                        var nowPage = e.page;
+                        var maxPage = type == 1 ? e.maxImgPage: e.maxPage;
+
+                        if (maxPage > 1) {
+                            initP(nowPage, maxPage+1, e)
+                        }
+                    }
+                },"json");
+            }
+
+            // 生成评论
+            function commentP(e) {
+                $('.comList').empty()
+                if (e.discussCount == 0) {
+                    $('.x-noComment').removeClass('x-hide')
+                } else {
+                    for (i in commentList) {
+                        var imgList = commentList[i].images
+
+                        var html = '<li><div class="left"><div class="iconbox imgbox"><img src="' + (commentList[i].member_headimgurl == null ? '/public/app/siteyx/statics/static/images/defualt.png' : commentList[i].member_headimgurl) + '" alt=""></div>'
+                        html += '<div><div class="rank imgbox"><img src="' + commentList[i].member_lv_logo + '" alt=""></div><div class="name">' + commentList[i].author + '</div></div></div>'
+                        html += '<div class="right"><p>' + commentList[i].comment + '</p>'
+                        html += '<div class="imgList"><ul style="display:' + (imgList == undefined ? 'none' : 'inline-block') + ';">'
+
+                        for (item in imgList) {
+                            html += '<li class="imgbox"><img src="' + imgList[item].s + '"></li>'
+                        }
+
+                        html += '</ul></div>'
+                        html += '<span class="x-gray">' + commentList[i].spec + '</span>'
+                        html += '<span class="x-gray x-flr">' + commentList[i].time + '</span>'
+                        html += '</div>'
+                        html += '<div class="showPic-container x-showPic x-flr"><div class="swiper-wrapper">'
+                        for (item in imgList) {
+                            html += '<div class="swiper-slide"><div class="showPicBox">'
+                            html += '<img src="' + imgList[item].l + '" alt="">'
+                            html += '</div></div>'
+                        }
+                        html += '</div>'
+                        html += '<div class="showPic-next"></div><div class="showPic-prev"></div><a href="javascript:;" class="closeBtn"></a></div></li>'
+
+                        $('ul.comList').append(html)
+                    }
+                }
+
+                $('.imgList').find('li').on('click', function () {
+                    var that = $(this).parents('li').find('.x-showPic')
+                    that.show();
+
+                    var swiperA = that.swiper({
+                        loop: true,
+                    })
+
+                    that.find('.showPic-prev').on('click', function (e) {
+                        e.preventDefault()
+                        swiperA.swipePrev()
+                    })
+                    that.find('.showPic-next').on('click', function (e) {
+                        e.preventDefault()
+                        swiperA.swipeNext()
+                    })
+
+                });
+
+                $('.closeBtn').click(function () {
+                    $(this).parent('.x-showPic').hide();
+                })
+
+            }
+
+            // 分页部分开始
+            // 初始化分页
+            function initP(_page, maxPage) {
+                $('.x-paging').removeClass('x-hide');
+                $pageCount.children('li').not('.etc').remove();
+                // 切换页数清空内容
+
+                var html
+
+                // 通用function
+                function ap(max) {
+                    for (var i = 1; i < max; i++) {
+                        html = '<li>' + i + '</li>'
+                        $pageCount.append(html)
+                    }
+                }
+                function be(min, max, idName) {
+                    for (var i = min; i < max; i++) {
+                        html = '<li>' + i + '</li>'
+                        $('#' + idName).before(html)
+                    }
+                }
+                function af(min, max, idName) {
+                    for (var i = max; i > min; i--) {
+                        html = '<li>' + i + '</li>'
+                        $('#' + idName).after(html)
+                    }
+                }
+
+                $etcA.addClass('x-hide')
+                $etcB.addClass('x-hide')
+
+                // 页数计算
+                if (maxPage < 7) {
+                    ap(maxPage)
+                } else {
+                    $etcA.removeClass('x-hide')
+                    if (_page < 6 && _page < maxPage / 2) {
+                        be(1, _page + 3, 'etcA')
+                        af(maxPage - 2, maxPage - 1, 'etcA')
+                    } else if (maxPage - _page < 5 && _page > maxPage / 2) {
+                        be(1, 2, 'etcA')
+                        af(_page - 3, maxPage - 1, 'etcA')
+                    } else {
+                        $etcB.removeClass('x-hide')
+                        be(1, 2, 'etcA')
+                        af(_page - 3, _page + 2, 'etcA')
+                        af(maxPage - 2, maxPage - 1, 'etcB')
+                    }
+                }
+
+                // 当前选中页面变红
+                $('.pageCount>li').each(function () {
+                    var that = $(this)
+                    if (that.html() == _page) {
+                        that.addClass('active')
+                    }
+                })
+            }
+
+        }
+
+        //设置product_id
+        function setProductId(pid) {
+            selectedProductId = pid;
+        }
+
+        //获取数量
+        function getSelectedNum() {
+            return $('#selectedNum').val();
+        }
+
+        // 点击购买时是否已经选择规格
+        function checkIsSelected() {
+            var max = parseInt($('.x-chioser').children('div').length);
+            var num = $('.x-chioser').find('.active').length;
+
+            if (num != max) {
+                Modal.black({'text':'请选择规格'});
+                return false;
+            }
+
+            return true;
+        }
+
+        //禁用数量框
+        function disableNumBox() {
+            $('#selectedNum').attr('disabled', 'disabled');
+            $('#selectedNum').addClass('x-gray');
+            $('.reduce').addClass('reduceDis');
+            $('.plus').addClass('plusDis');
+        }
+
+        //恢复数量框
+        function enableNumBox() {
+            $('#selectedNum').removeAttr('disabled');
+            $('#selectedNum').removeClass('x-gray');
+            $('.plus').removeClass('plusDis');
+        }
+
+
+    </script>
+
+    <div class="x-footer">
+        <div class="x-whiteBoard footerTop">
+            <div class="x-main">
+                <ul>
+                    <li>
+                        <h1>服务热线</h1> <h2>400-9965-022</h2> <span>9:00 - 21:00</span>
+                    </li>
+                    <li class="middle">
+                        <h1>名创优选品牌宣言</h1> <p> 名创优品旗下电商品牌，从名创优品2000家线下旗舰店筛选最优质的产品，秉承从选料，设计，生产，检测都严苛把控，只为把优质的商品送到你面前。 </p>
+                    </li>
+                    <li>
+                        <h1>扫码关注公众号&nbsp;</h1>
+                        <p></p>
+                        <img src="http://s1.hgcang.com/bsimg/ec/public/images/67/c2/67c275e04d456892a6922878b842ce60.png?1505372243#h">
+                    </li>
+                </ul>
+                <ul>
+                </ul>
+            </div>
+        </div>
+        <div class="footerBottom">
+            <div class="x-main">
+                <div class="x-main">
+                    <ul class="borderB">
+                        <li>
+                            <img src="./images/footerIcon1.png" alt=""> <span>名创优选质量保障</span>
+                        </li>
+                        <li>
+                            <img src="./images/footerIcon2.png" alt=""> <span>全场满79元包邮</span>
+                        </li>
+                        <li>
+                            <img src="./images/footerIcon3.png" alt=""> <span>30天无理由退换</span>
+                        </li>
+                    </ul>
+                    <ul class="link">
+                        <li>
+                            <a href="/article-index_question-i-13.html">常见问题</a>
+                        </li>
+                        <li>
+                            <a href="/article-index_aftersale-i-15.html">售后服务</a>
+                        </li>
+                        <li>
+                            <a href="/article-index_acceptance-i-14.html">配送与验收</a>
+                        </li>
+                        <li>
+                            <a href="http://p.qiao.baidu.com/im/index?siteid=11018217&amp;ucid=22851248&amp;cw=170918135943703">联系客服</a>
+                        </li>
+                        <li>
+                            <a href="/article-index_privacy-i-25.html">隐私政策</a>
+                        </li>
+                        <li>
+                            <a href="/article-index_service-i-24.html">服务协议</a>
+                        </li>
+                    </ul>
+                    <p>©&nbsp;2017&nbsp;MINISO&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;备案号：粤ICP备15008399号-3</p>
+                    <p>为了更好的体验，推荐您使用Chrome浏览器</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
