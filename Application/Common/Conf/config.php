@@ -51,7 +51,7 @@ return array(
         'api'    => 'Api',
         'wx'    => 'Wechat',
     ),
-    'URL_DOMAIN_ROOT'        => 'paimai.com',
+    'URL_DOMAIN_ROOT'        => 'shop.com',
 
     //***********************************邮件服务器**********************************
     'EMAIL_FROM_NAME'        => '',   // 发件人

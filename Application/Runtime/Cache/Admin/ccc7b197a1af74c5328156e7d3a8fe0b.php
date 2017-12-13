@@ -497,237 +497,132 @@
     </div>
 </div>
         </div>
-        <div class="right-product my-index right-full">
+        <div class="right-product right-full">
             <div class="container-fluid">
                 <div class="info-center">
-                    <div class="info-title">
+                    <div class="page-header">
                         <div class="pull-left">
-                            <h4 style="padding-top: 20px;"><strong><?php echo ($admin["username"]); ?>，欢迎您登录管理系统！</strong></h4>
-                        </div>
-                        <div class="time-title pull-right">
-                            <div class="year-month pull-left">
-                                <p class="week"><?php echo ($sys_info["week"]); ?></p>
-                                <p><span><?php echo ($sys_info["year"]); ?></span>年<em><?php echo ($sys_info["month"]); ?></em></p>
-                            </div>
-                            <div class="hour-minute pull-right">
-                                <strong><?php echo ($sys_info["time"]); ?></strong>
-                            </div>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="content-list">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="content">
-                                    <div class="w30 left-icon pull-left">
-                                        <span class="glyphicon glyphicon-file blue"></span>
-                                    </div>
-                                    <div class="w70 right-title pull-right">
-                                        <div class="title-content">
-                                            <p>今天新增订单数</p>
-                                            <h3 class="number">0</h3>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="content">
-                                    <div class="w30 left-icon pull-left">
-                                        <span class="glyphicon glyphicon-file orange"></span>
-                                    </div>
-                                    <div class="w70 right-title pull-right">
-                                        <div class="title-content">
-                                            <p>今日新增会员数</p>
-                                            <h3 class="number">?</h3>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="content">
-                                    <div class="w30 left-icon pull-left">
-                                        <span class="glyphicon glyphicon-file green"></span>
-                                    </div>
-                                    <div class="w70 right-title pull-right">
-                                        <div class="title-content">
-                                            <p>今日待审核评论数</p>
-                                            <h3 class="number">?</h3>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="content">
-                                    <div class="w30 left-icon pull-left">
-                                        <span class="glyphicon glyphicon-file violet"></span>
-                                    </div>
-                                    <div class="w70 right-title pull-right">
-                                        <div class="title-content">
-                                            <p>今日访问量</p>
-                                            <h3 class="number">?</h3>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mtop-10">
-                            <div class="col-md-3 section_select">
-                                <a href="">
-                                    <i class="ice ice_y"></i>
-                                    <div class="t">待处理订单</div>
-                                    <span class="number">5</span>
-                                </a>
-                            </div>
-
-                            <div class="col-md-3 section_select">
-                                <a href="">
-                                    <i class="ice ice_q"></i>
-                                    <div class="t">商品数量</div>
-                                    <span class="number">5</span>
-                                </a>
-                            </div>
-                            <div class="col-md-3 section_select">
-                                <a href="">
-                                    <i class="ice ice_w"></i>
-                                    <div class="t">文章数量</div>
-                                    <span class="number">5</span>
-                                </a>
-                            </div>
-                            <div class="col-md-3 section_select">
-                                <a href="">
-                                    <i class="ice ice_f"></i>
-                                    <div class="t">会员总数</div>
-                                    <span class="number">5</span>
-                                </a>
-                            </div>
-                        </div>
-                        <!-------信息列表------->
-                        <div class="row newslist" style="margin-top:20px;">
-                            <div class="col-md-8">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        操作日志
-                                    </div>
-                                    <?php if(is_array($action_log["action"])): foreach($action_log["action"] as $key=>$vo): ?><div class="panel-body">
-                                        <div class="w50 pull-left text-left"><?php echo ($vo["log_info"]); ?></div>
-                                        <div class="w25 pull-left text-center"><?php echo (date("Y年m月d日 H:i:s",$vo["log_time"])); ?></div>
-                                        <div class="w25 pull-left text-right"><?php echo ($vo["log_ip"]); ?></div>
-                                    </div><?php endforeach; endif; ?>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        登录记录
-                                    </div>
-                                    <?php if(is_array($action_log["login"])): foreach($action_log["login"] as $key=>$vo): ?><div class="panel-body">
-                                        <div class="w50 pull-left text-left"><?php echo (date("Y年m月d日 H:i:s",$vo["log_time"])); ?></div>
-                                        <div class="w50 pull-left text-right"><?php echo ($vo["log_ip"]); ?></div>
-                                    </div><?php endforeach; endif; ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row newslist">
-                            <div class="col-md-12">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">版本信息</div>
-                                    <div class="panel-body">
-                                        <div class="w20 pull-left">程序版本:</div>
-                                        <div class="w30 pull-left"><?php echo ($sys_info["version"]); ?></div>
-                                        <div class="w20 pull-left">更新时间:</div>
-                                        <div class="w30 pull-left">2017-09-30</div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="w20 pull-left">程序开发:</div>
-                                        <div class="w30 pull-left"><a href="https://www.zenghao.cc" target="_blank">Mr Jack</a></div>
-                                        <div class="w20 pull-left">版本所有:</div>
-                                        <div class="w30 pull-left">盗版必究</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row newslist">
-                            <div class="col-md-12">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        系统信息
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="w20 pull-left">服务器操作系统:</div>
-                                        <div class="w30 pull-left"><?php echo ($sys_info["os"]); ?></div>
-                                        <div class="w20 pull-left">服务器域名/IP:</div>
-                                        <div class="w30 pull-left"><span class="text-green-main"><?php echo ($sys_info["domain"]); ?> [ <?php echo ($sys_info["ip"]); ?> ]</span></div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="w20 pull-left">服务器环境:</div>
-                                        <div class="w30 pull-left"><?php echo ($sys_info["web_server"]); ?></div>
-                                        <div class="w20 pull-left">PHP 版本:</div>
-                                        <div class="w30 pull-left"><?php echo ($sys_info["phpv"]); ?></div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="w20 pull-left">Mysql 版本:</div>
-                                        <div class="w30 pull-left"><?php echo ($sys_info["mysql_version"]); ?></div>
-                                        <div class="w20 pull-left">GD 版本:</div>
-                                        <div class="w30 pull-left"><?php echo ($sys_info["gdinfo"]); ?></div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="w20 pull-left">文件上传限制:</div>
-                                        <div class="w30 pull-left"><?php echo ($sys_info["fileupload"]); ?></div>
-                                        <div class="w20 pull-left">最大占用内存:</div>
-                                        <div class="w30 pull-left"><?php echo ($sys_info["memory_limit"]); ?></div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="w20 pull-left">最大执行时间:</div>
-                                        <div class="w30 pull-left"><?php echo ($sys_info["set_time_limit"]); ?></div>
-                                        <div class="w20 pull-left">安全模式:</div>
-                                        <div class="w30 pull-left"><?php echo ($sys_info["safe_mode"]); ?></div>
-                                    </div>
-                                    <div class="panel-body">
-                                        <div class="w20 pull-left">Zlib支持:</div>
-                                        <div class="w30 pull-left"><?php echo ($sys_info["zlib"]); ?></div>
-                                        <div class="w20 pull-left">Curl支持</div>
-                                        <div class="w30 pull-left"><?php echo ($sys_info["curl"]); ?></div>
-                                    </div>
-                                </div>
-                            </div>
+                            <h4>数据备份</h4>      
                         </div>
                     </div>
-                </div>
+                    <div class="clearfix"></div>
+                    <div class="search-box row">
+                        <div class="col-md-8">
+                            数据库中共有<?php echo ($tableNum); ?>张表，共计<?php echo ($total); ?>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="javascript:void(0)" id="export" class="btn btn-primary pull-right ">备份</a>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-margin">
+                        <form id="export-form" method="post" action="<?php echo U('database/export');?>">
+                            <table class="table table-hover table-header">
+                                <thead>
+                                    <tr>
+                                        <th width="48"><input class="check-all" checked="chedked" type="checkbox" value=""></th>
+                                        <th>表名</th>
+                                        <th width="120">数据量</th>
+                                        <th width="120">数据大小</th>
+                                        <th width="160">创建时间</th>
+                                        <th width="160">备份状态</th>
+                                        <th width="120">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$table): $mod = ($i % 2 );++$i;?><tr>
+                                            <td class="num">
+                                                <input class="ids" checked="chedked" type="checkbox" name="tables[]" value="<?php echo ($table["name"]); ?>">
+                                            </td>
+                                            <td><?php echo ($table["name"]); ?></td>
+                                            <td><?php echo ($table["rows"]); ?></td>
+                                            <td><?php echo (format_bytes($table["data_length"])); ?></td>
+                                            <td><?php echo ($table["create_time"]); ?></td>
+                                            <td class="infos">未备份</td>
+                                            <td class="action">
+                                                <a href="<?php echo U('database/optimize',array('tablename'=>$table['name']));?>">优化</a>
+                                                <span class="text-explode">|</span>
+                                                <a href="<?php echo U('database/repair',array('tablename'=>$table['name']));?>">修复</a>
+                                            </td>
+                                        </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>       
             </div>
         </div>
     </div>
     <script type="text/javascript" src="/Public/Admin/js/common.js"></script>
     <script type="text/javascript">
-        setInterval(function(){
-            var myDate = new Date();
-            //获取当前年
-            var year=myDate.getFullYear();
-            //获取当前月
-            var month=myDate.getMonth()+1;
-            //获取当前日
-            var date=myDate.getDate();
-            //获取当前小时数(0-23)
-            var h = myDate.getHours();
-            //获取当前分钟数(0-59)
-            var m = myDate.getMinutes();
-            //获取当前秒数(0-59)
-            var s = myDate.getSeconds();
-            var today = new Array('星期日','星期一','星期二','星期三','星期四','星期五','星期六');
-            var week = today[myDate.getDay()];
-            $('.year-month span').html(year);
-            $('.year-month em').html(padZero(month)+'月'+padZero(date)+'日');
-            $('.year-month .week').html(week);
-            $('.hour-minute strong').html(padZero(h) +':'+ padZero(m) +':' + padZero(s));
-        },1000);
+    (function($){
 
-        function padZero(num){
-            return num < 10 ? '0'+ num : num;
+        var $form = $("#export-form"), $export = $("#export"), tables
+            $optimize = $("#optimize"), $repair = $("#repair");
+
+        $optimize.add($repair).click(function(){
+            $.post(this.href, $form.serialize(), function(data){
+                if(data.status){
+                    // updateAlert(data.info,'alert-success');
+                    layer.msg(data.info, {icon: 1});  
+                } else {
+                    layer.msg(data.info, {icon: 2});  
+                }
+            }, "json");
+            return false;
+        });
+
+        $export.click(function(){
+            $export.parent().children().addClass("disabled");
+            $export.html("正在发送备份请求...");
+            $.post(
+                $form.attr("action"),
+                $form.serialize(),
+                function(data){
+                    if(data.status){
+                        tables = data.tables;
+                        $export.html(data.info + "开始备份，请不要关闭本页面！");
+                        backup(data.tab);
+                        window.onbeforeunload = function(){ return "正在备份数据库，请不要关闭！" }
+                    } else {
+                        layer.msg(data.info, {icon: 2});  
+                        $export.parent().children().removeClass("disabled");
+                        $export.html("立即备份");
+                    }
+                },
+                "json"
+            );
+            return false;
+        });
+
+        function backup(tab, status){
+            status && showmsg(tab.id, "开始备份...(0%)");
+            $.get($form.attr("action"), tab, function(data){
+                if(data.status){
+                    showmsg(tab.id, data.info);
+
+                    if(!$.isPlainObject(data.tab)){
+                        $export.parent().children().removeClass("disabled");
+                        $export.html("备份完成，点击重新备份");
+                        layer.msg(data.info, {icon: 1});  
+                        window.onbeforeunload = function(){ return null }
+                        return;
+                    }
+                    backup(data.tab, tab.id != data.tab.id);
+                } else {
+                    // updateAlert(data.info,'alert-error');
+                    layer.msg(data.info, {icon: 2});  
+                    $export.parent().children().removeClass("disabled");
+                    $export.html("立即备份");
+                }
+            }, "json");
+
         }
+
+        function showmsg(id, msg){
+            $form.find("input[value=" + tables[id] + "]").closest("tr").find(".infos").html(msg);
+        }
+    })(jQuery);
     </script>
 </body>
 </html>
