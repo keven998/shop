@@ -13,7 +13,7 @@
         <div class="right-product right-full">
             <div class="container-fluid">
                 <div class="info-center">
-                    <div class="page-header">
+                    <div class="page-header clearfix">
                         <div class="pull-left">
                             <h4>评价回复</h4>     
                             <a href="{:U('goods/comment')}">
@@ -21,7 +21,6 @@
                             </a> 
                         </div>
                     </div>
-                    <div class="clearfix"></div>
                     <div class="table-margin">
                         {$comment.username} 于 {$comment.add_time|date="Y-m-d H:i:s",###} 对 <strong>{$comment.goods_name}</strong> 发表评论 物流评价{$comment.deliver_rank}分 商品评价{$comment.goods_rank}分 服务评价{$comment.service_rank}分
                         <hr />

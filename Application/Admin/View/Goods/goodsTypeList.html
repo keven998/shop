@@ -13,28 +13,19 @@
         <div class="right-product right-full">
             <div class="container-fluid">
                 <div class="info-center">
-                    <div class="page-header">
+                    <div class="page-header clearfix">
                         <div class="pull-left">
                             <h4>商品类型</h4>      
                         </div>
+                        <a href="{:U('goods/addGoodsType')}" class="btn btn-primary pull-right ">添加商品类型</a>
                     </div>
-                    <div class="clearfix"></div>
-                    <div class="search-box row">
-                        <div class="col-md-8">
-                       
-                        </div>
-                        <div class="col-md-4">
-                            <a href="{:U('goods/addGoodsType')}" class="btn btn-primary pull-right ">添加商品类型</a>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
                     <div class="table-margin">
                         <table class="table table-hover table-header">
                             <thead>
                                 <tr>
                                     <td>ID</td>
                                     <td>类型名</td>
-                                    <td class="w10">操作</td>
+                                    <td class="w15">操作</td>
                                 </tr>
                             </thead>
                             <if condition="$list['data']">
