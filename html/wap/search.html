@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="generator" content="ecos.b2c">
+        <title>名创优选-超越严选的品质</title>
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta content="yes" name="apple-touch-fullscreen">
+        <meta name="App-Config" content="fullscreen=yes,useHistoryState=yes,transition=yes">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="format-detection" content="telephone=no">
+        <link href="./css/common.css" rel="stylesheet" media="screen, projection">
+        <script src="./js/zepto/zepto.min.js"></script>
+        <script src="./js/swiper.min.js"></script>
+    </head>
+<body style="font-size: 24px;">
+    <div class="ms-search-top">
+        <div class="ms-header ms-fixed-top">
+            <div class="ms-content">
+                <form id="searchForm" class="ms-search" action="/wap/search-result.html" method="post">
+                    <div class="ms-searchInput">
+                        <i class="ms-icon ms-icon-search"></i>
+                        <input name="search_keywords" type="text" placeholder="搜索商品">
+                    </div>
+                    <a href="javascript:history.back()"><button class="submit ms-jsClean" type="button">取消</button></a>
+                </form>
+                <script>
+                    $('#searchForm').on('submit',function(){
+                        var keywords = $("input[name='search_keywords']").val();
+                        if(keywords == '')
+                        {
+                            Modal.tip({'content':'关键词不能为空'}); return false;
+                        }
+                    })
+                </script>
+            </div>
+        </div>
+    </div>
+    <div class="ms-indexFloor" style="">
+        <div class="ms-hd">
+            <span>历史记录</span>
+            <a href="javascript:void(0);" id="ms-jsCloseHistory">
+                <i class="ms-icon ms-icon-del"></i>
+            </a>
+        </div>
+        <ul class="ms-searchItem clearfix" id="history_searchItem">
+            <li class="item">
+                <a href="/wap/gallery.html?is_search=1&amp;scontent=n,枕头">枕头</a>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

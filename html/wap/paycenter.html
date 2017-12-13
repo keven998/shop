@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="generator" content="ecos.b2c">
+    <title>名创优选-超越严选的品质</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="App-Config" content="fullscreen=yes,useHistoryState=yes,transition=yes">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no">
+    <link href="./css/common.css" rel="stylesheet" media="screen, projection">
+    <script src="./js/zepto/zepto.min.js"></script>
+    <script src="./js/swiper.min.js"></script>
+    <script src="./js/plugins/scroll.js"></script>
+    <script src="./js/plugins/Modal.js"></script>
+</head>
+<body style="font-size: 24px;">
+    <div class="ms-bottomNav">
+        <!--头部开始-->
+        <div class="ms-fixed-header">
+            <div class="ms-header ms-fixed-top">
+                <div class="ms-content">
+
+                    <!-- 头部内容 开始 -->
+                    <!-- 头部内容 开始 -->
+                    <div class="ms-row ms-header-txt">
+                        <div class="left">
+                            <a href="/wap/index.html" class="btn home"><i class="ms-icon ms-icon-home"></i></a>
+                        </div>
+                        <div class="mid">
+                            <span id="title">支付选择</span>
+                        </div>
+                        <div class="right">
+                            <a href="/wap/search.html" class="btn search">
+                                <i class="ms-icon ms-icon-search"></i>
+                            </a>
+                            <a href="/wap/cart.html" class="btn cart">
+                                <i class="ms-icon ms-icon-cart"></i>
+                                <span id="min_cart_num"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 头部内容 结束 -->
+                    <script>
+                        function getMiniCartNumber() {
+                            $.post("/wap/cart-number.html",{},function (data) {
+                                var data = eval('('+data+')');
+                                if (typeof(data.success) && typeof (data.success.CART_NUMBER)) {
+                                    if (data.success.CART_NUMBER > 0) {
+                                        var min_cart_num = data.success.CART_NUMBER > 99 ? '99+' : data.success.CART_NUMBER;
+                                        $('#min_cart_num').addClass('num').text(min_cart_num);
+                                    }
+                                    //data.success.CART_NUMBER > 0 && $('#min_cart_num').addClass('num').text(data.success.CART_NUMBER);
+                                }
+                            }, 'JSON');
+                        }
+                        $(document).ready(function () {
+                            getMiniCartNumber();
+                            //setInterval(getMiniCartNumber, 5000);
+                        });
+                    </script>
+                    <!-- 头部内容 结束 -->
+                </div>
+            </div>
+        </div>
+        <!--头部结束-->
+
+        <form action="/wap/paycenter-dopayment-order.html" method="post" id="paycenter_form">
+            <input type="hidden" name="payment[order_id]" value="171128124090659">
+            <input type="hidden" name="payment[combination_pay]" value="false">
+            <input type="hidden" name="payment[def_pay][cur_money]" value="17.90">
+            <input type="hidden" name="payment[def_pay][pay_app_id]" value="malipaynew">
+            <input type="hidden" name="payment[memo]" value="">
+            <input type="hidden" name="pay[password]" id="password" value="">
+        </form>
+
+        <div class="ms-inputRadio" id="ms-jsChoosePay">
+            <a href="javascript:void(0);" class="radioGroup active" data-name="malipaynew">
+                <i class="ms-icon ms-icon-around"></i>
+                <i class="ms-icon ms-icon-around-active"></i>
+                <img src="./images/pay-ali.png" alt="">
+                <span>支付宝</span>
+            </a>
+        </div>
+
+        <div class="ms-bottomHandle ms-middle ms-shoppingBottom">
+            <div class="content">
+                <!--<form action="/wap/paycenter-dopayment-order.html" method="post" id="paycenter_form" >-->
+
+                <div class="btn">
+                    <!--<button class="ms-button large" id="canel"><label>取消</label></button>-->
+                    <button type="submit" class="ms-button red large" id="confirm"><label>确定</label></button>
+                </div>
+
+                <!--</form>-->
+                <script>
+                    // 弹窗
+                    $('#canel').on('click', function() {
+                        Modal.confirm({
+                            title: '确认放弃付款？',
+                            content: '订单会保留一段时间，请尽快支付',
+                            okText: '继续支付',
+                            cancelText: '确定离开',
+                            onCancel: function() {  // 确定离开回调函数
+                                location.href = '/wap/member-orders.html';
+                            },
+                            onSucess: function() {  // 继续支付回调函数
+                                console.log('继续支付回调函数')
+                            }
+                        })
+                    });
+
+                    $('#confirm').on('click', function () {
+
+                        var pay_app_id = $('#ms-jsChoosePay').children('a.active').data('name');
+                        if (!pay_app_id) {
+                            Modal.tip({"content":"请选择支付方式"});
+                            return false;
+                        }
+
+                        $('input[name="payment[def_pay][pay_app_id]"]').val(pay_app_id);
+
+                        $('#paycenter_form').submit();
+                        return false;
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="generator" content="ecos.b2c">
+    <title>名创优选-超越严选的品质</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="App-Config" content="fullscreen=yes,useHistoryState=yes,transition=yes">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no">
+    <link href="./css/common.css" rel="stylesheet" media="screen, projection">
+    <script src="./js/zepto/zepto.min.js"></script>
+    <script src="./js/swiper.min.js"></script>
+    <script src="./js/plugins/scroll.js"></script>
+    <script src="./js/plugins/Modal.js"></script>
+</head>
+<body style="font-size: 24px;">
+    <div class="ms-bottomNav">
+        <!-- 头部 开始 -->
+        <div class="ms-Collection-header">
+            <div class="ms-header ms-fixed-top">
+                <div class="ms-content">
+
+                    <!-- 头部内容 开始 -->
+                    <!-- 头部内容 开始 -->
+                    <div class="ms-row ms-header-txt">
+                        <div class="left">
+                            <a href="/wap/index.html" class="btn home"><i class="ms-icon ms-icon-home"></i></a>
+                        </div>
+                        <div class="mid">
+                            <span id="title">我的收藏</span>
+                        </div>
+                        <div class="right">
+                            <a href="/wap/search.html" class="btn search">
+                                <i class="ms-icon ms-icon-search"></i>
+                            </a>
+                            <a href="/wap/cart.html" class="btn cart">
+                                <i class="ms-icon ms-icon-cart"></i>
+                                <span id="min_cart_num"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 头部内容 结束 -->
+                    <script>
+                        function getMiniCartNumber() {
+                            $.post("/wap/cart-number.html",{},function (data) {
+                                var data = eval('('+data+')');
+                                if (typeof(data.success) && typeof (data.success.CART_NUMBER)) {
+                                    if (data.success.CART_NUMBER > 0) {
+                                        var min_cart_num = data.success.CART_NUMBER > 99 ? '99+' : data.success.CART_NUMBER;
+                                        $('#min_cart_num').addClass('num').text(min_cart_num);
+                                    }
+                                    //data.success.CART_NUMBER > 0 && $('#min_cart_num').addClass('num').text(data.success.CART_NUMBER);
+                                }
+                            }, 'JSON');
+                        }
+                        $(document).ready(function () {
+                            getMiniCartNumber();
+                            //setInterval(getMiniCartNumber, 5000);
+                        });
+                    </script>
+                    <!-- 头部内容 结束 -->
+
+                    <!-- Tab 开始 -->
+                    <div class="ms-tab">
+                        <div class="item">
+                            <a href="javascript:void(0);" class="active" data-name="product">商品(<span>2</span>)</a>
+                        </div>
+                        <div class="item">
+                            <a href="javascript:void(0);" data-name="theme">专题(<span>0</span>)</a>
+                        </div>
+                    </div>
+                    <!-- Tab 结束 -->
+                    <script>
+
+                    </script>
+                </div>
+            </div>
+        </div>
+        <!--头部 结束-->
+
+        <div class="ms-middle ms-collectionBox">
+
+            <!-- 收藏专题 开始 -->
+
+            <div class="content" id="theme">
+                <ul class="ms-collectionList ms-collectionList-theme">
+                </ul>
+            </div>
+
+            <!-- 收藏商品 结束 -->
+
+
+            <!-- 收藏商品 开始 -->
+
+            <div class="content" id="product">
+
+
+                <!-- 人气推荐模块开始 -->
+                <ul class="ms-popular ms-collectionPopular ms-collectionList-product" id="ms-favoriteListBox">
+                    <!-- 遍历 item 开始 -->
+                    <li class="item">
+                        <a href="/wap/product-567.html" class="clearfix">
+                            <div class="pic">
+                                <div><img src="http://s1.hgcang.com/bsimg/ec/public/images/8b/91/8b917bbeb727961e97eb56a0138a9cfc.png#h" alt="mini poni水感丝滑雾面唇釉"></div>
+                            </div>
+                            <div class="info">
+                                <div class="tag">
+                                </div>
+                                <p class="name">mini poni水感丝滑雾面唇釉</p>
+                                <p class="brief">Dior御用原料供应商</p>                            <p class="price">¥24.9</p>
+                            </div>
+                        </a>
+                    </li>
+                    <!-- 遍历 item 结束 -->
+                    <!-- 遍历 item 开始 -->
+                    <li class="item">
+                        <a href="/wap/product-318.html" class="clearfix">
+                            <div class="pic">
+                                <div><img src="http://s1.hgcang.com/bsimg/ec/public/images/58/48/58480c02b18a9122e702dfedee926d0c.png#h" alt="免水洗发喷雾50ml"></div>
+                            </div>
+                            <div class="info">
+                                <div class="tag">
+                                </div>
+                                <p class="name">免水洗发喷雾50ml</p>
+                                <p class="brief">免水洗去油喷雾</p>                            <p class="price">¥9.9</p>
+                            </div>
+                        </a>
+                    </li>
+                    <!-- 遍历 item 结束 -->
+
+                </ul>
+            </div>
+
+            <!-- 收藏专题 结束 -->
+            <!-- 人气推荐模块结束 -->
+            <script>
+                var page = 2;
+                var maxPage = 0;
+                var maxPage_prodcut = '1';
+                var maxPage_theme = '';
+                var page_product = 2;
+                var page_theme = 2;
+                var is_over = false;
+
+                var name = 'product';
+                var re_name = '';
+
+                $('.ms-tab a').on('click', function() {
+                    var tab_name = $(this).data('name');
+                    if(name != tab_name){
+                        name = tab_name;
+                        if(name=='theme'){
+                            location.href = "/wap/member-favorite-1-false-theme.html";
+                        }else{
+                            location.href = "/wap/member-favorite-1-false-product.html";
+                        }
+                    }
+
+//                var bool = $(this).hasClass('active');
+//                name = $(this).data('name');
+//                if (bool) return;
+//                $(this).parent().parent().find('a').removeClass('active');
+//                $(this).addClass("active");
+//                $('.ms-collectionBox .content').hide();
+//                $('#' + name).show();
+//                $(window).scrollTop(0);
+                })
+
+                Scroll.init({
+                    callback: function(e) {
+                        maxPage = name=='product' ? maxPage_prodcut : maxPage_theme;
+                        page = name=='product' ? page_product : page_theme;
+                        if(re_name!=name){
+                            is_over=false;
+                        }
+                        if (is_over || (page > maxPage)) return;
+                        re_name = name;
+                        e.isLoading = false;                    // 当前不可以 ajax 请求
+                        $('#ms-jsLoadMore').addClass('show');   // 显示加载更多 txt
+                        var url = '/wap/member-favorite-'+page+'-is_ajax-'+name+'.html';
+                        $.post(url,function(result){
+
+                            //$('#ms-favoriteListBox').append(result);
+                            $('.ms-collectionList-'+re_name).append(result);
+
+                            $('#ms-jsLoadMore').removeClass('show');    // 隐藏加载更多 txt
+                            e.isLoading = true;                         // 当前允许 ajax 请求
+
+                            name=='product' ? page_product++ : page_theme++;
+                            if (page >= maxPage) {
+                                is_over = true;   // 滚动事件移除
+                                return;
+                            }
+                        })
+                    }
+                })
+            </script>
+        </div>
+
+        <!--专题收藏开始-->
+        <div class="ms-middle ms-collectionBox">
+
+            <!-- 收藏专题 开始 -->
+
+            <div class="content" id="theme">
+                <ul class="ms-collectionList ms-collectionList-theme">
+                    <li class="item">
+                        <a href="/wap/topic-detail-15.html">
+                            <div class="pic">
+                                <img src="http://s1.hgcang.com/bsimg/dede_uploads/allimg/171123/1-1G1231KZ70-L.jpg" alt="">
+                            </div>
+                        </a>
+                        <div class="info">
+                            <p class="name">一到节日就断货の群宠好物</p>
+                            <p class="brief">感恩节来临，“断货王”TOP5提前抢</p>
+                            <div class="author">
+                                <div class="pic">
+                                    <img src="http://s1.hgcang.com/bsimg/dede_uploads/allimg/171123/1-1G1231JF40-L.png" alt="">
+                                </div>
+                                <p>名创优选</p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 收藏商品 结束 -->
+
+
+            <!-- 收藏商品 开始 -->
+
+            <div class="content" id="product">
+
+
+                <!-- 人气推荐模块开始 -->
+                <ul class="ms-popular ms-collectionPopular ms-collectionList-product" id="ms-favoriteListBox">
+
+                </ul>
+            </div>
+
+            <!-- 收藏专题 结束 -->
+            <!-- 人气推荐模块结束 -->
+            <script>
+                var page = 2;
+                var maxPage = 0;
+                var maxPage_prodcut = '';
+                var maxPage_theme = '1';
+                var page_product = 2;
+                var page_theme = 2;
+                var is_over = false;
+
+                var name = 'theme';
+                var re_name = '';
+
+                $('.ms-tab a').on('click', function() {
+                    var tab_name = $(this).data('name');
+                    if(name != tab_name){
+                        name = tab_name;
+                        if(name=='theme'){
+                            location.href = "/wap/member-favorite-1-false-theme.html";
+                        }else{
+                            location.href = "/wap/member-favorite-1-false-product.html";
+                        }
+                    }
+
+//                var bool = $(this).hasClass('active');
+//                name = $(this).data('name');
+//                if (bool) return;
+//                $(this).parent().parent().find('a').removeClass('active');
+//                $(this).addClass("active");
+//                $('.ms-collectionBox .content').hide();
+//                $('#' + name).show();
+//                $(window).scrollTop(0);
+                })
+
+                Scroll.init({
+                    callback: function(e) {
+                        maxPage = name=='product' ? maxPage_prodcut : maxPage_theme;
+                        page = name=='product' ? page_product : page_theme;
+                        if(re_name!=name){
+                            is_over=false;
+                        }
+                        if (is_over || (page > maxPage)) return;
+                        re_name = name;
+                        e.isLoading = false;                    // 当前不可以 ajax 请求
+                        $('#ms-jsLoadMore').addClass('show');   // 显示加载更多 txt
+                        var url = '/wap/member-favorite-'+page+'-is_ajax-'+name+'.html';
+                        $.post(url,function(result){
+
+                            //$('#ms-favoriteListBox').append(result);
+                            $('.ms-collectionList-'+re_name).append(result);
+
+                            $('#ms-jsLoadMore').removeClass('show');    // 隐藏加载更多 txt
+                            e.isLoading = true;                         // 当前允许 ajax 请求
+
+                            name=='product' ? page_product++ : page_theme++;
+                            if (page >= maxPage) {
+                                is_over = true;   // 滚动事件移除
+                                return;
+                            }
+                        })
+                    }
+                })
+            </script>
+        </div>
+        <!--专题收藏结束-->
+
+        <!-- 加载更多 开始-->
+        <div class="ms-loadMore" id="ms-jsLoadMore">
+            <div class="">
+                加载更多...
+            </div>
+        </div>
+        <!-- 加载更多 结束 -->
+
+    </div>
+</body>
+</html>

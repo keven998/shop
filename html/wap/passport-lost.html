@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="generator" content="ecos.b2c">
+        <title>名创优选-超越严选的品质</title>
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta content="yes" name="apple-touch-fullscreen">
+        <meta name="App-Config" content="fullscreen=yes,useHistoryState=yes,transition=yes">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="format-detection" content="telephone=no">
+        <link href="./css/common.css" rel="stylesheet" media="screen, projection">
+        <script src="./js/zepto/zepto.min.js"></script>
+        <script src="./js/swiper.min.js"></script>
+        <script src="./js/plugins/scroll.js"></script>
+        <script src="./js/plugins/Modal.js"></script>
+    </head>
+<body style="font-size: 24px;">
+    <div class="ms-bottomNav">
+        <div class="ms-formBox ms-setInOut ms-middle" style="margin-top: .25rem;">
+            <div class="content">
+                <div class="desc gray">
+                    <h4>找回密码</h4>
+                </div>
+                <form class="" action="/wap/passport-lost_pwd.html" method="post">
+                    <div class="ms-formInputGroup" style="margin-top: .25rem;">
+                        <input type="tel" placeholder="请输入手机号" name="pam_account[login_name]">
+                        <button class="ms-button small ms-jsSendCode" id="ms-jsSendCode"><label>获取验证码</label></button>
+                        <script>
+                            $('#ms-jsSendCode').on('click', function(e) {
+                                e.preventDefault();
+                                if ($(this).hasClass('active')) return;
+                                var self = $(this);
+                                var times = 60;
+                                var data = {};
+                                var url = '/wap/passport-send_vcode_sms.html';
+                                data.uname = $("input[name='pam_account[login_name]']").val();
+                                data.type = 'forgot';
+                                if (data.uname.length <= 0) {
+                                    Modal.tip({content : '请输入手机号'});return;
+                                }
+                                self.addClass('active');
+                                $.post(url, data, function(rs) {
+                                    self.removeClass('active');
+                                    if(rs) {
+                                        if(rs.error) {
+                                            if(typeof rs.error === 'string') Modal.tip({content : rs.error});
+                                        } else {
+                                            Modal.tip({content : '验证码已发送'});
+                                            self.addClass('active').html('<label>'+ times + 's</label>');
+                                            var time = setInterval(function() {
+                                                times--;
+                                                self.html('<label>'+times + 's</label>');
+                                                if (times == 0) {
+                                                    self.removeClass('active').text('获取验证码');
+                                                    clearInterval(time)
+                                                }
+                                            },1000)
+                                        }
+                                    }
+                                }, 'json');
+                            })
+                        </script>
+                    </div>
+                    <div class="ms-formInputGroup none">
+                        <input type="tel" placeholder="请输入验证码" name="pam_account[login_verification]">
+                    </div>
+
+                    <div class="btn">
+                        <button class="ms-button red" id="ms-submit"><label>下一步</label></button>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

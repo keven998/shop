@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="generator" content="ecos.b2c">
+    <title>名创优选-超越严选的品质</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="App-Config" content="fullscreen=yes,useHistoryState=yes,transition=yes">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no">
+    <link href="./css/common.css" rel="stylesheet" media="screen, projection">
+    <script src="./js/zepto/zepto.min.js"></script>
+    <script src="./js/swiper.min.js"></script>
+    <script src="./js/plugins/scroll.js"></script>
+    <script src="./js/plugins/Modal.js"></script>
+</head>
+<body style="font-size: 24px;">
+    <div class="ms-bottomNav">
+        <!--头部开始-->
+        <div class="ms-Collection-header">
+            <div class="ms-header ms-fixed-top">
+                <div class="ms-content">
+
+                    <!-- 头部内容 开始 -->
+                    <!-- 头部内容 开始 -->
+                    <div class="ms-row ms-header-txt">
+                        <div class="left">
+                            <a href="/wap/index.html" class="btn home"><i class="ms-icon ms-icon-home"></i></a>
+                        </div>
+                        <div class="mid">
+                            <span id="title">修改手机</span>
+                        </div>
+                        <div class="right">
+                            <a href="/wap/search.html" class="btn search">
+                                <i class="ms-icon ms-icon-search"></i>
+                            </a>
+                            <a href="/wap/cart.html" class="btn cart">
+                                <i class="ms-icon ms-icon-cart"></i>
+                                <span id="min_cart_num"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 头部内容 结束 -->
+                    <script>
+                        function getMiniCartNumber() {
+                            $.post("/wap/cart-number.html",{},function (data) {
+                                var data = eval('('+data+')');
+                                if (typeof(data.success) && typeof (data.success.CART_NUMBER)) {
+                                    if (data.success.CART_NUMBER > 0) {
+                                        var min_cart_num = data.success.CART_NUMBER > 99 ? '99+' : data.success.CART_NUMBER;
+                                        $('#min_cart_num').addClass('num').text(min_cart_num);
+                                    }
+                                    //data.success.CART_NUMBER > 0 && $('#min_cart_num').addClass('num').text(data.success.CART_NUMBER);
+                                }
+                            }, 'JSON');
+                        }
+                        $(document).ready(function () {
+                            getMiniCartNumber();
+                            //setInterval(getMiniCartNumber, 5000);
+                        });
+                    </script>
+                    <!-- 头部内容 结束 -->
+
+                    <!-- Tab 开始 -->
+                    <div class="ms-tab">
+                        <div class="item">
+                            <a href="javascript:void(0);" class="active" data-name="验证身份">验证身份</a>
+                        </div>
+                        <div class="item">
+                            <a href="javascript:void(0);" data-name="绑定手机">绑定新手机</a>
+                        </div>
+                    </div>
+                    <!-- Tab 结束 -->
+                </div>
+            </div>
+        </div>
+        <!--头部结束-->
+
+        <div class="ms-formBox ms-setInOut ms-middle ms-tabsPanel" style="margin-top: .25rem;">
+            <div class="content">
+                <form class="" action="index.html" method="post">
+                    <div class="ms-formInputGroup">
+                        <input type="tel" placeholder="请输入手机号" value="13148464579" name="old_phone" disabled="">
+                        <button class="ms-button small ms-jsSendCode" id="ms-jsSendCode-1"><label>获取验证码</label></button>
+                        <script>
+                            $('#ms-jsSendCode-1').on('click', function(e) {
+                                e.preventDefault();
+                                if ($(this).hasClass('active')) return;
+                                var self = $(this);
+                                var times = 60;
+                                var data = {};
+                                var url = '/wap/passport-send_vcode_sms.html';
+                                data.uname = '13148464579';
+                                data.type = 'change_phone_old';
+                                self.addClass('active');
+                                $.post(url, data, function(rs) {
+                                    self.removeClass('active');
+                                    if(rs) {
+                                        if(rs.error) {
+                                            if(typeof rs.error === 'string') Modal.tip({content : rs.error});
+                                        } else {
+                                            Modal.tip({content : '验证码已发送'});
+                                            self.addClass('active').html('<label>' + times + 's</label>');
+                                            var time = setInterval(function() {
+                                                times--;
+                                                self.html('<label>' + times + 's</label>');
+                                                if (times == 0) {
+                                                    self.removeClass('active').html('<label>获取验证码</label>');
+                                                    clearInterval(time)
+                                                }
+                                            },1000)
+                                        }
+                                    }
+                                }, 'json');
+                            })
+                        </script>
+                    </div>
+                    <div class="ms-formInputGroup none">
+                        <input type="tel" placeholder="请输入验证码" name="old_phone_vcode">
+                    </div>
+
+                    <div class="btn" id="ms-submit-1">
+                        <a href="" class="ms-button red">确定</a>
+                    </div>
+                </form>
+                <div class="desc">
+                    <h4>温馨提示</h4>
+                    <p>1、为保障您的账号安全，变更重要信息需要身份验证；</p>
+                    <p>2、有疑问请拨打400-996-5022(09:00-22:00)或联系在线客服。</p>
+                </div>
+            </div>
+        </div>
+        <div class="ms-formBox ms-setInOut ms-middle ms-tabsPanel" style="margin-top: .25rem;">
+            <div class="content">
+                <form class="" action="index.html" method="post">
+                    <div class="ms-formInputGroup">
+                        <input type="tel" placeholder="请输入新的手机号" name="new_phone">
+                        <button class="ms-button small ms-jsSendCode" id="ms-jsSendCode-2"><label>获取验证码</label></button>
+                        <script>
+                            $('#ms-jsSendCode-2').on('click', function(e) {
+                                e.preventDefault();
+                                if ($(this).hasClass('active')) return;
+                                var self = $(this);
+                                var times = 60;
+                                var data = {};
+                                var url = '/wap/passport-send_vcode_sms.html'
+                                data.uname = $("input[name='new_phone']").val();
+                                data.type = 'change_phone_new';
+                                if (data.uname.length <= 0) {
+                                    Modal.tip({content : '请输入手机号'});return;
+                                }
+                                self.addClass('active');
+                                $.post(url, data, function(rs) {
+                                    self.removeClass('active');
+                                    if(rs) {
+                                        if(rs.error) {
+                                            if(typeof rs.error === 'string') Modal.tip({content : rs.error});
+                                        } else {
+                                            Modal.tip({content : '验证码已发送'});
+                                            self.addClass('active').html('<label>' + times + 's</label>');
+                                            var time = setInterval(function() {
+                                                times--;
+                                                self.html('<label>' + times + 's</label>');
+                                                if (times == 0) {
+                                                    self.removeClass('active').html('<label>获取验证码</label>');
+                                                    clearInterval(time)
+                                                }
+                                            },1000)
+                                        }
+                                    }
+                                }, 'json');
+                            })
+                        </script>
+                    </div>
+                    <div class="ms-formInputGroup none">
+                        <input type="tel" placeholder="请输入验证码" name="new_phone_vcode">
+                    </div>
+
+                    <div class="btn" id="ms-submit-2">
+                        <a href="" class="ms-button red">确定</a>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

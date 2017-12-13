@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="generator" content="ecos.b2c">
+    <title>名创优选-超越严选的品质</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="App-Config" content="fullscreen=yes,useHistoryState=yes,transition=yes">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no">
+    <link href="./css/common.css" rel="stylesheet" media="screen, projection">
+    <script src="./js/zepto/zepto.min.js"></script>
+    <script src="./js/swiper.min.js"></script>
+    <script src="./js/plugins/scroll.js"></script>
+    <script src="./js/plugins/Modal.js"></script>
+</head>
+<body style="font-size: 24px;">
+    <div class="ms-bottomNav">
+        <script src="./js/region_data.js"></script>
+        <script src="./js/plugins/selectAddress.js"></script>
+        <!--头部开始-->
+        <div class="ms-fixed-header">
+            <div class="ms-header ms-fixed-top">
+                <div class="ms-content">
+                    <!-- 头部内容 开始 -->
+                    <div class="ms-row ms-header-txt">
+                        <div class="left">
+                            <a href="/wap/index.html" class="btn home"><i class="ms-icon ms-icon-home"></i></a>
+                        </div>
+                        <div class="mid">
+                            <span id="title">新增地址</span>
+                        </div>
+                        <div class="right">
+                            <a href="/wap/search.html" class="btn search">
+                                <i class="ms-icon ms-icon-search"></i>
+                            </a>
+                            <a href="/wap/cart.html" class="btn cart">
+                                <i class="ms-icon ms-icon-cart"></i>
+                                <span id="min_cart_num" class="num">1</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 头部内容 结束 -->
+                    <script>
+                        function getMiniCartNumber() {
+                            $.post("/wap/cart-number.html",{},function (data) {
+                                var data = eval('('+data+')');
+                                if (typeof(data.success) && typeof (data.success.CART_NUMBER)) {
+                                    if (data.success.CART_NUMBER > 0) {
+                                        var min_cart_num = data.success.CART_NUMBER > 99 ? '99+' : data.success.CART_NUMBER;
+                                        $('#min_cart_num').addClass('num').text(min_cart_num);
+                                    }
+                                    //data.success.CART_NUMBER > 0 && $('#min_cart_num').addClass('num').text(data.success.CART_NUMBER);
+                                }
+                            }, 'JSON');
+                        }
+                        $(document).ready(function () {
+                            getMiniCartNumber();
+                            //setInterval(getMiniCartNumber, 5000);
+                        });
+                    </script>
+                    <!-- 头部内容 结束 -->
+
+                </div>
+            </div>
+        </div>
+        <!--头部结束-->
+
+        <!--地址新建开始-->
+        <div class="ms-formBox ms-formBoxAddress ms-middle">
+            <div class="content">
+
+                <form id="address_box" onsubmit="return false;" action="/wap/member-save_rec.html" method="post" data-type="ajax">
+                    <input type="hidden" name="addr_id" value="">
+                    <div class="ms-formInputGroup">
+                        <input type="text" name="name" value="" placeholder="姓名">
+                    </div>
+                    <div class="ms-formInputGroup">
+                        <input type="tel" name="mobile" value="" placeholder="手机号">
+                    </div>
+                    <div class="ms-formInputGroup addressBox">
+                        <input type="hidden" id="plugin-selectAddress" package="mainland" name="area" value="" data-optionsId="" />
+                        <script>
+                            selectAddress.init();
+                        </script>
+                    </div>
+                    <div class="ms-formInputGroup none">
+                        <input type="text" name="addr" value="" required="required" placeholder="详细地址，如街道、楼牌号">
+                    </div>
+                    <div class="defaultAddress">
+                        <a href="javascript:void(0);" class="" id="setDefaultAddress">
+                            <i class="ms-icon ms-icon-around"></i>
+                            <i class="ms-icon ms-icon-around-active"></i>
+                            设置为默认地址
+                            <input type="hidden" name="def_addr" value="" id="addressDefault">
+                        </a>
+                        <script>
+                            /**
+                             * 设置地址默认
+                             * <input type="hidden" id="addressDefault" value="false" />
+                             */
+                            $('#setDefaultAddress').on('click', function() {
+                                $(this).hasClass('active')
+                                    ? $(this).removeClass('active').find('input').val(0)
+                                    : $(this).addClass('active').find('input').val(1);
+                            })
+                        </script>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--地址新建结束-->
+
+        <div class="ms-bottomHandle ms-middle ms-shoppingBottom">
+            <div class="content">
+                <div class="btn">
+                    <button onclick="history.go(-1)" class="ms-button large"><label>取消</label></button>
+                    <button type="submit" onclick="addressSubmit()" class="ms-button red large"><label>保存</label></button>
+                </div>
+            </div>
+        </div>
+        <script>
+            function addressSubmit() {
+                var url = "/wap/member-save_rec.html";
+                $.post(url, $('#address_box').serialize(), function (data) {
+                    var data = eval('('+data+')');
+                    if (typeof(data.success) == 'string') {
+                        location.href = data.redirect;
+                    }else {
+                        Modal.tip({content : data.error});
+                    }
+                });
+            }
+        </script>
+
+    </div>
+</body>
+</html>

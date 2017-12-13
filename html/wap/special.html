@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="generator" content="ecos.b2c">
+        <title>名创优选-超越严选的品质</title>
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta content="yes" name="apple-touch-fullscreen">
+        <meta name="App-Config" content="fullscreen=yes,useHistoryState=yes,transition=yes">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="format-detection" content="telephone=no">
+        <link href="./css/common.css" rel="stylesheet" media="screen, projection">
+        <script src="./js/zepto/zepto.min.js"></script>
+        <script src="./js/swiper.min.js"></script>
+        <script src="./js/plugins/scroll.js"></script>
+        <script src="./js/plugins/Modal.js"></script>
+    </head>
+<body style="font-size: 24px;">
+    <div class="ms-bottomNav">
+        <div class="ms-fixed-height">
+            <div class="ms-header ms-fixed-top">
+                <div class="ms-content">
+                    <div class="ms-search">
+                        <a href="/" class="logo"></a>
+                        <a href="/wap/search.html" class="ms-toSearchInput">
+                            <i class="ms-icon ms-icon-search"></i>
+                            <span class="placeholder">
+                                <span>名创优品自营</span>
+                            </span>
+                        </a>
+                    </div>
+                    <div class="ms-scroll-tab">
+                        <header class="ms-swiper-tab swiper-container-horizontal">
+                            <div class="ms-wrapper" id="ms-scrollTab">
+                                <a class="ms-slide" href="index.html"><span>推荐</span></a>
+                                <a class="ms-slide ms-active ms-slide-active" href="special.html"><span>限时特卖</span></a>
+                                <a class="ms-slide" href="new.html"><span>新品</span></a>
+                                <a class="ms-slide" href="/wap/category-channel-16.html"><span>居家</span></a>
+                                <a class="ms-slide" href="/wap/category-channel-14.html"><span>餐厨</span></a>
+                                <a class="ms-slide" href="/wap/category-channel-20.html"><span>服装</span></a>
+                                <a class="ms-slide" href="/wap/category-channel-18.html"><span>美护</span></a>
+                                <a class="ms-slide" href="/wap/category-channel-27.html"><span>出行</span></a>
+                                <a class="ms-slide" href="/wap/category-channel-37.html"><span>电器</span></a>
+                                <a class="ms-slide" href="/wap/category-channel-46.html"><span>杂货</span></a>
+                                <a class="ms-slide" href="/wap/category-channel-49.html"><span>系列</span></a>
+                            </div>
+                        </header>
+                        <script>
+                            (function () {
+                                new Swiper('.ms-swiper-tab', {
+                                    wrapperClass: 'ms-wrapper',
+                                    slideClass: 'ms-slide',
+                                    slideActiveClass : 'ms-slide-active',
+                                    slidesPerView: 'auto'
+                                })
+                            })();
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ms-indexFloor" style="margin-bottom: 0;">
+            <a href="" class="ms-banner-width">
+                <img src="./images/time-limit.jpg" alt="">
+            </a>
+        </div>
+        <div class="ms-indexFloor" style="margin-bottom: 0;">
+
+            <!-- tab 开始 -->
+            <div class="ms-swiperLimit">
+                <div class="ms-content ms-swiperBox ms-swiperTime swiper-container-horizontal">
+                    <div class="ms-wrapper cleafix" id="ms-slide">
+                        <a class="ms-slide swiper-no-swiping specialList active ms-active" data-index="0" data-time="1" style="width: 93.75px;">
+                            <div>
+                                <span>10:00</span>
+                                <span>
+                                                            正在开抢
+                                                    </span>
+                            </div>
+                        </a>
+                        <a class="ms-slide swiper-no-swiping specialList swiper-slide-next" data-index="1" data-time="2" style="width: 93.75px;">
+                            <div>
+                                <span>28日10:00</span>
+                                <span>
+                                                            即将开抢
+                                                    </span>
+                            </div>
+                        </a>
+                        <a class="ms-slide swiper-no-swiping specialList" data-index="2" data-time="2" style="width: 93.75px;">
+                            <div>
+                                <span>29日10:00</span>
+                                <span>
+                                                            即将开抢
+                                                    </span>
+                            </div>
+                        </a>
+                        <a class="ms-slide swiper-no-swiping specialList" data-index="3" data-time="2" style="width: 93.75px;">
+                            <div>
+                                <span>30日10:00</span>
+                                <span>
+                                                            即将开抢
+                                                    </span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <script>
+                    $(document).ready(function() {
+                        var top = $('.ms-swiperLimit').offset().top;
+                        var h = $('.ms-header').height();
+                        var topHeight = '1.946667rem';
+                        document.addEventListener('scroll', function() {
+                            var number = $(window).scrollTop();
+                            number - top + 100 >= h
+                                ? $('.ms-swiperLimit').css({
+                                    'position': 'fixed',
+                                    'top': topHeight,
+                                    'left': 0,
+                                    'zIndex': 100
+                                })
+                                : $('.ms-swiperLimit').css({
+                                    'position': 'static'
+                                });
+                        });
+
+                        var maxLength = 2;
+                        var length = $('#ms-slide .ms-slide').length;
+                        var e = new Swiper('.ms-swiperTime', {
+                            wrapperClass: 'ms-wrapper',
+                            slideClass: 'ms-slide',
+                            slideActiveClass : 'ms-active',
+                            slidesPerView: '4'
+                        });
+                        $('.specialList').on('click', function() {
+                            var index = $(this).index();
+                            $(this).siblings('a').removeClass('active');
+                            $(this).addClass('active');
+                            $('.ms-timeLimit').removeClass('active').eq(index).addClass('active');
+                            if (index < 3) return e.slideTo(0);
+                            if (index > (length-2)) return e.slideTo(length-1);
+                            e.slideTo(index-2);
+                        })
+                    })
+                </script>
+            </div>
+            <!-- tab 结束 -->
+        </div>
+
+        <div class="ms-indexFloor">
+
+            <!-- 限时抢购主体 开始 -->
+            <div class="ms-timeLimit active" id="ms-timeLimit-0">
+
+                <!-- 头部开始 -->
+                <div class="hd">
+                    <div>
+                        <span>本场还剩</span>
+                        <span>
+                    <span id="remain_hours">15</span>
+                    <span>:</span>
+                    <span id="remain_minutes">40</span>
+                    <span>:</span>
+                    <span id="remain_seconds">45</span>
+                </span>
+                        <script>
+                            function limitTime(){
+                                var EndTimeInt = '2017/11/28 10:00:00';
+                                var EndTime= new Date(EndTimeInt),
+                                    NowTime = new Date(),
+                                    t = EndTime.getTime() - NowTime.getTime(),
+                                    d=0,
+                                    h=0,
+                                    m=0,
+                                    s=0;
+                                if( t >= 0 ){
+                                    d = Math.floor(t/1000/60/60/24);
+                                    h = Math.floor(t/1000/60/60%24);
+                                    m = Math.floor(t/1000/60%60);
+                                    s = Math.floor(t/1000%60);
+                                } else {
+                                    clearInterval(timer);
+                                    location.reload();
+                                }
+
+                                // document.getElementById("t_d").innerHTML = d + "天";
+                                document.getElementById("remain_hours").innerHTML = h >= 10 ? h : '0' + h;
+                                document.getElementById("remain_minutes").innerHTML = m >= 10 ? m : '0' + m;
+                                document.getElementById("remain_seconds").innerHTML = s >= 10 ? s : '0' + s;
+                            }
+                            limitTime();
+                            var timer = setInterval(limitTime,1000);
+                        </script>
+                    </div>
+                </div>
+                <!-- 头部结束 -->
+
+                <div class="content">
+
+                    <!-- item 遍历开始 -->
+
+                    <div class="item " onclick="javascript:location.href='/wap/product-57.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/c0/3e/c03e434248ac4464ecb03d7864921e8b.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">可充电多功能便携风扇</p> <!-- TODO 一行显示 -->
+                            <p class="brief">小巧便携，轻巧随行</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥49.9</em></span>
+                                <span class="del">原价：¥49.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="stream">
+                                    <p>仅剩<span>57</span>件</p>
+                                    <div class="bg" style="width: 38%;"></div>
+                                </div>
+                                <a href="/wap/product-57.html" class="ms-jsGoShopping">马上抢</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+
+                    <div class="item " onclick="javascript:location.href='/wap/product-300.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/5a/de/5ade4d84562cce21b78327f25494b6a6.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">魔棒车载出风口固体香水</p> <!-- TODO 一行显示 -->
+                            <p class="brief">固态香薰，安全不洒漏</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥28.9</em></span>
+                                <span class="del">原价：¥28.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="stream">
+                                    <p>仅剩<span>29</span>件</p>
+                                    <div class="bg" style="width: 29%;"></div>
+                                </div>
+                                <a href="/wap/product-300.html" class="ms-jsGoShopping">马上抢</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+
+                    <div class="item " onclick="javascript:location.href='/wap/product-342.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/6b/be/6bbeecf5392d30bb67e28b0a30a98378.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">3双装 横条隐形男士船袜</p> <!-- TODO 一行显示 -->
+                            <p class="brief">无骨缝合，不勒脚，不掉跟</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥29.9</em></span>
+                                <span class="del">原价：¥29.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="stream">
+                                    <p>仅剩<span>339</span>件</p>
+                                    <div class="bg" style="width: 75%;"></div>
+                                </div>
+                                <a href="/wap/product-342.html" class="ms-jsGoShopping">马上抢</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+
+                    <div class="item " onclick="javascript:location.href='/wap/product-390.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/b0/33/b033ef7787660b108f313901ba59943a.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">2条装肌·15D美腿加档加大高档丝袜</p> <!-- TODO 一行显示 -->
+                            <p class="brief">高倍弹力，不易勾丝</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥19.9</em></span>
+                                <span class="del">原价：¥19.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="stream">
+                                    <p>仅剩<span>53</span>件</p>
+                                    <div class="bg" style="width: 35%;"></div>
+                                </div>
+                                <a href="/wap/product-390.html" class="ms-jsGoShopping">马上抢</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+
+                    <div class="item " onclick="javascript:location.href='/wap/product-396.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/82/fb/82fbd73642c8f64e80f16d7141bb9524.png#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">三折轻细彩胶防晒伞[可用券]</p> <!-- TODO 一行显示 -->
+                            <p class="brief">遮光防晒，轻巧便携</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥49.9</em></span>
+                                <span class="del">原价：¥49.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="stream">
+                                    <p>仅剩<span>29</span>件</p>
+                                    <div class="bg" style="width: 19%;"></div>
+                                </div>
+                                <a href="/wap/product-396.html" class="ms-jsGoShopping">马上抢</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+
+                    <div class="item " onclick="javascript:location.href='/wap/product-406.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/cf/11/cf1132b84d703d2a56631c2137396ce6.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">国宴专用祥云系列餐具套装</p> <!-- TODO 一行显示 -->
+                            <p class="brief">285年德国老牌品质之作</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥29.9</em></span>
+                                <span class="del">原价：¥29.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="stream">
+                                    <p>仅剩<span>34</span>件</p>
+                                    <div class="bg" style="width: 34%;"></div>
+                                </div>
+                                <a href="/wap/product-406.html" class="ms-jsGoShopping">马上抢</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+                </div>
+
+            </div>
+            <!-- 限时抢购主体 结束 -->
+            <div class="ms-timeLimit" id="ms-timeLimit-1">
+
+                <!-- 头部开始 -->
+                <div class="hd">
+                    <div>
+                        <span>设置提醒 好物不错过</span>
+                    </div>
+                </div>
+                <!-- 头部结束 -->
+
+                <div class="content">
+
+                    <!-- item 遍历开始 -->
+
+                    <div class="item notice" onclick="javascript:location.href='/wap/product-56.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/8e/87/8e8720d0ded9119bb5bc709381db87ac.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">可充电多功能便携风扇</p> <!-- TODO 一行显示 -->
+                            <p class="brief">小巧便携，轻巧随行</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥49.9</em></span>
+                                <span class="del">原价：¥49.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="txt">限量<span>150</span>件</div>
+                                <a href="javascript:void(0)" special_id="2" product_id="56" class="ms-jsGoShopping ms-jsNotice setNotice">开抢提醒</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+
+                    <div class="item notice" onclick="javascript:location.href='/wap/product-283.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/54/63/54633f003b434c3653eedd3e8109d263.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">舒适防滑家居拖鞋</p> <!-- TODO 一行显示 -->
+                            <p class="brief">柔软舒适，轻便防滑</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥14.9</em></span>
+                                <span class="del">原价：¥14.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="txt">限量<span>100</span>件</div>
+                                <a href="javascript:void(0)" special_id="2" product_id="283" class="ms-jsGoShopping ms-jsNotice setNotice">开抢提醒</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+
+                    <div class="item notice" onclick="javascript:location.href='/wap/product-302.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/ba/78/ba781405d4a96fff34f5ebd34a53c1df.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">魔棒车载出风口固体香水</p> <!-- TODO 一行显示 -->
+                            <p class="brief">固态香薰，安全不洒漏</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥28.9</em></span>
+                                <span class="del">原价：¥28.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="txt">限量<span>100</span>件</div>
+                                <a href="javascript:void(0)" special_id="2" product_id="302" class="ms-jsGoShopping ms-jsNotice setNotice">开抢提醒</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+
+                    <div class="item notice" onclick="javascript:location.href='/wap/product-313.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/5c/e8/5ce87f1dfd723da8891092d40246b8af.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">3双装 素色隐形男士船袜</p> <!-- TODO 一行显示 -->
+                            <p class="brief">三层硅胶防滑设计</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥29.9</em></span>
+                                <span class="del">原价：¥29.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="txt">限量<span>600</span>件</div>
+                                <a href="javascript:void(0)" special_id="2" product_id="313" class="ms-jsGoShopping ms-jsNotice setNotice">开抢提醒</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+
+                    <div class="item notice" onclick="javascript:location.href='/wap/product-393.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/b3/6e/b36ed44f107b20a81ec22d084d969d7d.png#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">260D磨毛舒适保暖踩脚裤</p> <!-- TODO 一行显示 -->
+                            <p class="brief">舒适保暖，高弹修腿</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥29.9</em></span>
+                                <span class="del">原价：¥29.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="txt">限量<span>50</span>件</div>
+                                <a href="javascript:void(0)" special_id="2" product_id="393" class="ms-jsGoShopping ms-jsNotice setNotice">开抢提醒</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+
+                    <div class="item notice" onclick="javascript:location.href='/wap/product-403.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/4d/fe/4dfe9149296d936af5626ee7d7d526c7.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">国宴专用祥云系列餐具套装</p> <!-- TODO 一行显示 -->
+                            <p class="brief">285年德国老牌品质之作</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥59.9</em></span>
+                                <span class="del">原价：¥59.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="txt">限量<span>100</span>件</div>
+                                <a href="javascript:void(0)" special_id="2" product_id="403" class="ms-jsGoShopping ms-jsNotice setNotice">开抢提醒</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+                </div>
+
+            </div>
+            <!-- 限时抢购主体 结束 -->
+            <div class="ms-timeLimit" id="ms-timeLimit-2">
+
+                <!-- 头部开始 -->
+                <div class="hd">
+                    <div>
+                        <span>设置提醒 好物不错过</span>
+                    </div>
+                </div>
+                <!-- 头部结束 -->
+
+                <div class="content">
+
+                    <!-- item 遍历开始 -->
+
+                    <div class="item notice" onclick="javascript:location.href='/wap/product-58.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/48/17/48171a0e57055ab3fc1e0e70a199dfff.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">可充电多功能便携风扇</p> <!-- TODO 一行显示 -->
+                            <p class="brief">小巧便携，轻巧随行</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥49.9</em></span>
+                                <span class="del">原价：¥49.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="txt">限量<span>190</span>件</div>
+                                <a href="javascript:void(0)" special_id="1" product_id="58" class="ms-jsGoShopping ms-jsNotice setNotice">开抢提醒</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+
+                    <div class="item notice" onclick="javascript:location.href='/wap/product-201.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/7c/d8/7cd8ab9ac1ab9232b15d716e2fd39245.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">3条装无感舒适无痕内裤</p> <!-- TODO 一行显示 -->
+                            <p class="brief">0.3MM超薄无感体验</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥44.9</em></span>
+                                <span class="del">原价：¥44.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="txt">限量<span>40</span>件</div>
+                                <a href="javascript:void(0)" special_id="1" product_id="201" class="ms-jsGoShopping ms-jsNotice setNotice">开抢提醒</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+
+                    <div class="item notice" onclick="javascript:location.href='/wap/product-243.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/cb/0d/cb0d02cf6dcba71f9d4ba08ead495778.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">3双装花纱隐形男士船袜</p> <!-- TODO 一行显示 -->
+                            <p class="brief">袜跟添加硅胶防滑，不掉跟</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥29.9</em></span>
+                                <span class="del">原价：¥29.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="txt">限量<span>94</span>件</div>
+                                <a href="javascript:void(0)" special_id="1" product_id="243" class="ms-jsGoShopping ms-jsNotice setNotice">开抢提醒</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+
+                    <div class="item notice" onclick="javascript:location.href='/wap/product-282.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/2e/12/2e120e50f5eb38108068ac81b748acad.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">舒适防滑家居拖鞋</p> <!-- TODO 一行显示 -->
+                            <p class="brief">柔软舒适，轻便防滑</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥14.9</em></span>
+                                <span class="del">原价：¥14.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="txt">限量<span>600</span>件</div>
+                                <a href="javascript:void(0)" special_id="1" product_id="282" class="ms-jsGoShopping ms-jsNotice setNotice">开抢提醒</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+
+                    <div class="item notice" onclick="javascript:location.href='/wap/product-303.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/68/a7/68a7522f3e6adf4f160c96cf5b4a1a9b.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">魔棒车载出风口固体香水</p> <!-- TODO 一行显示 -->
+                            <p class="brief">固态香薰，安全不洒漏</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥28.9</em></span>
+                                <span class="del">原价：¥28.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="txt">限量<span>160</span>件</div>
+                                <a href="javascript:void(0)" special_id="1" product_id="303" class="ms-jsGoShopping ms-jsNotice setNotice">开抢提醒</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+
+                    <div class="item notice" onclick="javascript:location.href='/wap/product-405.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/e5/74/e5748e3b5e8010828620290311518d6a.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">国宴专用祥云系列餐具套装</p> <!-- TODO 一行显示 -->
+                            <p class="brief">285年德国老牌品质之作</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥49.9</em></span>
+                                <span class="del">原价：¥49.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="txt">限量<span>100</span>件</div>
+                                <a href="javascript:void(0)" special_id="1" product_id="405" class="ms-jsGoShopping ms-jsNotice setNotice">开抢提醒</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+                </div>
+
+            </div>
+            <!-- 限时抢购主体 结束 -->
+            <div class="ms-timeLimit" id="ms-timeLimit-3">
+
+                <!-- 头部开始 -->
+                <div class="hd">
+                    <div>
+                        <span>设置提醒 好物不错过</span>
+                    </div>
+                </div>
+                <!-- 头部结束 -->
+
+                <div class="content">
+
+                    <!-- item 遍历开始 -->
+
+                    <div class="item notice" onclick="javascript:location.href='/wap/product-182.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/15/94/1594157813ab5e5d55abbe560add4d45.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">3条装细条纹无痕内裤</p> <!-- TODO 一行显示 -->
+                            <p class="brief">轻薄透气 性感无痕</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥44.9</em></span>
+                                <span class="del">原价：¥44.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="txt">限量<span>20</span>件</div>
+                                <a href="javascript:void(0)" special_id="3" product_id="182" class="ms-jsGoShopping ms-jsNotice setNotice">开抢提醒</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+
+                    <div class="item notice" onclick="javascript:location.href='/wap/product-286.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/24/a1/24a142fb17b2c729e569efb49deb6f26.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">3双装 竖纹男士商务袜</p> <!-- TODO 一行显示 -->
+                            <p class="brief">彰显商务男士成熟魅力</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥29.9</em></span>
+                                <span class="del">原价：¥29.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="txt">限量<span>450</span>件</div>
+                                <a href="javascript:void(0)" special_id="3" product_id="286" class="ms-jsGoShopping ms-jsNotice setNotice">开抢提醒</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+
+                    <div class="item notice" onclick="javascript:location.href='/wap/product-315.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/08/d8/08d8e02290b91697dca85ce9103b7e9f.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">MFI认证苹果数据线1米</p> <!-- TODO 一行显示 -->
+                            <p class="brief">苹果官方认证</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥39.9</em></span>
+                                <span class="del">原价：¥39.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="txt">限量<span>150</span>件</div>
+                                <a href="javascript:void(0)" special_id="3" product_id="315" class="ms-jsGoShopping ms-jsNotice setNotice">开抢提醒</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+
+                    <div class="item notice" onclick="javascript:location.href='/wap/product-339.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/5f/33/5f335cff1dba31f309173483d15347c8.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">miniso 3C认证旅行便携充电头</p> <!-- TODO 一行显示 -->
+                            <p class="brief">标准认证，旅行必备</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥19.9</em></span>
+                                <span class="del">原价：¥19.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="txt">限量<span>100</span>件</div>
+                                <a href="javascript:void(0)" special_id="3" product_id="339" class="ms-jsGoShopping ms-jsNotice setNotice">开抢提醒</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+
+                    <div class="item notice" onclick="javascript:location.href='/wap/product-404.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/75/7d/757dd2f68a920b8299b746b0ab1f1f4b.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">国宴专用祥云系列餐具套装</p> <!-- TODO 一行显示 -->
+                            <p class="brief">285年德国老牌品质之作</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥49.9</em></span>
+                                <span class="del">原价：¥49.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="txt">限量<span>100</span>件</div>
+                                <a href="javascript:void(0)" special_id="3" product_id="404" class="ms-jsGoShopping ms-jsNotice setNotice">开抢提醒</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+
+                    <div class="item notice" onclick="javascript:location.href='/wap/product-435.html'">
+                        <div class="pic">
+                            <div>
+                                <img src="http://s1.hgcang.com/bsimg/ec/public/images/4f/0e/4f0e5d0140693bec096d4a40ff3a2061.jpg#h" alt=""> <!-- TODO 修改图片缩略大小 @150w_150l_1e -->
+                            </div>
+                        </div>
+                        <div class="info">
+                            <p class="name">可视型蒸汽温热眼罩</p> <!-- TODO 一行显示 -->
+                            <p class="brief">缓解眼肌疲劳</p> <!-- TODO 一行显示 -->
+                            <div class="price">
+                                <span>限时价：<em>¥14.9</em></span>
+                                <span class="del">原价：¥14.9</span>
+                            </div>
+                            <div class="bottom">
+                                <div class="txt">限量<span>150</span>件</div>
+                                <a href="javascript:void(0)" special_id="3" product_id="435" class="ms-jsGoShopping ms-jsNotice setNotice">开抢提醒</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- item 遍历结束 -->
+                </div>
+
+            </div>
+            <!-- 限时抢购主体 结束 -->
+        </div>
+    </div>
+
+</body>
+</html>

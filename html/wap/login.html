@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="generator" content="ecos.b2c">
+        <title>名创优选-超越严选的品质</title>
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta content="yes" name="apple-touch-fullscreen">
+        <meta name="App-Config" content="fullscreen=yes,useHistoryState=yes,transition=yes">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="format-detection" content="telephone=no">
+        <link href="./css/common.css" rel="stylesheet" media="screen, projection">
+        <script src="./js/zepto/zepto.min.js"></script>
+        <script src="./js/swiper.min.js"></script>
+        <script src="./js/plugins/scroll.js"></script>
+        <script src="./js/plugins/Modal.js"></script>
+    </head>
+<body style="font-size: 24px;">
+    <div class="ms-bottomNav">
+        <div class="ms-detailHeader-height">
+            <div class="ms-header ms-fixed-top">
+                <div class="ms-content">
+
+                    <!-- 头部内容 开始 -->
+                    <!-- 头部内容 开始 -->
+                    <div class="ms-row ms-header-txt">
+                        <div class="left">
+                            <a href="/wap/index.html" class="btn home"><i class="ms-icon ms-icon-home"></i></a>
+                        </div>
+                        <div class="mid">
+                            <span id="title">登录</span>
+                        </div>
+                        <div class="right">
+                            <a href="/wap/search.html" class="btn search">
+                                <i class="ms-icon ms-icon-search"></i>
+                            </a>
+                            <a href="/wap/cart.html" class="btn cart">
+                                <i class="ms-icon ms-icon-cart"></i>
+                                <span id="min_cart_num"></span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 头部内容 结束 -->
+                    <script>
+                        function getMiniCartNumber() {
+                            $.post("/wap/cart-number.html",{},function (data) {
+                                var data = eval('('+data+')');
+                                if (typeof(data.success) && typeof (data.success.CART_NUMBER)) {
+                                    if (data.success.CART_NUMBER > 0) {
+                                        var min_cart_num = data.success.CART_NUMBER > 99 ? '99+' : data.success.CART_NUMBER;
+                                        $('#min_cart_num').addClass('num').text(min_cart_num);
+                                    }
+                                    //data.success.CART_NUMBER > 0 && $('#min_cart_num').addClass('num').text(data.success.CART_NUMBER);
+                                }
+                            }, 'JSON');
+                        }
+                        $(document).ready(function () {
+                            getMiniCartNumber();
+                            //setInterval(getMiniCartNumber, 5000);
+                        });
+                    </script>
+                    <!-- 头部内容 结束 -->
+
+                </div>
+            </div>
+        </div>
+
+        <div class="ms-formBox ms-setInOut ms-middle" style="margin-top: .25rem;">
+            <div class="content">
+
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="./images/logo-cn.png" alt="">
+                    </a>
+                </div>
+
+                <form onsubmit="return false;" action="/wap/passport-post_login.html" method="post">
+                    <div class="ms-formInputGroup">
+                        <input type="tel" placeholder="手机号" value="" name="uname">
+                    </div>
+                    <div class="ms-formInputGroup none">
+                        <input type="password" placeholder="密码" name="password">
+                    </div>
+
+                    <div class="btn">
+                        <button class="ms-button red"><label>登录</label></button>
+                        <div class="link">
+                            <a href="register.html">注册账号</a>
+                            <a href="passport-lost.html">忘记密码</a>
+                        </div>
+                    </div>
+                    <script>
+                        $(document).ready(function() {
+                            var _height = $(window).height();
+                            window.onresize = function() {
+                                $(window).height() < _height
+                                    ? $('body').css({'height': _height + 'px'})
+                                    : $('body').css({'height': '100%'});
+                            }
+                        })
+                    </script>
+                </form>
+            </div>
+        </div>
+
+        <!--第三方登录开始-->
+        <div class="ms-setInOutThird ms-middle">
+            <div class="content">
+                <a href="">
+                    <i class="ms-icon ms-icon-qq-c"></i>
+                    QQ
+                </a>
+                <a href="">
+                    <i class="ms-icon ms-icon-wx-c"></i>
+                    微信
+                </a>
+            </div>
+        </div>
+        <!--第三方登录结束-->
+    </div>
+</body>
+</html>

@@ -1,0 +1,104 @@
+.floor {
+  margin-bottom: .25rem;
+}
+.floor:last-child {
+  margin: 0;
+}
+.mobikeWarp {
+  background: #f4f4f4;
+}
+.mobikeWarp .ms-coupon-header {
+  background-color: #FA3701;
+  margin-top: -1px;
+  background-size: 100% 100%;
+  background-position: top left;
+}
+.mobikeWarp .ms-coupon-header .content div {
+  border: none;
+}
+.mobikeWarp .modalRed .panel #okText {
+  height: 1.2rem;
+  bottom: 1.2rem;
+}
+.mobikeWarp .modalRed .panel #seeCoupon {
+  position: absolute;
+  display: block;
+  width: 50%;
+  left: 50%;
+  margin-left: -25%;
+  height: 0.8rem;
+  bottom: 0.3rem;
+}
+.mobikeWarp .modalRed .panel .picContent {
+  position: relative;
+}
+.mobikeWarp .modalRed .panel .picContent span {
+  font-size: 0.45rem;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  top: 55%;
+}
+.mobikeWarp .ms-pack,
+.mobikeWarp .ms-list {
+  background-color: #FFF;
+}
+.mobikeWarp .ms-pack .hd {
+  text-align: center;
+}
+.mobikeWarp .ms-pack .hd a {
+  display: block;
+}
+.mobikeWarp .ms-pack .hd a p {
+  line-height: 0.5rem;
+}
+.mobikeWarp .ms-list-item .item {
+  float: left;
+  width: 50%;
+  padding-bottom: .5rem;
+}
+.mobikeWarp .ms-list-item .info .price {
+  text-align: center;
+}
+.mobikeWarp .ms-list-item .info .name {
+  text-align: center;
+}
+.mobikeWarp .ms-list-item .btn {
+  text-align: center;
+  margin-top: 0.2rem;
+}
+.mobikeWarp .ms-list-item .btn span {
+  font-size: 0.3rem;
+  display: inline-block;
+  vertical-align: middle;
+  height: 0.6rem;
+  width: 0.6rem;
+}
+.mobikeWarp .ms-list-item .btn span.btn-buy {
+  background: #D9232F;
+  margin-right: 0.3rem;
+  width: 2rem;
+  height: 0.6rem;
+  line-height: 0.6rem;
+  color: #fff;
+  text-align: center;
+  border-radius: 0.1rem;
+}
+
+#closeBtn_2 {
+  display: block;
+  position: absolute;
+  left: 20%; 
+  bottom: 1.3rem;
+  height: 1.1rem; 
+  width: 60%;
+}
+#closeBtn_3 {
+  display: block;
+  position: absolute;
+  left: 20%; 
+  bottom: .4rem;
+  height: .6rem; 
+  width: 60%;
+}

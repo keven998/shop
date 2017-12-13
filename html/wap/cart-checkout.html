@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="generator" content="ecos.b2c">
+    <title>名创优选-超越严选的品质</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta name="App-Config" content="fullscreen=yes,useHistoryState=yes,transition=yes">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="format-detection" content="telephone=no">
+    <link href="./css/common.css" rel="stylesheet" media="screen, projection">
+    <script src="./js/zepto/zepto.min.js"></script>
+    <script src="./js/swiper.min.js"></script>
+    <script src="./js/plugins/scroll.js"></script>
+    <script src="./js/plugins/Modal.js"></script>
+</head>
+<body style="font-size: 24px;">
+    <div class="ms-bottomNav checkout-floor" id="checkoutMainArea">
+        <!--头部开始-->
+        <div class="ms-fixed-header">
+            <div class="ms-header ms-fixed-top">
+                <div class="ms-content">
+
+                    <!-- 头部内容 开始 -->
+                    <!-- 头部内容 开始 -->
+                    <div class="ms-row ms-header-txt">
+                        <div class="left">
+                            <a href="/wap/index.html" class="btn home"><i class="ms-icon ms-icon-home"></i></a>
+                        </div>
+                        <div class="mid">
+                            <span id="title">订单确认</span>
+                        </div>
+                        <div class="right">
+                            <a href="/wap/search.html" class="btn search">
+                                <i class="ms-icon ms-icon-search"></i>
+                            </a>
+                            <a href="/wap/cart.html" class="btn cart">
+                                <i class="ms-icon ms-icon-cart"></i>
+                                <span id="min_cart_num" class="num">1</span>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- 头部内容 结束 -->
+                    <script>
+                        function getMiniCartNumber() {
+                            $.post("/wap/cart-number.html",{},function (data) {
+                                var data = eval('('+data+')');
+                                if (typeof(data.success) && typeof (data.success.CART_NUMBER)) {
+                                    if (data.success.CART_NUMBER > 0) {
+                                        var min_cart_num = data.success.CART_NUMBER > 99 ? '99+' : data.success.CART_NUMBER;
+                                        $('#min_cart_num').addClass('num').text(min_cart_num);
+                                    }
+                                    //data.success.CART_NUMBER > 0 && $('#min_cart_num').addClass('num').text(data.success.CART_NUMBER);
+                                }
+                            }, 'JSON');
+                        }
+                        $(document).ready(function () {
+                            getMiniCartNumber();
+                            //setInterval(getMiniCartNumber, 5000);
+                        });
+                    </script>
+                    <!-- 头部内容 结束 -->
+
+                </div>
+            </div>
+        </div>
+        <!--头部结束-->
+
+        <!-- Form Input (地址) 开始 -->
+        <div class="ms-inputGroup ms-shoppingAddress">
+            <a href="#addAddressArea" id="toAddAddressArea">
+                <div class="ms-inputTxtItem icon">
+                    <div id="address_left_info" style="display:none">
+                        <span id="address_user_name" style="max-width:2rem;white-space: nowrap; text-overflow: ellipsis;overflow: hidden;"></span>
+                        <span class="" id="address_is_default"></span>
+                    </div>
+                    <div class="">
+                        <p class="" id="address_mobile"></p><!-- TODO -->
+                        <p class="address" id="address_ship_area">
+                            点击添加收货地址                    </p>
+                    </div>
+                </div>
+                <div class="ms-inputTxtItem icon">
+                    <div id="address_left_info" style="">
+                        <span id="address_user_name" style="max-width:2rem;white-space: nowrap; text-overflow: ellipsis;overflow: hidden;">曾先生</span>
+                        <span class="tag" id="address_is_default">默认</span>
+                    </div>
+                    <div class="">
+                        <p class="" id="address_mobile">131****4579</p><!-- TODO -->
+                        <p class="address" id="address_ship_area">北京-北京市-东城区11</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- Form Input (地址) 结束 -->
+
+        <!-- Form Input (优惠券) 开始 -->
+        <div class="ms-inputGroup ms-shoppingCoupon">
+            <a href="#couponArea">
+                <div class="ms-inputTxtItem icon">
+                    <div>优惠券：</div>
+                    <div class="coupon" id="selectCoupon">
+
+                        <span class="coupon_name">未选择</span>
+                        <span class="">0张</span>
+                        <input type="hidden" name="coupon_code" id="coupon_code" value=""> <!-- 购物车优惠券标识 -->
+                        <input type="hidden" name="memc_code" value=""> <!-- 优惠券码 -->
+
+                        <!-- <input type="hidden" name="is_select_coupon" value="1"> -->
+                        <!-- <input type="hidden" name="coupon_condition" value="0"> --> <!-- 优惠最高优惠券满足金额 -->
+                        <input type="hidden" name="default_coupon_code" value=""> <!-- 优惠最高优惠券码 -->
+                        <input type="hidden" name="default_coupon_name" value="未选中"> <!-- 优惠最高优惠券名称 -->
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- Form Input (优惠券) 开始 -->
+
+        <div class="ms-inputGroup">
+            <div class="ms-inputTxtItem">
+                <div>商品合计</div>
+                <div><span id="cost_item">¥9.90</span></div>
+            </div>
+            <div class="ms-inputTxtItem">
+                <div>运费</div>
+                <div>
+                    <span class="price cost_freight">¥0.00</span>
+                </div>
+            </div>
+            <div class="ms-inputTxtItem">
+                <div>活动优惠</div>
+                <div>
+                    <span class="tag">优惠金额</span>
+                    <span id="couponCash"><span class="icon">¥</span>0.00</span>
+                </div>
+            </div>
+        </div>
+
+        <!--购物车列表开始-->
+        <div class="ms-shoppingList">
+            <div class="item">
+                <div class="content">
+                    <div class="info" id="goods_58_318">
+                        <a href="/wap/product-318.html" class="pic">
+                            <img src="http://s1.hgcang.com/bsimg/ec/public/images/02/7b/027b6dafd0ea9bd6ce8efdd8c69bffea.jpg#h" alt="">
+                        </a>
+                        <a href="/wap/product-318.html" class="desc">
+                            <p class="name">免水洗发喷雾50ml</p>
+                            <p class="brief">已选择：
+                                阳光柠檬                        </p>
+                            <p class="price">¥9.9</p>
+                            <span class="num">x<i id="num">1</i></span>
+                        </a>
+
+                        <input type="hidden" id="goods_58_318_store" value="421">
+                        <input type="hidden" id="goods_58_318_name" value="免水洗发喷雾50ml">
+                        <input type="hidden" id="goods_58_318_num" value="1">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 赠品 开始 -->
+            <!-- 赠品 结束 -->
+        </div>
+        <!--购物车列表结束-->
+
+        <!--服务协议开始-->
+        <div class="ms-shoppingAgreement ms-middle">
+            <div class="content">
+                <button class="ms-jsAgreement active">
+                    <i class="ms-icon ms-icon-check"></i>
+                    <i class="ms-icon ms-icon-check-active"></i>
+                    &nbsp;我已同意
+                </button>
+                <a href="#serviceArea" id="toServiceArea"> 《名创优选服务协议》</a>
+            </div>
+        </div>
+        <!--服务协议结束-->
+
+        <div class="ms-bottomHandle ms-middle ms-shoppingBottom" style="display: block;">
+            <div class="content">
+                <div class="start" style="flex: 2;">
+                    <span>应付：</span>
+                    <span id="price" class="price">¥9.9</span>
+                </div>
+                <div class="btn red" id="orderCreate">
+                    <button><label>去付款</label></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 地址区域 开始 -->
+        <div class="checkout-floor" id="addAddressArea" style="display: none;">
+
+        </div>
+        <!-- 地址区域 结束 -->
+
+        <!-- 优惠券区域 开始 -->
+        <div class="checkout-floor" id="couponArea" name="couponArea" style="display: none;">
+
+        </div>
+        <!-- 优惠券区域 结束 -->
+
+        <script>
+            var submitFlag = true;
+            var shipping_order_rule_id = parseInt('3'); // 免邮规则id
+            var fee_shipping_fee = '79';
+            var preUrlHash = [];
+            var tmpUrlHash = '';
+
+            var MainRouter = {
+                // 收货地址页面
+                shippingList : function () {
+                    return '/wap/cart-shipping_list.html';
+                },
+                // 优惠券列表页面
+                couponList : function () {
+                    return '/wap/cart-coupon.html';
+                },
+                // 发票页面
+                invoice : function () {
+                    return '/wap/cart-invoice.html';
+                },
+                // 添加优惠券
+                addCoupon : function () {
+                    return '/wap/cart-add-coupon.html';
+                },
+                remove: function(){
+                    return '/wap/cart-removeCartCoupon-coupon.html';
+                },
+                // 获取价格地址
+                totalPrice : function () {
+                    return '/wap/cart-total.html';
+                },
+                // 订单提交
+                orderCreate : function () {
+                    return '/wap/order-create.html';
+                }
+            };
+
+            var MainMethods = {
+                // 初始化
+                init : function (data) {
+                    $('#selectCoupon .coupon_name').html('未选择');
+                    $('input[name="coupon_code"]').val('');
+                    $('input[name="memc_code"]').val('');
+
+                    $('input[name="md5_cart_info"]').val(data.md5_cart_info);  // 更换购物车md5值
+                },
+                // 添加优惠券
+                addCoupon : function (coupon) {
+                    var isfastbuy = parseInt($('input[name="isfastbuy"]').val());
+
+                    var json = {};
+                    json.coupon = coupon;
+                    json.response_type = true;
+                    //json.btype = isfastbuy === 1 ? 'is_fastbuy' : '';
+                    json.is_fastbuy = isfastbuy === 1 ? 'true' : '';
+
+                    // 添加优惠券到购物车
+                    $.post(MainRouter.addCoupon(), json, function (data) {
+                        if (data.hasOwnProperty('success')) {
+                            $('input[name="md5_cart_info"]').val(data.success.md5_cart_info);  // 更换购物车md5值
+
+                            $('#selectCoupon .coupon_name').html($('input[name="default_coupon_name"]').val());
+
+                            $('#coupon_code').val("coupon_" + coupon); // 更换购物车中优惠券标示
+                            $('input[name="memc_code"]').val(coupon); // 更换优惠券码
+                        }
+                        // 更新使用优惠券后的价格s
+                        MainMethods.getTotalPrice();
+                    }, "json");
+                },
+                autoSelectCoupon : function () {
+                    var coupon_code = $('input[name="coupon_code"]').val(); // 购物车优惠券唯一标识
+                    var default_coupon_code = $('input[name="default_coupon_code"]').val();  // 优惠券码
+
+                    if (coupon_code) {
+                        // 删除旧优惠券
+                        var json = {};
+                        json.cpn_ident = coupon_code;
+                        json.response_json = 'true';
+
+                        $.post(MainRouter.remove(), json, function (data) {
+                            MainMethods.init(data.success);
+
+                            if (default_coupon_code) {
+                                // 删除成功后，添加新优惠券
+                                MainMethods.addCoupon(default_coupon_code);
+                            } else {
+                                MainMethods.getTotalPrice();
+                            }
+
+                        }, "json");
+                    } else {
+                        // 之前没有选择优惠券，添加新优惠券
+                        if (default_coupon_code) {
+                            // 删除成功后，添加新优惠券
+                            MainMethods.addCoupon(default_coupon_code);
+                        } else {
+                            MainMethods.getTotalPrice();
+                        }
+                    }
+                },
+                // 获取价格
+                getTotalPrice : function () {
+
+                    $('#orderCreate').removeClass('red').addClass('gray');
+
+                    var json = {};
+                    json.isfastbuy = $('input[name="isfastbuy"]').val();
+                    json.payment = MainMethods.paymentParam();
+                    json.address = MainMethods.addressParam();
+                    json.shipping = MainMethods.shippingParam();
+
+                    $.ajax({
+                        url : MainRouter.totalPrice(),
+                        cache : false,
+                        dataType : "json",
+                        data : json,
+                        type : "POST",
+                        success : function (result) {
+                            var order_detail = result.success.order_detail;
+                            var default_currency = result.success.default_currency;
+                            var pmt_order = parseFloat(order_detail.pmt_order);  // 订单优惠
+                            var pmt_amount = parseFloat(order_detail.pmt_amount); // 商品优惠
+
+                            var cashHtml = '';
+
+                            if ((pmt_order || pmt_amount) && 'prepare' !== order_detail.promotion_type) {
+                                if (parseFloat(order_detail.cost_item) > parseFloat(fee_shipping_fee) && shipping_order_rule_id > 0) {
+                                    pmt_order -= parseFloat(order_detail.cost_freight);
+                                }
+
+                                //cashHtml += pmt_order < 0 ? '+&yen;' + (0 - pmt_order - pmt_amount).toFixed(2) : '-&yen;' + (pmt_order + pmt_amount).toFixed(2);
+                                cashHtml += pmt_order < 0 ? '+' + default_currency.cur_sign + (0 - pmt_order).toFixed(2) : '-' + default_currency.cur_sign + pmt_order.toFixed(2);
+                            } else {
+                                cashHtml = '<span class="icon">' + default_currency.cur_sign + '</span>0.00';
+                            }
+
+                            // 商品总价
+                            $('#cost_item').html(default_currency.cur_sign + order_detail.cost_item);
+
+                            // 运费
+                            var feightHtml = '0.00';
+                            if (parseFloat(order_detail.cost_item) < parseFloat(fee_shipping_fee) || shipping_order_rule_id == 0) {
+                                feightHtml = order_detail.cost_freight;
+                            }
+                            $('.cost_freight').html(default_currency.cur_sign + feightHtml);
+
+                            // 优惠金额
+                            $('#couponCash').html(cashHtml);
+
+                            // 应付金额
+                            $('.ms-shoppingBottom #price').html(default_currency.cur_sign + order_detail.total_amount);
+
+                            $('#orderCreate').removeClass('gray').addClass('red');
+                        }
+                    });
+                },
+                // 获取发票以及支付方式参数
+                paymentParam : function () {
+                    var payment = {};
+                    payment.is_tax = 'false';
+                    payment.tax_company = '';
+                    payment.tax_content = '';
+                    payment.tax_type = '';
+                    payment.taxpayer_identity = '';
+                    payment.cost_tax = 0;
+                    payment.currency = 'CNY';
+                    payment.pay_app_id = '';
+
+                    var pay_app_id = {};
+                    // 支付方式
+                    if(MainMethods.is_weixn()) {
+                        pay_app_id.pay_app_id = 'wxpayjsapi';
+                        pay_app_id.payment_name = '微信';
+                    } else {
+                        pay_app_id.pay_app_id = 'malipaynew'; // wap端是malipaynew(新手机支付宝) PC端是alipay
+                        pay_app_id.payment_name = '支付宝';
+                    }
+                    pay_app_id = JSON.stringify(pay_app_id);
+                    payment.pay_app_id = pay_app_id;
+
+                    // 发票信息
+                    var is_tax = parseInt($('input[name="is_tax"]').val());
+                    if (is_tax === 1) {
+                        payment.is_tax = 'true';
+                        payment.tax_company = $('input[name="tax_company"]').val();
+                        payment.tax_content = $('input[name="tax_content"]').val();
+                        payment.tax_type = parseInt($('input[name="tax_type"]').val()) ? 'company' : 'personal';
+                        payment.taxpayer_identity = $('input[name="taxpayer_identity"]').val();
+                    }
+
+                    return payment;
+                },
+                // 获取物流参数
+                shippingParam : function () {
+                    var shipping = {};
+                    shipping.id = '3';
+                    shipping.has_cod = 'false';
+                    shipping.dt_name = '圆通快递';
+                    shipping.money = '0.00';
+
+                    return JSON.stringify(shipping);
+                },
+                addressParam : function () {
+                    var address = {};
+                    address.addr_id = $('input[name="address"]').val();
+                    address.area = $('input[name="address_area"]').val(); // 修改邮费时使用
+
+                    return JSON.stringify(address);
+                },
+                // 判断是否是微信
+                is_weixn : function () {
+                    return '';
+                }
+            };
+
+            var is_allow = '';
+
+            var AddressRouter = {
+                delete : function () {
+                    return "/wap/member-del_rec.html";
+                },
+                modify : function () {
+                    return "/wap/cart-shipping_edit.html";
+                },
+                save : function () {
+                    return "/wap/member-save_rec.html";
+                },
+                getList : function () {
+                    return "/wap/cart-shipping_list.html";
+                }
+            };
+
+            var AddressMethods = {
+                // 删除地址
+                deleteAddress : function (addr_id) {
+                    if (confirm('确定删除该地址？')) {
+                        var url = AddressRouter.delete();
+                        $.post(url, {"addr_id":addr_id}, function (data) {
+                            var data = eval('('+data+')');
+                            if (typeof(data.success) == 'string') {
+                                if (is_allow) {
+                                    location.reload(); //刷新当前页面
+                                } else {
+                                    $('#addr_id_'+addr_id).remove();
+                                }
+                            }else {
+                                alert('删除地址失败');
+                            }
+                        });
+                    }
+                },
+                // 选中地址
+                select : function (addr_id, area) {
+                    $('#address_left_info').show();
+
+                    var item_address_username = $('#addr_id_' + addr_id + ' span.item_address_username').html();
+                    var item_address_default = $('#addr_id_' + addr_id + ' span.item_address_default').html();
+                    var item_address_mobile = $('#addr_id_' + addr_id + ' p.item_address_mobile').html();
+                    var item_address_address = $('#addr_id_' + addr_id + ' p.item_address_address').html();
+
+                    $('#address_user_name').html(item_address_username);
+                    if (!item_address_default) {
+                        $('#address_is_default').html('');
+                        $('#address_is_default').removeClass('tag');
+                    }else {
+                        $('#address_is_default').addClass('tag');
+                        $('#address_is_default').html(item_address_default);
+                    }
+
+                    $('#address_mobile').html(item_address_mobile);
+                    $('#address_ship_area').html(item_address_address);
+                    $('input[name="address"]').val(addr_id);
+                    $('input[name="address_area"]').val(area);
+
+                    AddressMethods.back();
+
+                    MainMethods.getTotalPrice();
+                },
+                // 进入添加，修改地址页面
+                modify : function (addr_id) {
+                    var json = {};
+                    if (addr_id) {
+                        var address = {}; address.addr_id = addr_id;
+                        json.address = address;
+                    }
+
+                    $.post(AddressRouter.modify(), json, function(data) {
+                        $('#addAddressArea').html(data);
+
+                        listenUrlHash('#addAddressArea');
+                    });
+                },
+                // 添加，修改提交
+                submit : function () {
+                    var url = AddressRouter.save();
+                    $.post(url, $('#address_box').serialize(), function (data) {
+                        var data = eval('('+data+')');
+                        if (typeof(data.success) === 'string') {
+                            $('.ms-shoppingAddress>a').attr('href', '#addressArea');
+
+                            AddressMethods.getList();
+                        }else {
+                            var option = {};
+                            option.content = data.error;
+                            Modal.tip(option);
+                        }
+                    });
+                },
+                // 获取地址列表
+                getList : function () {
+                    $.post(AddressRouter.getList(), {}, function (data) {
+                        $('#addressArea').html(data);
+
+                        listenUrlHash('#addressArea');
+                    });
+                },
+                // 返回确认订单页面
+                back : function () {
+                    $('#addressArea').hide();
+                    $('#checkoutMainArea').show();
+                },
+                // 返回地址列表
+                backList : function () {
+                    $('#addAddressArea').hide();
+                    $('#shippingListArea').show();
+                }
+            };
+
+            // 确认订单页面，没有使用优惠券，默认选中优惠最多的优惠券
+            MainMethods.autoSelectCoupon();
+
+            $('#toServiceArea').on('click', function () {
+                /* $.post('/wap/html5-service_agreement.html', {}, function (data) {
+                     $('#serviceArea').html(data);
+                     /!*$('#serviceArea').html(111111);*!/
+                     listenUrlHash('#serviceArea');
+                 });*/
+
+                listenUrlHash('#serviceArea');
+                $('#serviceArea').height($('body').height());
+            });
+
+            // 地址选择
+            $('.ms-shoppingAddress').on('click', function () {
+
+                var areaHref = $(this).children('a').attr('href');
+
+                // 跳到地址列表页面
+                if (areaHref == '#addressArea') {
+                    $.ajax({
+                        url: MainRouter.shippingList(),
+                        cache: false,
+                        dataType: 'html',
+                        type : "POST",
+                        success: function(data){
+                            $('#addressArea').html(data);
+
+                            listenUrlHash('#addressArea');
+                            /*$('#addressArea').show();
+                             $('#checkoutMainArea').hide();*/
+                        }
+                    });
+                } else if (areaHref == '#addAddressArea') {
+                    // 跳到新增地址页面
+                    AddressMethods.modify();
+                }
+            });
+
+            // 优惠券页面
+            $('#selectCoupon').on('click', function (e) {
+                $.post(MainRouter.couponList(), {"selectCoupon": $('input[name="memc_code"]').val(), "isfastbuy":$('input[name="isfastbuy"]').val()}, function (data) {
+                    $('#couponArea').html(data);
+                    $('#couponArea').show();
+                    $('#checkoutMainArea').hide();
+                })
+            });
+
+            // 发票页面
+            $('#invoiceInputArea').on('click', function () {
+                $.ajax({
+                    url : MainRouter.invoice(),
+                    cache : false,
+                    dataType : 'html',
+                    type : "POST",
+                    success : function (data) {
+                        $('#invoiceArea').html(data);
+                        $('#invoiceArea').show();
+                        $('#checkoutMainArea').hide();
+
+                        read_temp_save(); // 该方法在invoice页面*!/*/
+                    }
+                })
+            });
+
+            // 服务协议
+            $('.ms-jsAgreement').on('click', function (e) {
+                var bool = $(this).hasClass('active');
+                !bool ? $(this).addClass('active') : $(this).removeClass('active')
+            });
+
+            // 发票
+            $('.ms-jsInvoice').on('click', function (e) {
+                var bool = $(this).hasClass('active');
+
+                e.stopPropagation();
+
+                if (!bool) {
+                    $('#invoiceInput').click();
+                } else {
+                    $('input[name="is_tax"]').val(0);  // 标识未开发票状态
+                    $(this).removeClass('active')
+                }
+            });
+
+            // 订单总价
+            //MainMethods.getTotalPrice();
+
+            // 订单提交
+            $('#orderCreate').on('click', function (e) {
+
+                if ($('#orderCreate').hasClass('gray')) {
+                    return false;
+                }
+
+                var bool = $('.ms-jsAgreement').hasClass('active');
+                if (!bool) {
+                    Modal.tip({content:"请先同意服务协议"});
+                    return false;
+                }
+
+                var md5_cart_info = $('input[name="md5_cart_info"]').val();
+                var isfastbuy = $('input[name="isfastbuy"]').val();
+
+                var option = {};
+                var obj_idents = [];
+                for (var i = 0; i < $('input[name="obj_idents[]"]').length; i++) {
+                    var obj_ident = $('input[name="obj_idents[]"]').eq(i).val();
+
+                    var store = $('#' + obj_ident + '_store').val();
+                    var num = $('#' + obj_ident + '_num').val();
+                    if (parseInt(store) <  parseInt(num)) {
+                        var goods_name = $('#' + obj_ident + '_name').val();
+
+                        option.content = '商品"' + goods_name + '"库存不足';
+                        Modal.tip(option);
+                        return false;
+                    }
+
+                    obj_idents.push($('input[name="obj_idents[]"]').eq(i).val());
+                }
+
+                if (obj_idents.length <= 0 || !md5_cart_info) {
+                    option.content = '购物车信息发生变化';
+                    Modal.tip(option);
+                    return false;
+                }
+
+                var addressValue = $('input[name="address"]').val();
+                if (!addressValue) {
+                    option.content = '请选择地址';
+                    Modal.tip(option);
+                    return false;
+                }
+
+                var purchase = {};
+                purchase.addr_id = addressValue;
+
+                if (!submitFlag) return false;
+                submitFlag = false;
+
+                var json = {};
+                json.md5_cart_info = md5_cart_info;
+                json.isfastbuy = isfastbuy;
+                json.payment = MainMethods.paymentParam();
+                json.address = MainMethods.addressParam();
+                json.shipping = MainMethods.shippingParam();
+                json.purchase = purchase;
+                json.obj_idents = obj_idents;
+
+                $.post(MainRouter.orderCreate(), json, function (data) {
+                    submitFlag = true;
+                    if (data.hasOwnProperty('error')) {
+                        option.content = data.error;
+                        Modal.tip(option);
+                        return false;
+                    } else {
+                        location.href = data.redirect;
+                    }
+                },"json");
+            });
+
+            window.onload = function() {
+                if( ("onhashchange" in window) && ((typeof document.documentMode==="undefined") || document.documentMode == 8)) {
+                    //浏览器支持onhashchange事件
+                    window.onhashchange = function () {
+                        var urlHash = window.location.hash;
+                        if (urlHash === '') {
+                            $('.checkout-floor').hide();
+                            $('#checkoutMainArea').show();
+                        }
+                    }
+                } else {
+                    // 不支持则用定时器检测的办法
+                    setInterval(function() {
+                        var urlHash = window.location.hash;
+                        if(urlHash === '') {
+                            $('.checkout-floor').hide();
+                            $('#checkoutMainArea').show();
+                        }
+                    }, 150);
+                }
+            };
+
+            function listenUrlHash(hash) {
+                var urlHash = window.location.hash;
+                if (hash) {
+                    urlHash = hash;
+                }
+
+                if ($.inArray(tmpUrlHash, ['#serviceArea', '#addAddressArea']) && urlHash != tmpUrlHash) {
+                    preUrlHash.push(tmpUrlHash);
+                }
+
+                if (urlHash == '#addressArea') {
+                    for (var i = preUrlHash.length - 1; i >= 0; i-- ) {
+                        if (preUrlHash[i] == urlHash) {
+                            delete preUrlHash[i];
+                        } else {
+                            break;
+                        }
+                    }
+                }
+
+                tmpUrlHash = urlHash;
+                showArea(urlHash);
+            }
+
+            function back() {
+                var backUrlhash = preUrlHash.pop();
+                if (typeof(backUrlhash) == "undefined") {
+                    backUrlhash = '';
+                }
+                tmpUrlHash = backUrlhash;
+
+                window.location.hash = tmpUrlHash;
+                showArea(tmpUrlHash);
+            }
+
+            function showArea(hash)
+            {
+                $('.checkout-floor').hide();
+                switch (hash) {
+                    case '#addressArea':
+                        $('#addressArea').show();
+                        break;
+                    case '#couponArea' :
+                        $('#couponArea').show();
+                        break;
+                    case '#addAddressArea':
+                        $('#addAddressArea').show();
+                        break;
+                    case '#serviceArea':
+                        $('#serviceArea').show();
+                        break;
+                    default :
+                        $('#checkoutMainArea').show();
+                        break;
+                }
+            }
+        </script>
+
+    </div>
+</body>
+</html>
