@@ -506,7 +506,6 @@
                         </div>
                         <a href="<?php echo U('admin/addUser');?>" class="btn btn-primary pull-right margin-top">添加管理员</a>
                     </div>
-                    <div class="clearfix"></div>
                     <div class="table-margin">
                         <table class="table  table-header">
                             <thead>
