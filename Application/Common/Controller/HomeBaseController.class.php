@@ -12,5 +12,6 @@ class HomeBaseController extends BaseController{
         if(is_mobile()){
             header("Location: http://m.".C('URL_DOMAIN_ROOT'));
         }
+        $this->assign('WEB_NAME', '锦鲤商城');
 	}
 }

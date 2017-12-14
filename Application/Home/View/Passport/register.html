@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{$WEB_NAME} - 注册</title>
+    <include file="Public/meta" />
+</head>
+<body>
+    <include file="Public/header" />
+    <!-- 登录板块 开始 -->
+    <div class="x-signIn">
+        <div class="x-main">
+            <div class="imgBoard x-fll">
+                <img src="__HOME_IMAGES__/signBG.png" alt="">
+            </div>
+            <!-- 输入框 开始 -->
+            <div class="signInBoard x-fll">
+                <p>账号注册</p>
+                <div class="x-pb12">
+                    <input name="pam_account[login_name]" maxlength="11" placeholder="请输入常用手机号码" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
+                </div>
+                <div class="x-input x-obtain x-pb12">
+                    <input name="pam_account[login_verification]" type="text" placeholder="请输入手机验证码">
+                    <button class="x-redBtn" id="send-vcode">获取验证码</button>
+                </div>
+                <input name="pam_account[login_password]" type="password" placeholder="设置密码 ( 6-16 位数字和字母)" onkeyup="value=value.replace(/[\W]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
+                <div class="h85">
+                    <!-- x-hide隐藏验证栏 -->
+                    <!--<div class="x-input x-verificationCode x-pb12 ">-->
+                    <!--<input name="pam_account[verifycode]" type="text" placeholder="请输入验证码">-->
+                    <!--<div class="x-codeArea" onclick="$('#vcode').attr('src', '/index-gen_vcode-signup-4.html?r='+Math.random());"><img id="vcode" src="/index-gen_vcode-signup-4.html" width="100%" height="100%"/></div>-->
+                    <!--</div>-->
+                    <div class="x-red" id="err-msg"></div>
+                </div>
+                <div class="agree">
+                    <div class="x-checkbox x-checkboxC"></div>
+                    <span>阅读并同意</span>
+                    <a href="article-help-i-service.html" class="x-blue">《名创优品用户服务协议》</a>
+                    <a href="article-help-i-privacy.html" class="x-blue">《平台隐私政策》</a>
+                </div>
+                <!-- 上可用，下不可用状态 -->
+                <button class="loginBtn x-redBtn" id="submit-btn">立即注册</button>
+                <!--<button class="loginBtn" disabled="disabled">立即注册</button>-->
+            </div>
+            <!-- 输入框 结束 -->
+
+        </div>
+    </div>
+    <!-- 登录板块 结束 -->
+    <script>
+        $(function () {
+            checkboxChange();
+            sendVcode();
+            submitSignUp();
+        })
+
+        function sendVcode() {
+            var flag = false;
+            $('#send-vcode').on('click', function(e) {
+                e.preventDefault();
+                if (flag) return;
+                if (!$(this).hasClass('x-redBtn')) return;
+                removeErrMsg();
+
+                var self = $(this);
+                var times = 60;
+                var data = {};
+                var url = '/passport-send_vcode_sms.html';
+                data.uname = $('input[name="pam_account[login_name]"]').val();
+                data.type = 'signup';
+                if (!checkMobile(data.uname)) return;
+
+                flag = true;
+                $.post(url, data, function(rs) {
+                    flag = false;
+                    if(rs) {
+                        if(rs.error) {
+                            $('#err-msg').html(rs.error);
+                        } else {
+                            self.removeClass('x-redBtn').text(times + 's');
+                            var time = setInterval(function() {
+                                times--;
+                                self.text(times + 's');
+                                if (times == 0) {
+                                    self.addClass('x-redBtn').text('重新获取验证码');
+                                    clearInterval(time)
+                                }
+                            },1000)
+                        }
+                    }
+                }, 'json');
+            })
+        }
+
+        function submitSignUp() {
+            var flag = false;
+            $('#submit-btn').on('click', function(e) {
+                if (flag) return;
+                var data = {};
+                var pam_account = {};
+                pam_account.login_name = $('input[name="pam_account[login_name]"]').val();
+                pam_account.login_password = $('input[name="pam_account[login_password]"]').val();
+    //            pam_account.verifycode = $('input[name="pam_account[verifycode]"]').val();
+                pam_account.login_verification = $('input[name="pam_account[login_verification]"]').val();
+                data.pam_account = pam_account;
+
+                if (!checkParam()) return;
+                var url = '/passport-create.html';
+                flag = true;
+                $.post(url, data, function(rs) {
+                    flag = false;
+                    if (rs.error) {
+                        $('#err-msg').html(rs.error);
+                    } else if (rs.success) {
+                        location.href = rs.redirect;
+                    }
+                }, 'json');
+            })
+        }
+
+        // checkbox选中
+        function checkboxChange() {
+            var flag = false;
+            $('.x-checkbox').click(function () {
+                btnUsed(flag);
+                if (flag) {
+                    // 选中状态
+                    $(this).addClass('x-checkboxC');
+                } else {
+                    // 取消选中状态
+                    $(this).removeClass('x-checkboxC');
+                }
+                flag = !flag;
+            })
+        }
+
+        // 按钮变为可用状态
+        function btnUsed(flag) {
+            // btn参数可以更改
+            var $btn = $('.loginBtn');
+
+            // 按钮可用
+            if (flag) {
+                $btn.addClass('x-redBtn');
+                $btn.removeAttr('disabled');
+            } else {
+                // 按钮不可用
+                $btn.removeClass('x-redBtn');
+                $btn.attr('disabled', 'disabled');
+            }
+
+        }
+
+        //检查参数
+        function checkParam() {
+            removeErrMsg();
+
+            if (!checkMobile($('input[name="pam_account[login_name]"]').val())) {
+                return false;
+            }
+
+            if ($('input[name="pam_account[login_verification]"]').val().length <= 0) {
+                $('input[name="pam_account[login_verification]"]').addClass('x-redBorder');
+                $('#err-msg').html('请输入手机验证码');
+                return false;
+            }
+            if ($('input[name="pam_account[login_password]"]').val().length <= 0) {
+                $('input[name="pam_account[login_password]"]').addClass('x-redBorder');
+                $('#err-msg').html('请输入密码');
+                return false;
+            }
+    //        if ($('input[name="pam_account[verifycode]"]').val().length <= 0) {
+    //            $('input[name="pam_account[verifycode]"]').addClass('x-redBorder');
+    //            $('#err-msg').html('请输入验证码');
+    //            return false;
+    //        }
+            return true;
+        }
+        function checkMobile(mobile) {
+            if (mobile.length <= 0) {
+                $('#err-msg').html('请输入手机号码');
+                $('input[name="pam_account[login_name]"]').addClass('x-redBorder');
+                return false;
+            }
+
+            var patrn=/^1[34578]{1}[0-9]{9}$/;
+            if (!patrn.exec(mobile)) {
+                $('#err-msg').html('手机号码有误');
+                $('input[name="pam_account[login_name]"]').addClass('x-redBorder');
+                return false;
+            }
+
+            return true;
+        }
+
+        function removeErrMsg() {
+            $('#err-msg').html('');
+            $('input').removeClass('x-redBorder');
+        }
+
+    </script>
+
+    <include file="Public/footer" />
+</body>
+</html>

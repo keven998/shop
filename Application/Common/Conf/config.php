@@ -39,8 +39,9 @@ return array(
 
 
     //***********************************URL设置**************************************
-    'MODULE_ALLOW_LIST'     => array('Home','Admin','Mobile','Api', 'Wechat'),    //允许访问列表
     'DEFAULT_MODULE'        => 'Home',
+    'MODULE_ALLOW_LIST'     => array('Home','Admin','Mobile','Api', 'Wechat'),    //允许访问列表
+
     'URL_MODEL'             => 2,
 
 

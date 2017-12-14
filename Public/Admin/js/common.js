@@ -101,7 +101,7 @@ function GetUploadify(num,elementid,path,callback)
         shadeClose: true,
         shade: false,
         maxmin: true, //开启最大化最小化按钮
-        area: ['50%', '60%'],
+        area: ['50%', '450px'],
         content: upurl
     });
 }

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{$WEB_NAME} - 登录</title>
+    <include file="Public/meta" />
+</head>
+<body>
+    <include file="Public/header" />
+    <!-- 登录板块 开始 -->
+    <div class="x-login x-signIn">
+        <div class="x-main">
+            <div class="board x-flr">
+                <p>账号登录</p>
+                <!-- 输入限制为数字且最大输入数为11位 -->
+                <!-- <input maxlength="11" placeholder="手机号码" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))"> -->
+                <!-- 不做输入限制 -->
+                <div class="x-input x-pb12">
+                    <div class="phone x-Licon"></div>
+                    <input class="x-left" type="text" placeholder="手机号码" name="uname">
+                </div>
+                <div class="x-input">
+                    <div class="lock x-Licon"></div>
+                    <input class="x-left" type="password" placeholder="输入密码" name="password">
+                </div>
+                <div class="h75">
+                    <!-- x-hide隐藏验证input栏 -->
+                    <div class="x-input x-verificationCode x-pb12 x-hide" id="input-vcode">
+                        <input class="x-left" type="text" placeholder="验证码" name="verifycode">
+                        <div class="x-codeArea" onclick="$('#vcode').attr('src', '/index-gen_vcode-b2c-4.html?r='+Math.random());"><img id="vcode" width="98" height="36"></div>
+                    </div>
+                    <div class="x-red" id="err-msg"></div>
+                </div>
+                <button class="x-redBtn" id="submit-btn">登录</button>
+                <div class="etc">
+                    <a href="passport-lost.html">忘记密码&nbsp;?</a>
+                    <a class="x-flr" href="register.html">注册</a>
+                </div>
+                <div class="loginThirdParty">
+                    <div>
+                        <a href="https://open.weixin.qq.com/connect/qrconnect?appid=wxf5ec9e991627f395&response_type=code&scope=snsapi_login&redirect_uri=http%3A%2F%2Fm.miniso.cn%2Fopenapi%2Ftrustlogin_api%2Fparse%2Ftrustlogin_plugin_weixin%2Fcallback%2F&state=ecf0ff76b96c60cf305ed2125e7439c8" data-link="https://open.weixin.qq.com/connect/qrconnect?appid=wxf5ec9e991627f395&response_type=code&scope=snsapi_login&redirect_uri=http%3A%2F%2Fm.miniso.cn%2Fopenapi%2Ftrustlogin_api%2Fparse%2Ftrustlogin_plugin_weixin%2Fcallback%2F&state=ecf0ff76b96c60cf305ed2125e7439c8" onclick="imageUrl(this,'微信');"><img src="http://m.miniso.cn/public/app/trustlogin/statics/weixin.png" alt="">
+                            <span>微信</span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="login_container">
+
+    </div>
+
+    <script>
+        var msg = '';
+        if(msg!=''){
+            Modal.black({
+                text : msg,
+                hold : 3000
+            })
+        }
+
+        $(document).keyup(function(e) {
+            if(e.keyCode == 13){
+                loginSubmit();
+            }
+        });
+        $('#submit-btn').click(function (e) {
+            loginSubmit();
+        });
+
+        function loginSubmit() {
+            var param = {};
+            param.uname = $.trim($('input[name="uname"]').val());
+            param.password = $('input[name="password"]').val();
+            param.verifycode = $('input[name="verifycode"]').val();
+            if (param.uname.length <= 0) {
+                $('#err-msg').html('请输入手机号');
+                $('input').removeClass('x-redBorder');
+                $('input[name="uname"]').addClass('x-redBorder');
+                return;
+            }
+            if (param.password.length <= 0) {
+                $('#err-msg').html('请输入密码');
+                $('input').removeClass('x-redBorder');
+                $('input[name="password"]').addClass('x-redBorder');
+                return;
+            }
+
+            var url = "/passport-post_login.html";
+            $.post(url, param,function (rs) {
+                if (rs.error) {
+                    $('#err-msg').html(rs.error);
+                    checkIsNeedVcode(param);
+                } else if (rs.success) {
+                    location.href = rs.redirect;
+                }
+            }, 'JSON');
+        }
+
+        //检查是否需要验证码
+        function checkIsNeedVcode(param) {
+            var url = "/passport-ajax_check_login_is_need_vcode.html";
+            $.post(url, param,function (rs) {
+                if (rs) {
+                    $('#input-vcode').removeClass('x-hide');
+                    $('#vcode').attr('src', '/index-gen_vcode-b2c-4.html?r='+Math.random());
+                } else {
+                    $('#input-vcode').addClass('x-hide');
+                }
+            }, 'JSON');
+        }
+
+    </script>
+
+    <include file="Public/footer" />
+</body>
+</html>
