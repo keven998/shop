@@ -500,7 +500,7 @@
         <div class="right-product my-index right-full">
             <div class="container-fluid">
                 <div class="info-center">
-                    <div class="info-title">
+                    <div class="info-title clearfix">
                         <div class="pull-left">
                             <h4 style="padding-top: 20px;"><strong><?php echo ($admin["username"]); ?>，欢迎您登录管理系统！</strong></h4>
                         </div>

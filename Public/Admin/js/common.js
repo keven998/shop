@@ -95,15 +95,14 @@ function checkMobile(tel) {
 function GetUploadify(num,elementid,path,callback)
 {       
     var upurl ='/index.php?m=Admin&c=Uploadify&a=upload&num='+num+'&input='+elementid+'&path='+path+'&func='+callback;
-    var iframe_str='<iframe frameborder="0" ';
-    iframe_str=iframe_str+'id=uploadify ';          
-    iframe_str=iframe_str+' src='+upurl;
-    iframe_str=iframe_str+' allowtransparency="true" class="uploadframe" scrolling="no"> ';
-    iframe_str=iframe_str+'</iframe>';                  
-    $("body").append(iframe_str);   
-    $("iframe.uploadframe").css("height",$(document).height()).css("width","100%").css("position","absolute").css("left","0px").css("top","0px").css("z-index","999999").show();
-    $(window).resize(function(){
-        $("iframe.uploadframe").css("height",$(document).height()).show();
+    layer.open({
+        type: 2,
+        title: '上传图片',
+        shadeClose: true,
+        shade: false,
+        maxmin: true, //开启最大化最小化按钮
+        area: ['50%', '60%'],
+        content: upurl
     });
 }
 

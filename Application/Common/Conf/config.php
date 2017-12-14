@@ -24,7 +24,9 @@ return array(
     'DATA_BACKUP_PATH'       => './Data/',     
     'DATA_BACKUP_PART_SIZE'  => '20971520',
     'DATA_BACKUP_COMPRESS'   =>  1,
-    'DATA_BACKUP_COMPRESS_LEVEL' => 9,     
+    'DATA_BACKUP_COMPRESS_LEVEL' => 9,
+
+    'image_upload_limit_size' => 1024 * 1024 * 5,//上传图片大小限制
 
 
     //***********************************表单令牌设置************************************

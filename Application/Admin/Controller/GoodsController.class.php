@@ -386,7 +386,7 @@ class GoodsController extends AdminBaseController{
     public function del_goods_images()
     {
         $path = I('filename','');
-        M('goods_images')->where("image_url = '$path'")->delete();
+        M('goodsGallery')->where("image_url = '$path'")->delete();
     }
 
 

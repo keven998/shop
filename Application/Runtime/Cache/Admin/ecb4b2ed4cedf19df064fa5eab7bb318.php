@@ -500,7 +500,7 @@
         <div class="right-product right-full">
             <div class="container-fluid">
                 <div class="info-center">
-                    <div class="page-header">
+                    <div class="page-header clearfix">
                         <div class="pull-left">
                             <h4>添加管理员</h4>     
                             <a href="javascript:history.go(-1)">
@@ -531,14 +531,14 @@
                                             <input type="password" name="repassword" class="form-control w-300" placeholder="">
                                         </td>
                                     </tr>
-                                    <tr>
+                                    <!--<tr>
                                         <td width="20%" align="right">所属角色：</td>
                                         <td>
                                             <select class="form-control w-300" name="rid">
                                                 <?php if(is_array($role)): $i = 0; $__LIST__ = $role;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><option value="<?php echo ($vo["id"]); ?>"><?php echo ($vo["remark"]); ?>(<?php echo ($vo["name"]); ?>)</option><?php endforeach; endif; else: echo "" ;endif; ?>
                                             </select>
                                         </td>
-                                    </tr>
+                                    </tr>-->
                                     <tr>
                                         <td width="20%" align="right">账户状态：</td>
                                         <td>
