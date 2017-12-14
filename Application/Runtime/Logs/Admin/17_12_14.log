@@ -1,0 +1,240 @@
+[ 2017-12-14T19:55:28+08:00 ] 127.0.0.1 /Admin/goods/editBrand/brand_id/1
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000023s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002481s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000815s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000892s ]
+SQL: SHOW COLUMNS FROM `h_admin_user` [ RunTime:0.0189s ]
+SQL: SELECT * FROM `h_admin_user` WHERE `user_id` = 1 LIMIT 1   [ RunTime:0.0140s ]
+SQL: SHOW COLUMNS FROM `h_brand` [ RunTime:0.0632s ]
+SQL: SELECT * FROM `h_brand` WHERE `brand_id` = 1 LIMIT 1   [ RunTime:0.0181s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000445s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000509s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.033261s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.033369s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000554s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000613s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000961s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001033s ]
+
+[ 2017-12-14T19:55:33+08:00 ] 127.0.0.1 /Admin/goods/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000381s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000346s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000430s ]
+SQL: SHOW COLUMNS FROM `h_admin_user` [ RunTime:0.0319s ]
+SQL: SELECT * FROM `h_admin_user` WHERE `user_id` = 1 LIMIT 1   [ RunTime:0.0073s ]
+SQL: SHOW COLUMNS FROM `h_goods` [ RunTime:0.0099s ]
+SQL: SELECT COUNT(*) AS tp_count FROM `h_goods` WHERE (  1 = 1  ) LIMIT 1   [ RunTime:0.0168s ]
+SQL: SELECT * FROM `h_goods` WHERE (  1 = 1  ) LIMIT 0,10   [ RunTime:0.0734s ]
+SQL: SHOW COLUMNS FROM `h_brand` [ RunTime:0.0096s ]
+SQL: SELECT * FROM `h_brand` WHERE ( 1=1 AND brand_id='1' ) LIMIT 1   [ RunTime:0.0083s ]
+SQL: SHOW COLUMNS FROM `h_goods_cate` [ RunTime:0.0125s ]
+SQL: SELECT * FROM `h_goods_cate` WHERE ( 1=1 AND cat_id='8' ) LIMIT 1   [ RunTime:0.0103s ]
+SQL: SELECT * FROM `h_brand` WHERE ( 1=1 AND brand_id='1' ) LIMIT 1   [ RunTime:0.0113s ]
+SQL: SELECT * FROM `h_goods_cate` WHERE ( 1=1 AND cat_id='8' ) LIMIT 1   [ RunTime:0.0141s ]
+SQL: SELECT * FROM `h_brand` WHERE ( 1=1 AND brand_id='1' ) LIMIT 1   [ RunTime:0.0456s ]
+SQL: SELECT * FROM `h_goods_cate` WHERE ( 1=1 AND cat_id='8' ) LIMIT 1   [ RunTime:0.0757s ]
+SQL: SELECT * FROM `h_brand` WHERE ( is_show = 1 )  [ RunTime:0.0069s ]
+SQL: SELECT * FROM `h_goods_cate`  [ RunTime:0.0142s ]
+NOTIC: [8] Undefined variable: catList /www/shop/Application/Admin/Controller/GoodsController.class.php 第 45 行.
+NOTIC: [8] Undefined variable: show /www/shop/Application/Admin/Controller/GoodsController.class.php 第 47 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000462s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000526s ]
+NOTIC: [8] Undefined index: is_on_sale /www/shop/Application/Runtime/Cache/Admin/7460c3bd08e8aaf3e719467d6ea19bd3.php 第 528 行.
+NOTIC: [8] Undefined index: is_on_sale /www/shop/Application/Runtime/Cache/Admin/7460c3bd08e8aaf3e719467d6ea19bd3.php 第 529 行.
+NOTIC: [8] Undefined index: intro /www/shop/Application/Runtime/Cache/Admin/7460c3bd08e8aaf3e719467d6ea19bd3.php 第 535 行.
+NOTIC: [8] Undefined index: intro /www/shop/Application/Runtime/Cache/Admin/7460c3bd08e8aaf3e719467d6ea19bd3.php 第 536 行.
+NOTIC: [8] Undefined index: goods_name /www/shop/Application/Runtime/Cache/Admin/7460c3bd08e8aaf3e719467d6ea19bd3.php 第 541 行.
+NOTIC: [8] Use of undefined constant is_on_sale - assumed 'is_on_sale' /www/shop/Application/Runtime/Cache/Admin/7460c3bd08e8aaf3e719467d6ea19bd3.php 第 578 行.
+NOTIC: [8] Use of undefined constant is_recommend - assumed 'is_recommend' /www/shop/Application/Runtime/Cache/Admin/7460c3bd08e8aaf3e719467d6ea19bd3.php 第 581 行.
+NOTIC: [8] Use of undefined constant is_new - assumed 'is_new' /www/shop/Application/Runtime/Cache/Admin/7460c3bd08e8aaf3e719467d6ea19bd3.php 第 584 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' /www/shop/Application/Runtime/Cache/Admin/7460c3bd08e8aaf3e719467d6ea19bd3.php 第 587 行.
+NOTIC: [8] Use of undefined constant is_on_sale - assumed 'is_on_sale' /www/shop/Application/Runtime/Cache/Admin/7460c3bd08e8aaf3e719467d6ea19bd3.php 第 578 行.
+NOTIC: [8] Use of undefined constant is_recommend - assumed 'is_recommend' /www/shop/Application/Runtime/Cache/Admin/7460c3bd08e8aaf3e719467d6ea19bd3.php 第 581 行.
+NOTIC: [8] Use of undefined constant is_new - assumed 'is_new' /www/shop/Application/Runtime/Cache/Admin/7460c3bd08e8aaf3e719467d6ea19bd3.php 第 584 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' /www/shop/Application/Runtime/Cache/Admin/7460c3bd08e8aaf3e719467d6ea19bd3.php 第 587 行.
+NOTIC: [8] Use of undefined constant is_on_sale - assumed 'is_on_sale' /www/shop/Application/Runtime/Cache/Admin/7460c3bd08e8aaf3e719467d6ea19bd3.php 第 578 行.
+NOTIC: [8] Use of undefined constant is_recommend - assumed 'is_recommend' /www/shop/Application/Runtime/Cache/Admin/7460c3bd08e8aaf3e719467d6ea19bd3.php 第 581 行.
+NOTIC: [8] Use of undefined constant is_new - assumed 'is_new' /www/shop/Application/Runtime/Cache/Admin/7460c3bd08e8aaf3e719467d6ea19bd3.php 第 584 行.
+NOTIC: [8] Use of undefined constant is_hot - assumed 'is_hot' /www/shop/Application/Runtime/Cache/Admin/7460c3bd08e8aaf3e719467d6ea19bd3.php 第 587 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.030735s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.030831s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000177s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000227s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000561s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000623s ]
+
+[ 2017-12-14T19:55:41+08:00 ] 127.0.0.1 /Admin/goods/addGoods
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000400s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000373s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000443s ]
+SQL: SHOW COLUMNS FROM `h_admin_user` [ RunTime:0.0103s ]
+SQL: SELECT * FROM `h_admin_user` WHERE `user_id` = 1 LIMIT 1   [ RunTime:0.0093s ]
+SQL: SHOW COLUMNS FROM `h_goods_type` [ RunTime:0.0162s ]
+SQL: SELECT * FROM `h_goods_type`  [ RunTime:0.0092s ]
+SQL: SHOW COLUMNS FROM `h_goods_cate` [ RunTime:0.0105s ]
+NOTIC: [8] Only variables should be passed by reference /www/shop/ThinkPHP/Library/Think/Db/Driver.class.php 第 769 行.
+SQL: SELECT * FROM `h_goods_cate` WHERE ( is_show = 1 ) ORDER BY `sort` asc  [ RunTime:0.3332s ]
+SQL: SHOW COLUMNS FROM `h_brand` [ RunTime:0.0259s ]
+SQL: SELECT * FROM `h_brand` WHERE ( is_show = 1 )  [ RunTime:0.0251s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000912s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000985s ]
+NOTIC: [8] Undefined variable: URL_home /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 29 行.
+NOTIC: [8] Undefined variable: goodsImages /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 720 行.
+NOTIC: [8] Use of undefined constant spec_type - assumed 'spec_type' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 745 行.
+NOTIC: [8] Undefined variable: goodsInfo /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 745 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 745 行.
+NOTIC: [8] Use of undefined constant spec_type - assumed 'spec_type' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 745 行.
+NOTIC: [8] Undefined variable: goodsInfo /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 745 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 745 行.
+NOTIC: [8] Use of undefined constant spec_type - assumed 'spec_type' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 745 行.
+NOTIC: [8] Undefined variable: goodsInfo /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 745 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 745 行.
+NOTIC: [8] Use of undefined constant spec_type - assumed 'spec_type' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 745 行.
+NOTIC: [8] Undefined variable: goodsInfo /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 745 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 745 行.
+NOTIC: [8] Use of undefined constant spec_type - assumed 'spec_type' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 745 行.
+NOTIC: [8] Undefined variable: goodsInfo /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 745 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 745 行.
+NOTIC: [8] Use of undefined constant spec_type - assumed 'spec_type' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 745 行.
+NOTIC: [8] Undefined variable: goodsInfo /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 745 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 745 行.
+NOTIC: [8] Use of undefined constant goods_type - assumed 'goods_type' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 760 行.
+NOTIC: [8] Undefined variable: goodsInfo /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 760 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 760 行.
+NOTIC: [8] Use of undefined constant goods_type - assumed 'goods_type' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 760 行.
+NOTIC: [8] Undefined variable: goodsInfo /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 760 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 760 行.
+NOTIC: [8] Use of undefined constant goods_type - assumed 'goods_type' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 760 行.
+NOTIC: [8] Undefined variable: goodsInfo /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 760 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 760 行.
+NOTIC: [8] Use of undefined constant goods_type - assumed 'goods_type' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 760 行.
+NOTIC: [8] Undefined variable: goodsInfo /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 760 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 760 行.
+NOTIC: [8] Use of undefined constant goods_type - assumed 'goods_type' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 760 行.
+NOTIC: [8] Undefined variable: goodsInfo /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 760 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 760 行.
+NOTIC: [8] Use of undefined constant goods_type - assumed 'goods_type' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 760 行.
+NOTIC: [8] Undefined variable: goodsInfo /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 760 行.
+NOTIC: [8] Use of undefined constant id - assumed 'id' /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 760 行.
+NOTIC: [8] Undefined variable: goodsInfo /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 767 行.
+NOTIC: [8] Undefined variable: goodsInfo /www/shop/Application/Runtime/Cache/Admin/c74fb0c111dc216c19c7bf766c95f466.php 第 866 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.031160s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.031254s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000169s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000216s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000453s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000552s ]
+
+[ 2017-12-14T19:55:42+08:00 ] 127.0.0.1 /index.php/admin/Goods/ajaxGetAttrInput?goods_id=&type_id=0
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000348s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000381s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000458s ]
+SQL: SHOW COLUMNS FROM `h_admin_user` [ RunTime:0.0102s ]
+SQL: SELECT * FROM `h_admin_user` WHERE `user_id` = 1 LIMIT 1   [ RunTime:0.0097s ]
+SQL: SHOW COLUMNS FROM `h_goods` [ RunTime:0.0144s ]
+SQL: SHOW COLUMNS FROM `h_goods_attribute` [ RunTime:0.0099s ]
+SQL: SELECT * FROM `h_goods_attribute` WHERE ( type_id = 0 )  [ RunTime:0.0253s ]
+NOTIC: [8] Undefined variable: str /www/shop/Application/Admin/Model/GoodsModel.class.php 第 100 行.
+
+[ 2017-12-14T19:55:42+08:00 ] 127.0.0.1 /admin/Goods/ajaxGetSpecSelect?goods_id=&spec_type=0
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000022s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000342s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000381s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000454s ]
+SQL: SHOW COLUMNS FROM `h_admin_user` [ RunTime:0.0118s ]
+SQL: SELECT * FROM `h_admin_user` WHERE `user_id` = 1 LIMIT 1   [ RunTime:0.0113s ]
+SQL: SHOW COLUMNS FROM `h_spec` [ RunTime:0.0103s ]
+NOTIC: [8] Only variables should be passed by reference /www/shop/ThinkPHP/Library/Think/Db/Driver.class.php 第 769 行.
+SQL: SELECT * FROM `h_spec` WHERE ( type_id = 0 ) ORDER BY `sort` desc  [ RunTime:0.0080s ]
+SQL: SHOW COLUMNS FROM `h_spec_goods_price` [ RunTime:0.0169s ]
+SQL: SELECT GROUP_CONCAT(`key` SEPARATOR '_') AS items_id FROM `h_spec_goods_price` WHERE ( goods_id = 0 ) LIMIT 1   [ RunTime:0.0645s ]
+NOTIC: [8] Undefined variable: specImageList /www/shop/Application/Admin/Controller/GoodsController.class.php 第 211 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000086s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000157s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009026s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009132s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000180s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000229s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000836s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000916s ]
+
+[ 2017-12-14T19:55:43+08:00 ] 127.0.0.1 /index.php/admin/Goods/ajaxGetSpecInput/goods_id/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000244s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000264s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000314s ]
+SQL: SHOW COLUMNS FROM `h_admin_user` [ RunTime:0.0112s ]
+SQL: SELECT * FROM `h_admin_user` WHERE `user_id` = 1 LIMIT 1   [ RunTime:0.0072s ]
+SQL: SHOW COLUMNS FROM `h_goods` [ RunTime:0.0460s ]
+NOTIC: [8] Undefined index: goods_id /www/shop/Application/Admin/Controller/GoodsController.class.php 第 224 行.
+NOTIC: [8] Undefined index: spec_arr /www/shop/Application/Admin/Controller/GoodsController.class.php 第 225 行.
+NOTIC: [2] Invalid argument supplied for foreach() /www/shop/Application/Admin/Model/GoodsModel.class.php 第 137 行.
+NOTIC: [2] asort() expects parameter 1 to be array, null given /www/shop/Application/Admin/Model/GoodsModel.class.php 第 141 行.
+NOTIC: [2] Invalid argument supplied for foreach() /www/shop/Application/Admin/Model/GoodsModel.class.php 第 142 行.
+NOTIC: [8] Undefined variable: spec_arr2 /www/shop/Application/Admin/Model/GoodsModel.class.php 第 148 行.
+NOTIC: [2] array_keys() expects parameter 1 to be array, null given /www/shop/Application/Admin/Model/GoodsModel.class.php 第 148 行.
+NOTIC: [8] Undefined variable: spec_arr2 /www/shop/Application/Admin/Model/GoodsModel.class.php 第 149 行.
+NOTIC: [2] array_shift() expects parameter 1 to be array, null given /www/shop/Application/Common/Common/function.php 第 842 行.
+NOTIC: [2] Invalid argument supplied for foreach() /www/shop/Application/Common/Common/function.php 第 843 行.
+NOTIC: [2] Invalid argument supplied for foreach() /www/shop/Application/Common/Common/function.php 第 848 行.
+SQL: SHOW COLUMNS FROM `h_spec` [ RunTime:0.0163s ]
+SQL: SELECT `id`,`name` FROM `h_spec`  [ RunTime:0.0092s ]
+SQL: SHOW COLUMNS FROM `h_spec_item` [ RunTime:0.0135s ]
+SQL: SELECT `id`,`item`,`spec_id` FROM `h_spec_item`  [ RunTime:0.0120s ]
+SQL: SHOW COLUMNS FROM `h_spec_goods_price` [ RunTime:0.0099s ]
+SQL: SELECT `key`,`key_name`,`price`,`goods_number`,`bar_code` FROM `h_spec_goods_price` WHERE ( goods_id = 0 )  [ RunTime:0.0203s ]
+NOTIC: [2] Invalid argument supplied for foreach() /www/shop/Application/Admin/Model/GoodsModel.class.php 第 158 行.
+
+[ 2017-12-14T19:55:43+08:00 ] 127.0.0.1 /index.php?m=Admin&c=Uploadify&a=upload&num=10&input=&path=goods&func=call_back2
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000231s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000234s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000285s ]
+SQL: SHOW COLUMNS FROM `h_admin_user` [ RunTime:0.0107s ]
+SQL: SELECT * FROM `h_admin_user` WHERE `user_id` = 1 LIMIT 1   [ RunTime:0.0072s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000111s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000199s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.007861s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.007937s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000174s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000236s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000407s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000476s ]
+
