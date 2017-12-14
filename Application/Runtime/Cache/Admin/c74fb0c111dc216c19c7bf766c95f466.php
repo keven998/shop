@@ -264,7 +264,7 @@
                     <span class="sub-title">商品属性</span>
                 </a> 
             </li>
-            <li <?php if((strtolower(CONTROLLER_NAME)== 'goods') and (strtolower(ACTION_NAME)== 'brand') ): ?>class="active"<?php endif; ?>>
+            <!--<li <?php if((strtolower(CONTROLLER_NAME)== 'goods') and (strtolower(ACTION_NAME)== 'brand') ): ?>class="active"<?php endif; ?>>
                 <div class="showtitle" style="width:100px;">
                     <img src="/Public/Admin/images/leftimg.png" />品牌列表
                 </div>
@@ -272,7 +272,7 @@
                     <span class="sublist-icon glyphicon glyphicon-record"></span>
                     <span class="sub-title">品牌列表</span>
                 </a> 
-            </li>
+            </li>-->
             <li <?php if((strtolower(CONTROLLER_NAME)== 'goods') and (strtolower(ACTION_NAME)== 'comment') ): ?>class="active"<?php endif; ?>>
                 <div class="showtitle" style="width:100px;">
                     <img src="/Public/Admin/images/leftimg.png" />商品评论
@@ -456,7 +456,7 @@
             <span class="sublist-title">系统设置</span>
         </div>
         <ul class="navContent" <?php if(strtolower(CONTROLLER_NAME)== 'system' ): ?>style="display:block"<?php else: ?>style="display:none"<?php endif; ?>>
-            <li <?php if((strtolower(CONTROLLER_NAME)== 'system') and (strtolower(ACTION_NAME)== 'index') ): ?>class="active"<?php endif; ?>>
+            <!--<li <?php if((strtolower(CONTROLLER_NAME)== 'system') and (strtolower(ACTION_NAME)== 'index') ): ?>class="active"<?php endif; ?>>
                 <div class="showtitle" style="width:100px;">
                     <img src="/Public/Admin/images/leftimg.png" />网站设置
                 </div>
@@ -464,7 +464,7 @@
                     <span class="sublist-icon glyphicon glyphicon-record"></span>
                     <span class="sub-title">网站设置</span>
                 </a> 
-            </li>
+            </li>-->
             <li <?php if((strtolower(CONTROLLER_NAME)== 'system') and (strtolower(ACTION_NAME)== 'friendlink') ): ?>class="active"<?php endif; ?>>
                 <div class="showtitle" style="width:100px;">
                     <img src="/Public/Admin/images/leftimg.png" />友情链接

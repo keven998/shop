@@ -8,11 +8,9 @@
 // +----------------------------------------------------------------------
 namespace Admin\Controller;
 use Common\Controller\AdminBaseController;
-
 use Common\Util\File;
 use Think\Log;
 use Think\Upload;
-
 /**
  * Class UeditorController
  * @package Admin\Controller
@@ -21,18 +19,16 @@ class UeditorController extends AdminBaseController
 {
     private $sub_name = array('date', 'Y/m-d');
     private $savePath = 'temp/';
-
     public function __construct()
     {
         parent::__construct();
-
         date_default_timezone_set("Asia/Shanghai");
-        
+
         $this->savePath = I('GET.savepath','temp').'/';
-        
+
         error_reporting(E_ERROR | E_WARNING);
     }
-    
+
     public function getContent()
     {
         echo '<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
@@ -44,7 +40,6 @@ class UeditorController extends AdminBaseController
         $content = htmlspecialchars(stripslashes($_REQUEST ['myEditor']));
         echo "<div class='content'>" . htmlspecialchars_decode($content) . "</div>";
     }
-
     /**
      *上传文件
      */
@@ -56,23 +51,19 @@ class UeditorController extends AdminBaseController
             "exts" => explode(",",  'zip,rar,doc,docx,zip,pdf,txt,ppt,pptx,xls,xlsx'),
             "subName" => $this->sub_name,
         );
-
         $upload = new Upload($config);
         $info = $upload->upload();
-
         if ($info) {
             $state = "SUCCESS";
         } else {
             $state = "ERROR" . $upload->getError();
         }
-
         $return_data['url'] = $info['upfile']['urlpath'];
         $return_data['fileType'] = $info['upfile']['ext'];
         $return_data['original'] = $info['upfile']['name'];
         $return_data['state'] = $state;
         $this->ajaxReturn($return_data,'JSON');
     }
-
     /**
      * 获取远程图片
      */
@@ -88,9 +79,7 @@ class UeditorController extends AdminBaseController
         $uri = htmlspecialchars($_REQUEST['upfile']);
         $uri = str_replace("&amp;", "&", $uri);
         $this->getRemoteImage2($uri, $config);
-
     }
-
     /**
      * 远程抓取
      * @param $uri
@@ -119,14 +108,13 @@ class UeditorController extends AdminBaseController
                     continue;
                 }
             }
-            
+
             //格式验证(扩展名验证和Content-Type验证)
             $fileType = strtolower(strrchr($imgUrl, '.'));
             if (!in_array($fileType, $config['allowFiles']) || stristr($heads['Content-Type'], "image")) {
                 array_push($tmpNames, "Content-Type error");
                 continue;
             }
-
             //打开输出缓冲区并获取远程图片
             ob_start();
             $context = stream_context_create(
@@ -140,7 +128,6 @@ class UeditorController extends AdminBaseController
             readfile($imgUrl, false, $context);
             $img = ob_get_contents();
             ob_end_clean();
-
             //大小验证
             $uriSize = strlen($img); //得到图片大小
             $allowSize = 1024 * $config['maxSize'];
@@ -148,9 +135,7 @@ class UeditorController extends AdminBaseController
                 array_push($tmpNames, "maxSize error");
                 continue;
             }
-
             $savePath = $config['savePath'];
-
             if (!defined('SAE_TMP_PATH')) {
                 //非SAE
                 //创建保存位置
@@ -161,7 +146,6 @@ class UeditorController extends AdminBaseController
                 $tmpName = $savePath . rand(1, 10000) . time() . strrchr($imgUrl, '.');
                 try {
                     File::writeFile($tmpName, $img, "a");
-
                     array_push($tmpNames, __ROOT__ . '/' . $tmpName);
                 } catch (\Exception $e) {
                     array_push($tmpNames, "error");
@@ -178,9 +162,7 @@ class UeditorController extends AdminBaseController
                 } else {
                     array_push($tmpNames, "not supported");
                 }
-
             }
-
         }
         /**
          * 返回数据格式
@@ -195,7 +177,6 @@ class UeditorController extends AdminBaseController
         $return_data['srcUrl'] = $uri;
         $this->ajaxReturn($return_data);
     }
-
     /**
      * 无需移植
      * @function getMovie
@@ -205,16 +186,14 @@ class UeditorController extends AdminBaseController
         $key = C("tudouSearchKey");
         $type = I('post.videoType');
         $html = file_get_contents('http://api.tudou.com/v3/gw?method=item.search&appKey=myKey&format=json&kw=' .
-        $key . '&pageNo=1&pageSize=20&channelId=' . $type . '&inDays=7&media=v&sort=s');
+            $key . '&pageNo=1&pageSize=20&channelId=' . $type . '&inDays=7&media=v&sort=s');
         echo $html;
     }
-
     /**
      * @function imageManager
      */
     public function imageManager()
     {
-
         header("Content-Type: text/html; charset=utf-8");
         //需要遍历的目录列表，最好使用缩略图地址，否则当网速慢时可能会造成严重的延时
         $paths = array(UPLOAD_PATH, 'upload1/');
@@ -247,7 +226,6 @@ class UeditorController extends AdminBaseController
                 while ($ret = $st->getList(C('SaeStorage'), null, 100, $num)) {
                     foreach ($ret as $file) {
                         if (preg_match("/\.(gif|jpeg|jpg|png|bmp)$/i", $file))
-
                             echo $st->getUrl('upload', $file) . "ue_separate_ue";
                         $num++;
                     }
@@ -255,7 +233,6 @@ class UeditorController extends AdminBaseController
             }
         }
     }
-
     /**
      * @function imageUp
      */
@@ -263,8 +240,7 @@ class UeditorController extends AdminBaseController
     {
         // 上传图片框中的描述表单名称，
         $title = htmlspecialchars($_POST['pictitle'], ENT_QUOTES);
-        $path = htmlspecialchars($_POST['dir'], ENT_QUOTES);        
-
+        $path = htmlspecialchars($_POST['dir'], ENT_QUOTES);
         $config = array(
             "savePath" => $this->savePath,
             "maxSize" =>  20000000, // 单位B
@@ -273,29 +249,28 @@ class UeditorController extends AdminBaseController
         );
         $upload = new Upload($config);
         $info = $upload->upload();
-
         if ($info) {
-            $state = "SUCCESS";         
+            $state = "SUCCESS";
         } else {
             $state = "ERROR" . $upload->getError();
         }
         if(!isset($info['upfile'])){
-        	$info['upfile'] = $info['Filedata'];
+            $info['upfile'] = $info['file'];
         }else{
-        	//编辑器插入图片水印处理
-        	if($this->savePath=='Goods/'){
-        		$image = new \Think\Image();
-        		$water = tpCache('water');
-        		$imgresource = ".".$info['upfile']['urlpath'];
-        		$image->open($imgresource);
-        		if($water['is_mark']==1 && $image->width()>$water['mark_width'] && $image->height()>$water['mark_height']){
-        			if($water['mark_type'] == 'text'){
-        				$image->text($water['mark_txt'],'./hgzb.ttf',20,'#000000',9)->save($imgresource);
-        			}else{
-        				$image->water(".".$water['mark_img'],9,$water['mark_degree'])->save($imgresource);
-        			}
-        		}
-        	}
+            //编辑器插入图片水印处理
+            if($this->savePath=='Goods/'){
+                $image = new \Think\Image();
+                $water = tpCache('water');
+                $imgresource = ".".$info['upfile']['urlpath'];
+                $image->open($imgresource);
+                if($water['is_mark']==1 && $image->width()>$water['mark_width'] && $image->height()>$water['mark_height']){
+                    if($water['mark_type'] == 'text'){
+                        $image->text($water['mark_txt'],'./hgzb.ttf',20,'#000000',9)->save($imgresource);
+                    }else{
+                        $image->water(".".$water['mark_img'],9,$water['mark_degree'])->save($imgresource);
+                    }
+                }
+            }
         }
         $return_data['url'] = '/Uploads/'.$info['upfile']['savepath'].$info['upfile']['savename'];
         $return_data['title'] = $title;
@@ -303,5 +278,4 @@ class UeditorController extends AdminBaseController
         $return_data['state'] = $state;
         $this->ajaxReturn($return_data,'json');
     }
-
 }

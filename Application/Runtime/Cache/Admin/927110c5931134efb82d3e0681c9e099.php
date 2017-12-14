@@ -1,152 +1,143 @@
-<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php if (!defined('THINK_PATH')) exit();?><html lang="zh-cn">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Uploadify</title>
-<link rel="stylesheet" type="text/css" href="/Public/Admin/plugins/uploadify/uploadify.css" />
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>文件管理</title>
+	<link rel="stylesheet" type="text/css" href="/Public/Admin/plugins/webuploader/webuploader.css">
+	<link rel="stylesheet" type="text/css" href="/Public/Admin/plugins/webuploader/css/style.css">
 </head>
 <body>
-<div class="W">
-	<div class="Bg"></div>
-	<div class="Wrap" id="Wrap">
-		<div class="Title">
-			<h3 class="MainTit" id="MainTit"><?php echo ($info["title"]); ?></h3>
-			<a href="javascript:Close();" title="关闭" class="Close"></a>
-		</div>
-		<div class="Cont">
-			<p class="Note">最多上传<strong><?php echo ($info["num"]); ?></strong>个附件,单文件最大<strong><?php echo ($info["size"]); ?></strong>,类型<strong><?php echo ($info["type"]); ?></strong></p>
-			<div class="flashWrap">
-				<input name="uploadify" id="uploadify" type="file" multiple="true" />
-				<!-- <span><input type="checkbox" name="iswatermark" id="iswatermark" /><label>是否添加水印</label></span>-->
-			</div>
-			<div class="fileWarp">
-				<fieldset>
-					<legend>列表</legend>
-					<ul>
-					</ul>
-					<div id="fileQueue">
+<div class="upload-box">
+	<!--<ul class="tabs">-->
+		<!--<li class="checked" id="upload_tab">本地上传</li>-->
+	<!--</ul>-->
+	<div class="container">
+		<div class="area upload-area area-checked" id="upload_area">
+			<div id="uploader">
+				<div class="statusBar" style="display:none;">
+					<div class="progress">
+						<span class="text">0%</span>
+						<span class="percentage"></span>
+					</div><div class="info"></div>
+					<div class="btns">
+						<div id="filePicker2"></div><div class="uploadBtn">开始上传</div>
+						<div class="saveBtn">确定使用</div>
 					</div>
-				</fieldset>
-			</div>
-			<div class="btnBox">
-				<button class="btn" id="SaveBtn">保存</button>
-				&nbsp;
-				<button class="btn" id="CancelBtn">取消</button>
+				</div>
+				<div class="queueList">
+					<div id="dndArea" class="placeholder">
+						<div id="filePicker"></div>
+						<p>或将文件拖到这里，本次最多可选<?php echo ((isset($info["num"]) && ($info["num"] !== ""))?($info["num"]):1); ?>个</p>
+					</div>
+				</div>
 			</div>
 		</div>
-		<!--[if IE 6]>
-		<iframe frameborder="0" style="width:100%;height:100px;background-color:transparent;position:absolute;top:0;left:0;z-index:-1;"></iframe>
-		<![endif]-->
+		<div class="area manage-area" id="manage_area">
+			<ul class="choose-btns">
+				<li class="btn sure checked">确定</li>
+				<li class="btn cancel">取消</li>
+			</ul>
+			<div class="file-list">
+				<ul id="file_all_list">
+					<!--<li class="checked">
+						<div class="img">
+							<img src="" />
+							<span class="icon"></span>
+						</div>
+						<div class="desc"></div>
+					</li>-->
+				</ul>
+			</div>
+		</div>
+		<div class="area search-area" id="search_area">
+			<ul class="choose-btns">
+				<li class="search">
+					<div class="search-condition">
+						<input class="key" type="text" />
+						<input class="submit" type="button" hidefocus="true" value="搜索" />
+					</div>
+				</li>
+				<li class="btn sure checked">确定</li>
+				<li class="btn cancel">取消</li>
+			</ul>
+			<div class="file-list">
+				<ul id="file_search_list">
+					<!--<li>
+						<div class="img">
+							<img src="" />
+							<span class="icon"></span>
+						</div>
+						<div class="desc"></div>
+					</li>-->
+				</ul>
+			</div>
+		</div>
+		<div class="fileWarp" style="display:none;">
+			<fieldset>
+				<legend>列表</legend>
+				<ul>
+				</ul>
+			</fieldset>
+		</div>
 	</div>
 </div>
+<script type="text/javascript" src="/Public/Admin/js/jquery-1.10.2.js"></script>
+<script type="text/javascript" src="/Public/Admin/plugins/webuploader/webuploader.min.js"></script>
+<script type="text/javascript" src="/Public/Admin/plugins/webuploader/upload.js"></script>
+<script>
+    $(function(){
+        moudle = 'Admin';
+        var config = {
+                "swf":"/Public/Admin/plugins/webuploader/Uploader.swf",
+                "server":"<?php echo ($info["upload"]); ?>",
+                "filelistPah":"<?php echo ($info["fileList"]); ?>",
+                "delPath":"<?php echo U('Uploadify/delupload');?>",
+                "chunked":false,
+                "chunkSize":524288,
+                "fileNumLimit":<?php echo ((isset($info["num"]) && ($info["num"] !== ""))?($info["num"]):1); ?>,
+            "fileSizeLimit":209715200,
+            "fileSingleSizeLimit":2097152,
+            "fileVal":"file",
+            "auto":true,
+            "formData":{},
+        "pick":{"id":"#filePicker","label":"点击选择图片","name":"file"},
+        "thumb":{"width":110,"height":110,"quality":70,"allowMagnify":true,"crop":true,"preserveHeaders":false,"type":"image/jpeg"}
+    };
+        Manager.upload($.extend(config, {type : "Images"}));
 
-<script src="/Public/Admin/plugins/uploadify/jquery.min.js" type="text/javascript"></script> 
-<!--防止客户端缓存文件，造成uploadify.js不更新，而引起的“喔唷，崩溃啦”-->
-<script>document.write("<script type='text/javascript' "+ "src='/Public/Admin/plugins/uploadify/jquery.uploadify.js?" + new Date()+ "'></s" + "cript>");
-</script>			
-<script src="/Public/Admin/plugins/uploadify/uploadify-move.js" type="text/javascript"></script> 
-<script type="text/javascript">
-function Close(){
-	$("iframe.uploadframe", window.parent.document).remove();
-}
+        /*点击保存按钮时
+         *判断允许上传数，检测是单一文件上传还是组文件上传
+         *如果是单一文件，上传结束后将地址存入$input元素
+         *如果是组文件上传，则创建input样式，添加到$input后面
+         *隐藏父框架，清空列队，移除已上传文件样式*/
+        $(".statusBar .saveBtn").click(function(){
+            var callback = "<?php echo ($info["func"]); ?>";
+            var num = <?php echo ((isset($info["num"]) && ($info["num"] !== ""))?($info["num"]):1); ?>;
+            var fileurl_tmp = [];
+            if(callback != "undefined"){
+                if(num > 1){
+                    $("input[name^='fileurl_tmp']").each(function(index,dom){
+                        fileurl_tmp[index] = dom.value;
+                    });
+                }else{
+                    fileurl_tmp = $("input[name^='fileurl_tmp']").val();
+                }
+                eval('window.parent.'+callback+'(fileurl_tmp)');
+                window.parent.layer.closeAll();
+                return;
+            }
+            if(num > 1){
+                var fileurl_tmp = "";
+                $("input[name^='fileurl_tmp']").each(function(){
+                    fileurl_tmp += '<li rel="'+ this.value +'"><input class="input-text" type="text" name="<?php echo ($info["input"]); ?>[]" value="'+ this.value +'" /><a href="javascript:void(0);" onclick="ClearPicArr(\''+ this.value +'\',\'\')">删除</a></li>';
+                });
+                $(window.parent.document).find("#<?php echo ($info["input"]); ?>").append(fileurl_tmp);
+            }else{
+                $(window.parent.document).find("#<?php echo ($info["input"]); ?>").val($("input[name^='fileurl_tmp']").val());
+            }
+            window.parent.layer.closeAll();
+        });
 
-$("#CancelBtn").click(function(){
-	$("iframe.uploadframe", window.parent.document).remove();
-	//$('#uploadify').uploadifyClearQueue();
-	//$(".fileWarp ul li").remove();
-});
-
-$(function() {
-	$('#uploadify').uploadify({
-			'auto'			  : true,
-			'method'   		  : 'post',
-			'multi'   		  : true,
-			'swf'      		  : '/Public/Admin/plugins/uploadify/uploadify.swf',
-       		'uploader'        : "<?php echo ($info["upload"]); ?>",
-    		'progressData'    : 'all',
-			'queueSizeLimit'  : <?php echo ($info["num"]); ?>,
-	        'uploadLimit'     : 5,
-			'fileSizeLimit'   : '20000KB',
-	        'fileTypeDesc' 	  : 'Image Files',
-	        'fileTypeExts'    : '*.jpeg; *.jpg; *.png; *.gif',
-			'buttonImage'     : '/Public/Admin/plugins/uploadify/select.png',
-			'queueID'         : 'fileQueue',
-			'onUploadStart'   : function(file){
-				$('#uploadify').uploadify('settings', 'formData', {'iswatermark':$("#iswatermark").is(':checked')});				
-			},
-			'onUploadSuccess' : function(file, data, response){
-				$(".fileWarp ul").append(SetImgContent(data));
-				SetUploadFile();
-			}
-		});
-});
-
-function SetImgContent(data){	
-	var obj=eval('('+data+')');
-	if(obj.state == 'SUCCESS'){
-		var sLi = "";
-		sLi += '<li class="img">';
-		sLi += '<img src="' + obj.url + '" width="100" height="100" onerror="this.src=\'/Public/Admin/plugins/uploadify/nopic.png\'">';
-		sLi += '<input type="hidden" name="fileurl_tmp[]" value="' + obj.url + '">';
-		sLi += '<a href="javascript:void(0);">删除</a>';
-		sLi += '</li>';
-		return sLi;
-	}else{
-		//window.parent.message(obj.text,8,2);
-		alert(obj.text);
-		return;
-	}
-}
-
-
-
-function SetUploadFile(){
-	$("ul li").each(function(l_i){
-		$(this).attr("id", "li_" + l_i);
-	})
-	$("ul li a").each(function(a_i){
-		$(this).attr("rel", "li_" + a_i);
-	}).click(function(){
-		$.get(
-			'<?php echo U("Admin/Uploadify/delupload");?>',{action:"del", filename:$(this).prev().val()},function(){}
-		);
-		$("#" + this.rel).remove();
-	})
-}
-
-/*点击保存按钮时
- *判断允许上传数，检测是单一文件上传还是组文件上传
- *如果是单一文件，上传结束后将地址存入$input元素
- *如果是组文件上传，则创建input样式，添加到$input后面
- *隐藏父框架，清空列队，移除已上传文件样式*/
-$("#SaveBtn").click(function(){	
-	var callback = "<?php echo ($info["func"]); ?>";
-	var num = <?php echo ($info["num"]); ?>;
-	var fileurl_tmp = [];
-	if(callback != "undefined"){	
-		if(num > 1){	
-			 $("input[name^='fileurl_tmp']").each(function(index,dom){
-				fileurl_tmp[index] = dom.value;
-			 });	
-		}else{
-			fileurl_tmp = $("input[name^='fileurl_tmp']").val();	
-		}
-		eval('window.parent.'+callback+'(fileurl_tmp)');
-		$(window.parent.document).find("iframe.uploadframe").remove();
-		return;
-	}					 
-	if(num > 1){
-			var fileurl_tmp = "";
-			$("input[name^='fileurl_tmp']").each(function(){
-				fileurl_tmp += '<li rel="'+ this.value +'"><input class="input-text" type="text" name="<?php echo ($info["input"]); ?>[]" value="'+ this.value +'" /><a href="javascript:void(0);" onclick="ClearPicArr(\''+ this.value +'\',\'\')">删除</a></li>';	
-			});			
-			$(window.parent.document).find("#<?php echo ($info["input"]); ?>").append(fileurl_tmp);
-	}else{
-			$(window.parent.document).find("#<?php echo ($info["input"]); ?>").val($("input[name^='fileurl_tmp']").val());
-	}
-	
-	$(window.parent.document).find("iframe.uploadframe").remove();
-});
+    });
 </script>
 </body>
 </html>

@@ -1751,3 +1751,84 @@ INFO: [ app_end ] --START--
 INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000498s ]
 INFO: [ app_end ] --END-- [ RunTime:0.000598s ]
 
+[ 2017-12-13T13:56:28+08:00 ] 127.0.0.1 /admin
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000005s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000178s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000301s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000327s ]
+SQL: SHOW COLUMNS FROM `h_admin_user` [ RunTime:0.0078s ]
+SQL: SELECT * FROM `h_admin_user` WHERE `user_id` = 1 LIMIT 1   [ RunTime:0.0074s ]
+SQL: SELECT VERSION() as version [ RunTime:0.0071s ]
+SQL: SHOW COLUMNS FROM `h_admin_log` [ RunTime:0.0078s ]
+SQL: SELECT * FROM `h_admin_log` WHERE `admin_id` = 1 AND `log_type` = 0 ORDER BY `log_time` LIMIT 5   [ RunTime:0.0080s ]
+SQL: SELECT * FROM `h_admin_log` WHERE `admin_id` = 1 AND `log_type` = 1 ORDER BY `log_time` LIMIT 5   [ RunTime:0.0077s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000370s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000396s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.166636s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.166662s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000191s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000207s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000396s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000416s ]
+
+[ 2017-12-13T13:56:31+08:00 ] 127.0.0.1 /Admin/admin/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000005s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000183s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000294s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000316s ]
+SQL: SHOW COLUMNS FROM `h_admin_user` [ RunTime:0.0084s ]
+SQL: SELECT * FROM `h_admin_user` WHERE `user_id` = 1 LIMIT 1   [ RunTime:0.0086s ]
+SQL: SHOW COLUMNS FROM `h_admin_user` [ RunTime:0.0093s ]
+SQL: SELECT * FROM `h_admin_user`  [ RunTime:0.0082s ]
+SQL: SHOW COLUMNS FROM `h_role` [ RunTime:0.0081s ]
+NOTIC: [8] Undefined index: mapping_order C:\www\shop\ThinkPHP\Library\Think\Model\RelationModel.class.php 第 209 行.
+NOTIC: [8] Undefined index: mapping_limit C:\www\shop\ThinkPHP\Library\Think\Model\RelationModel.class.php 第 210 行.
+SQL: SELECT b.* FROM h_role_user AS a, h_role AS b WHERE a.role_id = b.id AND a. user_id='1' [ RunTime:0.0090s ]
+NOTIC: [8] Undefined index: mapping_order C:\www\shop\ThinkPHP\Library\Think\Model\RelationModel.class.php 第 209 行.
+NOTIC: [8] Undefined index: mapping_limit C:\www\shop\ThinkPHP\Library\Think\Model\RelationModel.class.php 第 210 行.
+SQL: SELECT b.* FROM h_role_user AS a, h_role AS b WHERE a.role_id = b.id AND a. user_id='4' [ RunTime:0.0089s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000311s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000335s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.155169s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.155193s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000154s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000170s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000378s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000413s ]
+
+[ 2017-12-13T13:56:33+08:00 ] 127.0.0.1 /Admin/admin/addUser
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000006s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000302s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000298s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000322s ]
+SQL: SHOW COLUMNS FROM `h_admin_user` [ RunTime:0.0070s ]
+SQL: SELECT * FROM `h_admin_user` WHERE `user_id` = 1 LIMIT 1   [ RunTime:0.0073s ]
+SQL: SHOW COLUMNS FROM `h_role` [ RunTime:0.0072s ]
+SQL: SELECT * FROM `h_role`  [ RunTime:0.0066s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000296s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000321s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.203749s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.203776s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000155s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000171s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000418s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000467s ]
+
