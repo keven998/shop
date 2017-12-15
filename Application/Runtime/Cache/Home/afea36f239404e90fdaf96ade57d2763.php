@@ -737,8 +737,8 @@
                 </div>
                 <button class="x-redBtn" id="submit-btn">登录</button>
                 <div class="etc">
-                    <a href="passport-lost.html">忘记密码&nbsp;?</a>
-                    <a class="x-flr" href="register.html">注册</a>
+                    <a href="<?php echo U('passport/lost');?>">忘记密码&nbsp;?</a>
+                    <a class="x-flr" href="<?php echo U('passport/register');?>">注册</a>
                 </div>
                 <div class="loginThirdParty">
                     <div>
