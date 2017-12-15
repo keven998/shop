@@ -712,16 +712,13 @@
     </script>
 </div>
     <!-- 登录板块 开始 -->
-
     <div class="x-signIn">
         <div class="x-main">
             <div class="imgBoard x-fll">
                 <img src="/Public/Home/images/signBG.png" alt="">
             </div>
             <!-- 输入框 开始 -->
-
             <div class="signInBoard x-fll">
-
                 <p>账号注册</p>
                 <div class="x-pb12">
                     <input name="pam_account[login_name]" maxlength="11" placeholder="请输入常用手机号码" onkeyup="value=value.replace(/[^\d]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))">
@@ -754,7 +751,6 @@
         </div>
     </div>
     <!-- 登录板块 结束 -->
-
     <script>
         $(function () {
             checkboxChange();
@@ -804,7 +800,6 @@
             var flag = false;
             $('#submit-btn').on('click', function(e) {
                 if (flag) return;
-
                 var data = {};
                 var pam_account = {};
                 pam_account.login_name = $('input[name="pam_account[login_name]"]').val();
